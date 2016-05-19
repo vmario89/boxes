@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>What is this? &mdash; boxes.py 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="boxes.py 0.1 documentation" href="index.html" />
+    <link rel="next" title="The boxes.Boxes main class" href="Boxes.html" />
+    <link rel="prev" title="Welcome to boxes.py’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Boxes.html" title="The boxes.Boxes main class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to boxes.py’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">boxes.py 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="what-is-this">
+<h1>What is this?<a class="headerlink" href="#what-is-this" title="Permalink to this headline">¶</a></h1>
+<p>This is a small python library for generating SVG drawings used for
+cutting out boxes or other structures using a laser cutter.</p>
+<p>It also comes with a set of ready-to-use, fully parametrized generators:</p>
+<ul class="simple">
+<li>Various simple boxes</li>
+<li>Flex boxes with rounded corners and living hinges</li>
+<li>Type trays with and without walls and floors</li>
+<li>Book cover with flex spine</li>
+<li>Magazine file</li>
+</ul>
+<p>And a few one trick ponies:</p>
+<ul class="simple">
+<li>A drill stand</li>
+<li>A castle tower</li>
+<li>A housing for a special kind of lamp</li>
+<li>A cutlery stand</li>
+</ul>
+<p>Have a look into the examples/ directory to see how the results look like.</p>
+</div>
+<div class="section" id="features">
+<h1>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h1>
+<p>Of course the library and the generators allow selecting the &#8220;thickness&#8221;
+of the material used and automatically adjusts lengths and width of
+joining fingers and other elements.</p>
+<p>The &#8220;burn&#8221; parameter compensates for the material removed by the laser. This
+allows fine tuning the gaps between joins up to the point where plywood
+can be press fitted even without any glue.</p>
+<p>Finger Joints are the work horse of the library. They allow 90° edges
+and T connections. Their size is scaled up with the material
+&#8220;thickness&#8221; to maintain the same appearance. The library also allows
+putting holes and slots for screws (bed bolts) into finger joints,
+although this is currently not supported for the finished generators.</p>
+<p>Dovetail joints can be used to join pieces in the same plane.</p>
+<p>Flex allows bending and stretching the material in one direction. This
+is used for rounded edges and living hinges.</p>
+</div>
+<div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>There are two ways to use the available generators:</p>
+<ul class="simple">
+<li>Execute the scripts/boxes tool and pass the name of the generator together with the measurements on the command line</li>
+<li>Run scripts/boxesserver which provides an web interface on port 8000</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">What is this?</a></li>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to boxes.py&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Boxes.html"
+                        title="next chapter">The boxes.Boxes main class</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/README.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Boxes.html" title="The boxes.Boxes main class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to boxes.py’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">boxes.py 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Florian Festi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

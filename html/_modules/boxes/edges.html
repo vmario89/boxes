@@ -1,0 +1,914 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>boxes.edges &mdash; boxes.py 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="boxes.py 0.1 documentation" href="../../index.html" />
+    <link rel="up" title="boxes" href="../boxes.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../../index.html">boxes.py 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../boxes.html" accesskey="U">boxes</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for boxes.edges</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (C) 2013-2016 Florian Festi</span>
+<span class="c1">#</span>
+<span class="c1">#   This program is free software: you can redistribute it and/or modify</span>
+<span class="c1">#   it under the terms of the GNU General Public License as published by</span>
+<span class="c1">#   the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1">#   (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#   This program is distributed in the hope that it will be useful,</span>
+<span class="c1">#   but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1">#   GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#   You should have received a copy of the GNU General Public License</span>
+<span class="c1">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+
+<span class="k">def</span> <span class="nf">getDescriptions</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">edge</span><span class="o">.</span><span class="n">char</span> <span class="p">:</span> <span class="n">edge</span><span class="o">.</span><span class="n">description</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">BaseEdge</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">edge</span><span class="o">.</span><span class="n">char</span><span class="p">}</span>
+
+<div class="viewcode-block" id="BoltPolicy"><a class="viewcode-back" href="../../edges.html#boxes.edges.BoltPolicy">[docs]</a><span class="k">class</span> <span class="nc">BoltPolicy</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Abstract class</span>
+
+<span class="sd">    Distributes (bed) bolts on a number of segments</span>
+<span class="sd">    (fingers of a finger joint)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">drawbolt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add a bolt to this segment?</span>
+
+<span class="sd">        :param pos: number of the finger</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">numFingers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numfingers</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return next smaller, possible number of fingers</span>
+
+<span class="sd">        :param numfingers: number of fingers to aim for</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">numFingers</span>
+
+    <span class="k">def</span> <span class="nf">_even</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numFingers</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return same or next smaller even number</span>
+
+<span class="sd">        :param numFingers:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">numFingers</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="k">def</span> <span class="nf">_odd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numFingers</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return same or next smaller odd number</span>
+
+<span class="sd">        :param numFingers:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">numFingers</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numFingers</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numFingers</span> <span class="o">-</span> <span class="mi">1</span>
+</div>
+<div class="viewcode-block" id="Bolts"><a class="viewcode-back" href="../../edges.html#boxes.edges.Bolts">[docs]</a><span class="k">class</span> <span class="nc">Bolts</span><span class="p">(</span><span class="n">BoltPolicy</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Distribute a fixed number of bolts evenly&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bolts</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bolts</span> <span class="o">=</span> <span class="n">bolts</span>
+
+    <span class="k">def</span> <span class="nf">numFingers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numFingers</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bolts</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fingers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_even</span><span class="p">(</span><span class="n">numFingers</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fingers</span> <span class="o">=</span> <span class="n">numFingers</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fingers</span>
+
+    <span class="k">def</span> <span class="nf">drawBolt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return if this finger needs a bolt</span>
+
+<span class="sd">        :param pos: number of this finger</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fingers</span><span class="o">//</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fingers</span> <span class="o">-</span> <span class="n">pos</span>
+        <span class="k">if</span> <span class="n">pos</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">fingers</span><span class="o">//</span><span class="mi">2</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bolts</span> <span class="o">%</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bolts</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">fingers</span><span class="p">)</span><span class="o">-</span><span class="mf">0.01</span><span class="p">)</span> <span class="o">!=</span>
+                  <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">pos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bolts</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">fingers</span><span class="p">)</span><span class="o">-</span><span class="mf">0.01</span><span class="p">))</span>
+        <span class="c1">#print pos, result, ((float(pos)*(self.bolts+1)/self.fingers)-0.01), ((float(pos+1)*(self.bolts+1)/self.fingers)-0.01)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">### Settings</span>
+<span class="c1">#############################################################################</span>
+</div>
+<div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../edges.html#boxes.edges.Settings">[docs]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Generic Settings class</span>
+
+<span class="sd">    Used by different other classes to store messurements and details.</span>
+<span class="sd">    Supports absolute values and settings that grow with the thickness</span>
+<span class="sd">    of the material used.</span>
+
+<span class="sd">    Overload the absolute_params and relative_params class attributes with</span>
+<span class="sd">    the suported keys and default values. The values are available via</span>
+<span class="sd">    attribute access.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">absolute_params</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="n">thickness</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">if</span> <span class="n">relative</span><span class="p">:</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="n">thickness</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">factor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setValues</span><span class="p">(</span><span class="n">thickness</span><span class="p">,</span> <span class="n">relative</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Settings.setValues"><a class="viewcode-back" href="../../edges.html#boxes.edges.Settings.setValues">[docs]</a>    <span class="k">def</span> <span class="nf">setValues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set values</span>
+
+<span class="sd">        :param thickness: thickness of the material used</span>
+<span class="sd">        :param relative:  (Default value = True) Do scale by thickness</span>
+<span class="sd">        :param \*\*kw: parameters to set</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">if</span> <span class="n">relative</span><span class="p">:</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="n">thickness</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kw</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">absolute_params</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="k">elif</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">relative_params</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">factor</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown parameter for </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+</div>
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">### Edges</span>
+<span class="c1">#############################################################################</span>
+
+</div>
+<span class="k">class</span> <span class="nc">BaseEdge</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Abstract base class for all Edges&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Abstract Edge Class&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span> <span class="o">=</span> <span class="n">boxes</span><span class="o">.</span><span class="n">ctx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span>
+
+    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Hack for using unalter code form Boxes class&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Draw edge of length mm&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">get_current_point</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Amount of space the beginning of the edge is set below the inner space of the part &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span> <span class="nf">endwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Space needed right of the starting point&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span>
+
+    <span class="k">def</span> <span class="nf">spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Space the edge needs outside of the inner space of the part&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">startAngle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Not yet supported&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span> <span class="nf">endAngle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Not yet supported&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+
+<div class="viewcode-block" id="Edge"><a class="viewcode-back" href="../../edges.html#boxes.edges.Edge">[docs]</a><span class="k">class</span> <span class="nc">Edge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Straight edge&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;e&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Straight Edge&quot;</span>    
+</div>
+<div class="viewcode-block" id="OutSetEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.OutSetEdge">[docs]</a><span class="k">class</span> <span class="nc">OutSetEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Straight edge out set by one thickness&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;E&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Straight Edge (outset by thickness)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">thickness</span>
+</div>
+<div class="viewcode-block" id="CompoundEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.CompoundEdge">[docs]</a><span class="k">class</span> <span class="nc">CompoundEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge composed of multiple different Edges&quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Compound Edge&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">types</span><span class="p">,</span> <span class="n">lengths</span><span class="p">):</span>
+        <span class="n">Edge</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">types</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lengths</span> <span class="o">=</span> <span class="n">lengths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">endwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endwidth</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">((</span><span class="n">e</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1E-5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Wrong length for CompoundEdge&quot;</span><span class="p">)</span>
+        <span class="n">lastwidth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lengths</span><span class="p">):</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span> <span class="o">-</span> <span class="n">lastwidth</span>
+            <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mf">1E-5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">1E-5</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="o">-</span><span class="n">diff</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+            <span class="n">e</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="n">lastwidth</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">endwidth</span><span class="p">()</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">####     Slots</span>
+<span class="c1">#############################################################################</span>
+</div>
+<div class="viewcode-block" id="Slot"><a class="viewcode-back" href="../../edges.html#boxes.edges.Slot">[docs]</a><span class="k">class</span> <span class="nc">Slot</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge with an slot to slid another pice through &quot;&quot;&quot;</span>
+
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Slot&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
+        <span class="n">Edge</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">depth</span> <span class="o">=</span> <span class="n">depth</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">depth</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">depth</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">depth</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="SlottedEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.SlottedEdge">[docs]</a><span class="k">class</span> <span class="nc">SlottedEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge with multiple slots&quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Straight Edge with slots&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">sections</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="n">Edge</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sections</span> <span class="o">=</span> <span class="n">sections</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slots</span> <span class="o">=</span> <span class="n">slots</span>
+
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">endwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">endwidth</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">:</span>
+                <span class="n">Slot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">slots</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">####     Finger Joints</span>
+<span class="c1">#############################################################################</span>
+</div>
+<div class="viewcode-block" id="FingerJointSettings"><a class="viewcode-back" href="../../edges.html#boxes.edges.FingerJointSettings">[docs]</a><span class="k">class</span> <span class="nc">FingerJointSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Settings for finger joints</span>
+
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute</span>
+
+<span class="sd">  * surroundingspaces : 2 : maximum space at the start and end in multiple</span>
+<span class="sd">    of normal spaces</span>
+
+<span class="sd">* relative (in multiples of thickness)</span>
+
+<span class="sd">  * space : 1.0 : space between fingers</span>
+<span class="sd">  * finger : 1.0 : width of the fingers</span>
+<span class="sd">  * height : 1.0 : length of the fingers</span>
+<span class="sd">  * width : 1.0 : width of finger holes</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;surroundingspaces&quot;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;space&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;finger&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;height&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;width&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="FingerJointEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.FingerJointEdge">[docs]</a><span class="k">class</span> <span class="nc">FingerJointEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Finger joint edge &quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;f&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Finger Joint&quot;</span>
+    <span class="n">positive</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span>
+                    <span class="n">bedBolts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">positive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positive</span>
+        <span class="n">space</span><span class="p">,</span> <span class="n">finger</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">space</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">finger</span>
+
+        <span class="n">fingers</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">length</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">surroundingspaces</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">space</span><span class="p">)</span> <span class="o">//</span>
+                      <span class="p">(</span><span class="n">space</span><span class="o">+</span><span class="n">finger</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">bedBolts</span><span class="p">:</span>
+            <span class="n">fingers</span> <span class="o">=</span> <span class="n">bedBolts</span><span class="o">.</span><span class="n">numFingers</span><span class="p">(</span><span class="n">fingers</span><span class="p">)</span>
+        <span class="n">leftover</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">fingers</span><span class="o">*</span><span class="p">(</span><span class="n">space</span><span class="o">+</span><span class="n">finger</span><span class="p">)</span> <span class="o">+</span> <span class="n">space</span>
+
+        <span class="n">s</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">thickness</span> <span class="o">=</span> <span class="n">space</span><span class="p">,</span> <span class="n">finger</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="n">d</span><span class="p">,</span> <span class="n">d_nut</span><span class="p">,</span> <span class="n">h_nut</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">l1</span> <span class="o">=</span> <span class="n">bedBoltSettings</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">bedBoltSettings</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">positive</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">fingers</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fingers</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">leftover</span> <span class="o">=</span> <span class="n">length</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">leftover</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fingers</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">positive</span> <span class="ow">and</span> <span class="n">bedBolts</span> <span class="ow">and</span> <span class="n">bedBolts</span><span class="o">.</span><span class="n">drawBolt</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">space</span><span class="p">,</span>
+                              <span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">positive</span> <span class="ow">and</span> <span class="n">bedBolts</span> <span class="ow">and</span> <span class="n">bedBolts</span><span class="o">.</span><span class="n">drawBolt</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bedBoltHole</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">leftover</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">thickness</span>
+</div>
+<div class="viewcode-block" id="FingerJointEdgeCounterPart"><a class="viewcode-back" href="../../edges.html#boxes.edges.FingerJointEdgeCounterPart">[docs]</a><span class="k">class</span> <span class="nc">FingerJointEdgeCounterPart</span><span class="p">(</span><span class="n">FingerJointEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Finger joint edge - other side&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;F&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Finger Joint (opposing side)&quot;</span>
+    <span class="n">positive</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">thickness</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span>
+</div>
+<div class="viewcode-block" id="FingerHoles"><a class="viewcode-back" href="../../edges.html#boxes.edges.FingerHoles">[docs]</a><span class="k">class</span> <span class="nc">FingerHoles</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Hole matching a finger joint edge&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span> <span class="o">=</span> <span class="n">boxes</span><span class="o">.</span><span class="n">ctx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">bedBolts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw holes for a matching finger joint edge</span>
+
+<span class="sd">        :param x: position</span>
+<span class="sd">        :param y: position</span>
+<span class="sd">        :param length: length of matching edge</span>
+<span class="sd">        :param angle:  (Default value = 90)</span>
+<span class="sd">        :param bedBolts:  (Default value = None)</span>
+<span class="sd">        :param bedBoltSettings:  (Default value = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+
+        <span class="n">s</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">space</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">finger</span>
+        <span class="n">fingers</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">length</span><span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">surroundingspaces</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="o">//</span>
+                      <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">f</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">bedBolts</span><span class="p">:</span>
+            <span class="n">fingers</span> <span class="o">=</span> <span class="n">bedBolts</span><span class="o">.</span><span class="n">numFingers</span><span class="p">(</span><span class="n">fingers</span><span class="p">)</span>
+            <span class="n">d</span><span class="p">,</span> <span class="n">d_nut</span><span class="p">,</span> <span class="n">h_nut</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">l1</span> <span class="o">=</span> <span class="n">bedBoltSettings</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">bedBoltSettings</span>
+        <span class="n">leftover</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">fingers</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">f</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">burn</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">b</span><span class="p">,</span>
+                               <span class="n">length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fingers</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">leftover</span><span class="o">/</span><span class="mf">2.0</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">bedBolts</span> <span class="ow">and</span> <span class="n">bedBolts</span><span class="o">.</span><span class="n">drawBolt</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="n">pos</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">*</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">pos</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="n">b</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">b</span><span class="p">,</span>
+                               <span class="n">f</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">b</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="FingerHoleEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.FingerHoleEdge">[docs]</a><span class="k">class</span> <span class="nc">FingerHoleEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge with holes for a parallel finger joint&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;h&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Edge (parallel Finger Joint Holes)&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">fingerHoles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">Edge</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHoles</span> <span class="o">=</span> <span class="n">fingerHoles</span> <span class="ow">or</span> <span class="n">boxes</span><span class="o">.</span><span class="n">fingerHolesAt</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                 <span class="n">bedBolts</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">dist</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fingerHoleEdgeWidth</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHoles</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dist</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                         <span class="n">bedBolts</span><span class="o">=</span><span class="n">bedBolts</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="o">=</span><span class="n">bedBoltSettings</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+        <span class="c1"># XXX continue path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">get_current_point</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fingerHoleEdgeWidth</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+</div>
+<div class="viewcode-block" id="CrossingFingerHoleEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.CrossingFingerHoleEdge">[docs]</a><span class="k">class</span> <span class="nc">CrossingFingerHoleEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge with holes for finger joints 90° above&quot;&quot;&quot;</span>
+
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Edge (orthogonal Finger Joint Holes)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">fingerHoles</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">Edge</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHoles</span> <span class="o">=</span> <span class="n">fingerHoles</span> <span class="ow">or</span> <span class="n">boxes</span><span class="o">.</span><span class="n">fingerHolesAt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHoles</span><span class="p">(</span><span class="n">length</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="n">Edge</span><span class="o">.</span><span class="n">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">####     Stackable Joints</span>
+<span class="c1">#############################################################################</span>
+</div>
+<div class="viewcode-block" id="StackableSettings"><a class="viewcode-back" href="../../edges.html#boxes.edges.StackableSettings">[docs]</a><span class="k">class</span> <span class="nc">StackableSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Settings for StackableEdge classes</span>
+
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute_params</span>
+
+<span class="sd">  * angle : 60 : inside angle of the feet</span>
+
+<span class="sd">* relative (in multiples of thickness)</span>
+
+<span class="sd">  * height : 2.0 : height of the feet</span>
+<span class="sd">  * width  : 4.0 : width of the feet</span>
+<span class="sd">  * holedistance : 1.0 : distance from finger holes to bottom edge</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;angle&quot;</span> <span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;height&quot;</span> <span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+        <span class="s2">&quot;width&quot;</span>  <span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+        <span class="s2">&quot;holedistance&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="StackableEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.StackableEdge">[docs]</a><span class="k">class</span> <span class="nc">StackableEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge for having stackable Boxes. The Edge creates feet on the bottom</span>
+<span class="sd">    and has matching recesses on the top corners.&quot;&quot;&quot;</span>
+
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;s&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Stackable (bottom, finger joint holes)&quot;</span>
+    <span class="n">bottom</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">fingerjointsettings</span><span class="p">):</span>
+        <span class="n">Edge</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerjointsettings</span> <span class="o">=</span> <span class="n">fingerjointsettings</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">angle</span><span class="p">)))</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">angle</span><span class="p">))</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">height</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">holedistance</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span>
+                                     <span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">width</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">l</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_height</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">holedistance</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
+        
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="StackableEdgeTop"><a class="viewcode-back" href="../../edges.html#boxes.edges.StackableEdgeTop">[docs]</a><span class="k">class</span> <span class="nc">StackableEdgeTop</span><span class="p">(</span><span class="n">StackableEdge</span><span class="p">):</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;S&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Stackable (top)&quot;</span>
+    <span class="n">bottom</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">####     Click Joints</span>
+<span class="c1">#############################################################################</span>
+</div>
+<span class="k">class</span> <span class="nc">ClickSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;angle&quot;</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;depth&quot;</span> <span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="s2">&quot;bottom_radius&quot;</span> <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ClickConnector</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;c&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Click on (bottom side)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">angle</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">depth</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bottom_radius</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+        <span class="n">p1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">d</span><span class="o">+</span><span class="n">t</span><span class="p">,</span>
+            <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+            <span class="n">t</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="mi">135</span><span class="p">,</span>
+            <span class="n">t</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="mi">135</span><span class="p">,</span>
+            <span class="n">d</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="n">s</span><span class="o">*</span><span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">p3</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="o">-</span><span class="n">s</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="mf">0.2</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">reverse</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">p1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">p2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">p3</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">p3</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">p2</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">hookWidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">angle</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">depth</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bottom_radius</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">d</span> <span class="o">*</span> <span class="n">c</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">c</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">r</span>
+
+    <span class="k">def</span> <span class="nf">hookOffset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">angle</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">depth</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bottom_radius</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">s</span> <span class="o">*</span> <span class="n">d</span> <span class="o">*</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span>
+
+    <span class="k">def</span> <span class="nf">finger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span>
+            <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">,</span>
+            <span class="mi">90</span><span class="p">,</span>
+            <span class="n">length</span><span class="p">,</span>
+            <span class="mi">90</span><span class="p">,</span>
+            <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hook</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finger</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span> <span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">hookWidth</span><span class="p">()))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hook</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finger</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hook</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+
+<span class="k">class</span> <span class="nc">ClickEdge</span><span class="p">(</span><span class="n">ClickConnector</span><span class="p">):</span>
+    <span class="n">char</span> <span class="o">=</span><span class="s2">&quot;C&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Click on (top)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">thickness</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hookOffset</span><span class="p">()</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hookWidth</span><span class="p">()</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mi">4</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">o</span><span class="p">,</span>
+            <span class="mi">90</span><span class="p">,</span>
+            <span class="n">t</span><span class="p">,</span>
+            <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+            <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">w</span><span class="o">-</span><span class="n">o</span><span class="p">),</span>
+            <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+            <span class="n">t</span><span class="p">,</span>
+            <span class="mi">90</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">p1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">o</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="nb">reversed</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">####     Dove Tail Joints</span>
+<span class="c1">#############################################################################</span>
+    
+<div class="viewcode-block" id="DoveTailSettings"><a class="viewcode-back" href="../../edges.html#boxes.edges.DoveTailSettings">[docs]</a><span class="k">class</span> <span class="nc">DoveTailSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Settings used for dove tail joints</span>
+
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute</span>
+
+<span class="sd">  * angle : 50 : how much should fingers widen (-80 to 80)</span>
+
+<span class="sd">* relative (in multiples of thickness)</span>
+
+<span class="sd">  * size : 3 : from one middle of a dove tail to another</span>
+<span class="sd">  * depth : 1.5 : how far the dove tails stick out of/into the edge</span>
+<span class="sd">  * radius : 0.2 : radius used on all four corners</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;angle&quot;</span> <span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;size&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;depth&quot;</span> <span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>
+        <span class="s2">&quot;radius&quot;</span> <span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="DoveTailJoint"><a class="viewcode-back" href="../../edges.html#boxes.edges.DoveTailJoint">[docs]</a><span class="k">class</span> <span class="nc">DoveTailJoint</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge with dove tail joints &quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;d&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Dove Tail Joint&quot;</span>
+    <span class="n">positive</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span>
+        <span class="n">radius</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">burn</span><span class="p">)</span> <span class="c1"># no smaller than burn</span>
+        <span class="n">positive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">positive</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">angle</span> <span class="o">+</span> <span class="mi">90</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">angle</span><span class="o">/</span><span class="mf">180.0</span>
+
+        <span class="n">l1</span> <span class="o">=</span> <span class="n">radius</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">alpha</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">diffx</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">depth</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">l2</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">depth</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+
+        <span class="n">sections</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">length</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">leftover</span> <span class="o">=</span> <span class="n">length</span> <span class="o">-</span> <span class="n">sections</span><span class="o">*</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mi">2</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">positive</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">((</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="n">leftover</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="o">+</span><span class="n">diffx</span><span class="o">-</span><span class="n">l1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sections</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">p</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">l2</span><span class="o">-</span><span class="n">l1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">diffx</span><span class="o">-</span><span class="n">l1</span><span class="p">)</span><span class="o">+</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">l2</span><span class="o">-</span><span class="n">l1</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">p</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">sections</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># all but the last</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">diffx</span><span class="o">-</span><span class="n">l1</span><span class="p">)</span><span class="o">+</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">((</span><span class="n">s</span><span class="o">.</span><span class="n">size</span><span class="o">+</span><span class="n">leftover</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="o">+</span><span class="n">diffx</span><span class="o">-</span><span class="n">l1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">get_current_point</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">depth</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span>
+</div>
+<div class="viewcode-block" id="DoveTailJointCounterPart"><a class="viewcode-back" href="../../edges.html#boxes.edges.DoveTailJointCounterPart">[docs]</a><span class="k">class</span> <span class="nc">DoveTailJointCounterPart</span><span class="p">(</span><span class="n">DoveTailJoint</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge for other side of dove joints &quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Dove Tail Joint (opposing side)&quot;</span>
+
+    <span class="n">positive</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span>
+</div>
+<div class="viewcode-block" id="FlexSettings"><a class="viewcode-back" href="../../edges.html#boxes.edges.FlexSettings">[docs]</a><span class="k">class</span> <span class="nc">FlexSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Settings for one directional flex cuts</span>
+
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute</span>
+
+<span class="sd"> * stretch : 1.05 : Hint of how much the flex part should be shortend</span>
+
+<span class="sd">* relative (in multiples of thickness)</span>
+
+<span class="sd"> * distance : 0.5 : width of the pattern perpendicular to the cuts</span>
+<span class="sd"> * connection : 1.0 : width of the gaps in the cuts</span>
+<span class="sd"> * width&quot; : 5.0 : width of the pattern in direction of the cuts</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;distance&quot;</span> <span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s2">&quot;connection&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;width&quot;</span> <span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;stretch&quot;</span> <span class="p">:</span> <span class="mf">1.05</span><span class="p">,</span>
+        <span class="p">}</span>
+</div>
+<div class="viewcode-block" id="FlexEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.FlexEdge">[docs]</a><span class="k">class</span> <span class="nc">FlexEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Edge with flex cuts - use straight edge for the opposing side&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;X&#39;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Flex cut&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">distance</span>
+        <span class="n">connection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">connection</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">width</span>
+
+        <span class="n">burn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">burn</span>
+        <span class="n">h</span> <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">burn</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">//</span> <span class="n">dist</span><span class="p">)</span>
+        <span class="n">leftover</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">lines</span> <span class="o">*</span> <span class="n">dist</span>
+        <span class="n">sections</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">h</span><span class="o">-</span><span class="n">connection</span><span class="p">)</span> <span class="o">//</span> <span class="n">width</span><span class="p">)</span>
+        <span class="n">sheight</span> <span class="o">=</span> <span class="p">((</span><span class="n">h</span><span class="o">-</span><span class="n">connection</span><span class="p">)</span> <span class="o">/</span> <span class="n">sections</span><span class="p">)</span><span class="o">-</span><span class="n">connection</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">dist</span> <span class="o">+</span> <span class="n">leftover</span><span class="o">/</span><span class="mi">2</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">connection</span><span class="o">+</span><span class="n">sheight</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">sections</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span> <span class="n">sheight</span><span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">connection</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span> <span class="p">(</span><span class="n">sheight</span><span class="o">+</span> <span class="n">connection</span><span class="p">))</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">sections</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">h</span> <span class="o">-</span> <span class="n">sheight</span><span class="o">-</span> <span class="n">connection</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">sections</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">h</span><span class="o">-</span><span class="n">connection</span><span class="o">-</span><span class="n">sheight</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="n">sections</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span>
+                             <span class="n">pos</span><span class="p">,</span> <span class="n">h</span><span class="o">-</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span> <span class="n">sheight</span><span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">connection</span><span class="p">))</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span>
+                             <span class="n">pos</span><span class="p">,</span> <span class="n">h</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span> <span class="p">(</span><span class="n">sheight</span><span class="o">+</span> <span class="n">connection</span><span class="p">))</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sections</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span>
+                                         <span class="n">h</span><span class="o">-</span><span class="n">connection</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">sheight</span><span class="o">+</span><span class="n">connection</span><span class="p">))</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">h</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">sheight</span><span class="o">+</span><span class="n">connection</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">get_current_point</span><span class="p">())</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../../index.html">boxes.py 0.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../boxes.html" >boxes</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Florian Festi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

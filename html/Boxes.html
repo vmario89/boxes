@@ -1,0 +1,787 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The boxes.Boxes main class &mdash; boxes.py 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="boxes.py 0.1 documentation" href="index.html" />
+    <link rel="next" title="Edges" href="edges.html" />
+    <link rel="prev" title="What is this?" href="README.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="edges.html" title="Edges"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="What is this?"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">boxes.py 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-boxes-boxes-main-class">
+<h1>The boxes.Boxes main class<a class="headerlink" href="#the-boxes-boxes-main-class" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<p>There is basically one class that takes care of everything. You are
+supposed to sub class it and implement the <tt class="docutils literal"><span class="pre">.__init__()</span></tt> and
+<tt class="docutils literal"><span class="pre">.render()</span></tt> method. This Boxes class keeps a cairo canvas object
+(self.ctx) that all drawing is made on. In addition it keeps a couple
+of global settings used for various drawing operations. See the
+<tt class="docutils literal"><span class="pre">.__init__()</span></tt> method for the details.</p>
+<dl class="class">
+<dt id="boxes.Boxes">
+<em class="property">class </em><tt class="descclassname">boxes.</tt><tt class="descname">Boxes</tt><a class="reference internal" href="_modules/boxes.html#Boxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main class &#8211; Generator should sub class this</p>
+</dd></dl>
+
+<p>And easier way to get started is using the
+<tt class="docutils literal"><span class="pre">boxes/generators/_template.py</span></tt> as a basis for your own generators.</p>
+<div class="section" id="basic-operation">
+<h2>Basic operation<a class="headerlink" href="#basic-operation" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="boxes.Boxes.__init__">
+<tt class="descclassname">Boxes.</tt><tt class="descname">__init__</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.parseArgs">
+<tt class="descclassname">Boxes.</tt><tt class="descname">parseArgs</tt><big>(</big><em>args=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.parseArgs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.parseArgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse command line parameters</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> &#8211; (Default value = None) parameters, None for using sys.argv</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.render">
+<tt class="descclassname">Boxes.</tt><tt class="descname">render</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.render"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.render" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implement this method in your sub class.</p>
+<p>You will typically need to call .parseArgs() before calling this one</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.open">
+<tt class="descclassname">Boxes.</tt><tt class="descname">open</tt><big>(</big><em>width</em>, <em>height</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare for rendering</p>
+<p>Call this function from your .render() method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>width</strong> &#8211; width of canvas in mm</li>
+<li><strong>height</strong> &#8211; height of canvas in mm</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.close">
+<tt class="descclassname">Boxes.</tt><tt class="descname">close</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finish rendering</p>
+<p>Call at the end of your .render() method</p>
+</dd></dl>
+
+</div>
+<div class="section" id="generating-parts">
+<h2>Generating Parts<a class="headerlink" href="#generating-parts" title="Permalink to this headline">¶</a></h2>
+<p>A couple of commands can create whole parts like walls. Typically the
+sizes given are the inner dimmensions not including additional space
+needed for burn compensation or joints.</p>
+<p>Currently there are only three such parts:</p>
+<dl class="method">
+<dt id="boxes.Boxes.rectangularWall">
+<tt class="descclassname">Boxes.</tt><tt class="descname">rectangularWall</tt><big>(</big><em>x</em>, <em>y</em>, <em>edges='eeee'</em>, <em>holesMargin=None</em>, <em>holesSettings=None</em>, <em>bedBolts=None</em>, <em>bedBoltSettings=None</em>, <em>callback=None</em>, <em>move=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rectangular wall for all kind of box like objects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; width</li>
+<li><strong>y</strong> &#8211; height</li>
+<li><strong>edges</strong> &#8211; (Default value = &#8220;eeee&#8221;) bottom, right, top, left</li>
+<li><strong>holesMargin</strong> &#8211; (Default value = None)</li>
+<li><strong>holesSettings</strong> &#8211; (Default value = None)</li>
+<li><strong>bedBolts</strong> &#8211; (Default value = None)</li>
+<li><strong>bedBoltSettings</strong> &#8211; (Default value = None)</li>
+<li><strong>callback</strong> &#8211; (Default value = None)</li>
+<li><strong>move</strong> &#8211; (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.roundedPlate">
+<tt class="descclassname">Boxes.</tt><tt class="descname">roundedPlate</tt><big>(</big><em>x</em>, <em>y</em>, <em>r</em>, <em>callback=None</em>, <em>holesMargin=None</em>, <em>holesSettings=None</em>, <em>bedBolts=None</em>, <em>bedBoltSettings=None</em>, <em>move=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.roundedPlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.roundedPlate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plate with rounded corner fitting to .surroundingWall()</p>
+<p>First edge is split to have a joint in the middle of the side
+callback is called at the beginning of the straight edges
+0, 1 for the two part of the first edge, 2, 3, 4 for the others</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; width</li>
+<li><strong>y</strong> &#8211; hight</li>
+<li><strong>r</strong> &#8211; radius of the corners</li>
+<li><strong>callback</strong> &#8211; (Default value = None)</li>
+<li><strong>holesMargin</strong> &#8211; (Default value = None) set to get hex holes</li>
+<li><strong>holesSettings</strong> &#8211; (Default value = None)</li>
+<li><strong>bedBolts</strong> &#8211; (Default value = None)</li>
+<li><strong>bedBoltSettings</strong> &#8211; (Default value = None)</li>
+<li><strong>move</strong> &#8211; (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.surroundingWall">
+<tt class="descclassname">Boxes.</tt><tt class="descname">surroundingWall</tt><big>(</big><em>x</em>, <em>y</em>, <em>r</em>, <em>h</em>, <em>bottom='e'</em>, <em>top='e'</em>, <em>left='D'</em>, <em>right='d'</em>, <em>callback=None</em>, <em>move=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.surroundingWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.surroundingWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>h : inner height, not counting the joints
+callback is called a beginn of the flat sides with</p>
+<ul class="simple">
+<li>0 for right half of first x side;</li>
+<li>1 and 3 for y sides;</li>
+<li>2 for second x side</li>
+<li>4 for second half of the first x side</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; width of matching roundedPlate</li>
+<li><strong>y</strong> &#8211; height of matching roundedPlate</li>
+<li><strong>r</strong> &#8211; corner radius of matching roundedPlate</li>
+<li><strong>h</strong> &#8211; height of the wall</li>
+<li><strong>bottom</strong> &#8211; (Default value = &#8216;e&#8217;) Edge type</li>
+<li><strong>top</strong> &#8211; (Default value = &#8216;e&#8217;) Edge type</li>
+<li><strong>callback</strong> &#8211; (Default value = None)</li>
+<li><strong>move</strong> &#8211; (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="the-callback-parameter">
+<h3>The callback parameter<a class="headerlink" href="#the-callback-parameter" title="Permalink to this headline">¶</a></h3>
+<p>The callback parameter can take on of the following forms:</p>
+<ul class="simple">
+<li>A function (or bound method) that expects one parameter: the number of the side the callback is currently called for.</li>
+<li>A dict with some of the numbers of the sides as keys and functions without parameters as values.</li>
+<li>A list of functions without parameters. The list may contain None as place holder and be shorter than the number of sides.</li>
+</ul>
+<p>The callback functions are called with the side of the part at the
+positive x and y axis. If the edge uses up space this space is below
+the x axis. You do not have to restore the coordinate settings in the
+callback.</p>
+<p>Instead of functions it can be handy to use a lambda expression
+calling the one building block funtion you need (e.g. fingerHolesAt).</p>
+<p>For your own parts you can use this helper function:</p>
+<dl class="method">
+<dt id="boxes.Boxes.cc">
+<tt class="descclassname">Boxes.</tt><tt class="descname">cc</tt><big>(</big><em>callback</em>, <em>number</em>, <em>x=0.0</em>, <em>y=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.cc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.cc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call callback from edge of a part</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>callback</strong> &#8211; callback (callable or list of callables)</li>
+<li><strong>number</strong> &#8211; number of the callback</li>
+<li><strong>x</strong> &#8211; (Default value = 0.0) x position to be call on</li>
+<li><strong>y</strong> &#8211; (Default value = None) y position to be called on (default does burn correction)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>For finding the right piece to the <em>callback</em> parameter this function is used:</p>
+<dl class="method">
+<dt id="boxes.Boxes.getEntry">
+<tt class="descclassname">Boxes.</tt><tt class="descname">getEntry</tt><big>(</big><em>param</em>, <em>idx</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.getEntry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.getEntry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get entry from list or items itself</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>param</strong> &#8211; list or item</li>
+<li><strong>idx</strong> &#8211; index in list</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="the-move-parameter">
+<h3>The move parameter<a class="headerlink" href="#the-move-parameter" title="Permalink to this headline">¶</a></h3>
+<p>For placing the parts the <tt class="docutils literal"><span class="pre">move</span></tt> parameter can be used. It is string
+with space separated words - at most one of each of those options:</p>
+<ul class="simple">
+<li>left / right</li>
+<li>up / down</li>
+<li>only</li>
+</ul>
+<p>If &#8220;only&#8221; is given the part is not drawn but only the move is
+done. This can be useful to go in one direction after having placed
+multiple parts in the other and have returned with <tt class="docutils literal"><span class="pre">.ctx.restore()</span></tt>.</p>
+<p>For implementing parts the following helper function can be used to
+implement a <tt class="docutils literal"><span class="pre">move</span></tt> parameter:</p>
+<dl class="method">
+<dt id="boxes.Boxes.move">
+<tt class="descclassname">Boxes.</tt><tt class="descname">move</tt><big>(</big><em>x</em>, <em>y</em>, <em>where</em>, <em>before=False</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.move" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intended to be used by parts
+where can be combinations of &#8220;up&#8221;, &#8220;down&#8221;, &#8220;left&#8221;, &#8220;right&#8221; and &#8220;only&#8221;
+when &#8220;only&#8221; is included the move is only done when before is True
+The function returns whether actual drawing of the part
+should be omited.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; width of part</li>
+<li><strong>y</strong> &#8211; height of part</li>
+<li><strong>where</strong> &#8211; which direction to move</li>
+<li><strong>before</strong> &#8211; (Default value = False) called before or after part being drawn</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>It needs to be called before and after drawing the actual part with
+the proper <tt class="docutils literal"><span class="pre">before</span></tt> paramter set.</p>
+</div>
+<div class="section" id="the-edges-parameter">
+<h3>The edges parameter<a class="headerlink" href="#the-edges-parameter" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">edges</span></tt> parameter needs to be an iterable of Edge instances to be
+used as edges of the part. Instead of instances it is possible to pass
+a single character that is looked up in the <tt class="docutils literal"><span class="pre">.edges</span></tt> dict. This
+allows to pass a string with the desired characters per edge. By
+default the following character are supported:</p>
+<ul class="simple">
+<li>e : straight edge</li>
+<li>E : as above but extended outside by one thickness</li>
+<li>f, F : finger joints</li>
+<li>h : edge with holes for finger joints</li>
+<li>d, D : dove tail joints</li>
+</ul>
+<p>Generators can register their own Edges by putting them into the
+<tt class="docutils literal"><span class="pre">.edges</span></tt> dictionary.</p>
+<p>Same applies to the parameters of <tt class="docutils literal"><span class="pre">.surroundingWall</span></tt> although they
+denominate single edge (types) only.</p>
+</div>
+</div>
+<div class="section" id="navigation">
+<h2>Navigation<a class="headerlink" href="#navigation" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="boxes.Boxes.moveTo">
+<tt class="descclassname">Boxes.</tt><tt class="descname">moveTo</tt><big>(</big><em>x</em>, <em>y=0.0</em>, <em>degrees=0</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.moveTo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.moveTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move coordinate system to given point</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; </li>
+<li><strong>y</strong> &#8211; (Default value = 0.0)</li>
+<li><strong>degrees</strong> &#8211; (Default value = 0)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.continueDirection">
+<tt class="descclassname">Boxes.</tt><tt class="descname">continueDirection</tt><big>(</big><em>angle=0</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.continueDirection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.continueDirection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set coordinate system to current position (end point)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>angle</strong> &#8211; (Default value = 0) heading</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Boxes.ctx.save()
+Boxes.ctx.restore()</p>
+</div>
+<div class="section" id="turtle-graphics-commands">
+<h2>Turtle Graphics commands<a class="headerlink" href="#turtle-graphics-commands" title="Permalink to this headline">¶</a></h2>
+<p>These commands all move the coordinate system with them.</p>
+<dl class="method">
+<dt id="boxes.Boxes.edge">
+<tt class="descclassname">Boxes.</tt><tt class="descname">edge</tt><big>(</big><em>length</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple line
+:param length: length in mm</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.corner">
+<tt class="descclassname">Boxes.</tt><tt class="descname">corner</tt><big>(</big><em>degrees</em>, <em>radius=0</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.corner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a corner</p>
+<p>This is what does the burn corrections</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>degrees</strong> &#8211; angle</li>
+<li><strong>radius</strong> &#8211; (Default value = 0)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.curveTo">
+<tt class="descclassname">Boxes.</tt><tt class="descname">curveTo</tt><big>(</big><em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em>, <em>x3</em>, <em>y3</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.curveTo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.curveTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>control point 1, control point 2, end point</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x1</strong> &#8211; </li>
+<li><strong>y1</strong> &#8211; </li>
+<li><strong>x2</strong> &#8211; </li>
+<li><strong>y2</strong> &#8211; </li>
+<li><strong>x3</strong> &#8211; </li>
+<li><strong>y3</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.polyline">
+<tt class="descclassname">Boxes.</tt><tt class="descname">polyline</tt><big>(</big><em>*args</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.polyline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.polyline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw multiple connected lines</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> &#8211; Alternating length in mm and angle</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="special-functions">
+<h3>Special Functions<a class="headerlink" href="#special-functions" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="boxes.Boxes.bedBoltHole">
+<tt class="descclassname">Boxes.</tt><tt class="descname">bedBoltHole</tt><big>(</big><em>length</em>, <em>bedBoltSettings=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.bedBoltHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.bedBoltHole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw an edge with slot for a bed bolt</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>length</strong> &#8211; length of the edge in mm</li>
+<li><strong>bedBoltSettings</strong> &#8211; (Default value = None) Dimmensions of the slot</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="latch-and-grip">
+<h3>Latch and Grip<a class="headerlink" href="#latch-and-grip" title="Permalink to this headline">¶</a></h3>
+<p>These should probably be Edge classes. But right now they are still functions.</p>
+<dl class="method">
+<dt id="boxes.Boxes.grip">
+<tt class="descclassname">Boxes.</tt><tt class="descname">grip</tt><big>(</big><em>length</em>, <em>depth</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.grip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.grip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Corrugated edge useful as an gipping area</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>length</strong> &#8211; length</li>
+<li><strong>depth</strong> &#8211; depth of the grooves</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.latch">
+<tt class="descclassname">Boxes.</tt><tt class="descname">latch</tt><big>(</big><em>length</em>, <em>positive=True</em>, <em>reverse=False</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.latch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.latch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Latch to fix a flex box door to the box</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>length</strong> &#8211; length in mm</li>
+<li><strong>positive</strong> &#8211; (Default value = True) False: Door side; True: Box side</li>
+<li><strong>reverse</strong> &#8211; (Default value = False) True when running away from the latch</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.handle">
+<tt class="descclassname">Boxes.</tt><tt class="descname">handle</tt><big>(</big><em>x</em>, <em>h</em>, <em>hl</em>, <em>r=30</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an Edge with a handle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; width in mm</li>
+<li><strong>h</strong> &#8211; height in mm</li>
+<li><strong>hl</strong> &#8211; height if th grip hole</li>
+<li><strong>r</strong> &#8211; (Default value = 30) radius of the corners</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="draw-commands">
+<h2>Draw Commands<a class="headerlink" href="#draw-commands" title="Permalink to this headline">¶</a></h2>
+<p>These commands do not change the coordinate system but get the
+coordinates passed as parameters. All of them are either som sort of
+hole or text. These artefacts are placed somewhere independently of
+some continuous outline of the part their on.</p>
+<dl class="method">
+<dt id="boxes.Boxes.hole">
+<tt class="descclassname">Boxes.</tt><tt class="descname">hole</tt><big>(</big><em>x</em>, <em>y</em>, <em>r</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.hole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a round hole</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; position</li>
+<li><strong>y</strong> &#8211; postion</li>
+<li><strong>r</strong> &#8211; radius</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.rectangularHole">
+<tt class="descclassname">Boxes.</tt><tt class="descname">rectangularHole</tt><big>(</big><em>x</em>, <em>y</em>, <em>dx</em>, <em>dy</em>, <em>r=0</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularHole" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw an rectangulat hole</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; position</li>
+<li><strong>y</strong> &#8211; position</li>
+<li><strong>dx</strong> &#8211; width</li>
+<li><strong>dy</strong> &#8211; height</li>
+<li><strong>r</strong> &#8211; (Default value = 0) radius of the corners</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.text">
+<tt class="descclassname">Boxes.</tt><tt class="descname">text</tt><big>(</big><em>text</em>, <em>x=0</em>, <em>y=0</em>, <em>angle=0</em>, <em>align=''</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>text</strong> &#8211; text to render</li>
+<li><strong>x</strong> &#8211; (Default value = 0)</li>
+<li><strong>y</strong> &#8211; (Default value = 0)</li>
+<li><strong>angle</strong> &#8211; (Default value = 0)</li>
+<li><strong>align</strong> &#8211; (Default value = &#8220;&#8221;) string with combinations of (top|middle|bottom) and (left|center|right) separated by a space</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.NEMA">
+<tt class="descclassname">Boxes.</tt><tt class="descname">NEMA</tt><big>(</big><em>size</em>, <em>x=0</em>, <em>y=0</em>, <em>angle=0</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.NEMA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.NEMA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw holes for mounting a NEMA stepper motor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>size</strong> &#8211; Nominal size in tenths of inches</li>
+<li><strong>x</strong> &#8211; (Default value = 0)</li>
+<li><strong>y</strong> &#8211; (Default value = 0)</li>
+<li><strong>angle</strong> &#8211; (Default value = 0)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>An instance of</p>
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FingerHoles</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FingerHoles"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Hole matching a finger joint edge</p>
+</dd></dl>
+
+<p>is accessible as <strong>Boxes.fingerHolesAt</strong>.</p>
+<div class="section" id="hexagonal-hole-patterns">
+<h3>Hexagonal Hole patterns<a class="headerlink" href="#hexagonal-hole-patterns" title="Permalink to this headline">¶</a></h3>
+<p>Hexagonal hole patterns are one way to have some ventilation for
+housings maded with Boxes.py. Right now both <tt class="docutils literal"><span class="pre">.rectangularWall()</span></tt>
+and <tt class="docutils literal"><span class="pre">.roundedPlate()</span></tt> do supports this pattern directly by passing
+the parameters to the calls. For other use cases these more low level
+methods can be used.</p>
+<p>For now this is the only supported pattern for ventilation slots. More
+may be added in the future.</p>
+<dl class="method">
+<dt id="boxes.Boxes.hexHolesRectangle">
+<tt class="descclassname">Boxes.</tt><tt class="descname">hexHolesRectangle</tt><big>(</big><em>x</em>, <em>y</em>, <em>settings=None</em>, <em>skip=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.hexHolesRectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hexHolesRectangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills a rectangle with holes in a hex pattern.</p>
+<p>Settings have:
+r : radius of holes
+b : space between holes
+style : what types of holes (not yet implemented)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; width</li>
+<li><strong>y</strong> &#8211; height</li>
+<li><strong>settings</strong> &#8211; (Default value = None)</li>
+<li><strong>skip</strong> &#8211; (Default value = None) function to check if hole should be present
+gets x, y, r, b, posx, posy</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.hexHolesCircle">
+<tt class="descclassname">Boxes.</tt><tt class="descname">hexHolesCircle</tt><big>(</big><em>d</em>, <em>settings=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.hexHolesCircle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hexHolesCircle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill circle with holes in a hex pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>d</strong> &#8211; diameter of the circle</li>
+<li><strong>settings</strong> &#8211; (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.hexHolesPlate">
+<tt class="descclassname">Boxes.</tt><tt class="descname">hexHolesPlate</tt><big>(</big><em>x</em>, <em>y</em>, <em>rc</em>, <em>settings=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.hexHolesPlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hexHolesPlate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill a plate with holes in a hex pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> &#8211; width</li>
+<li><strong>y</strong> &#8211; height</li>
+<li><strong>rc</strong> &#8211; radius of the corners</li>
+<li><strong>settings</strong> &#8211; (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.hexHolesHex">
+<tt class="descclassname">Boxes.</tt><tt class="descname">hexHolesHex</tt><big>(</big><em>h</em>, <em>settings=None</em>, <em>grow=None</em><big>)</big><a class="reference internal" href="_modules/boxes.html#Boxes.hexHolesHex"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hexHolesHex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill a hexagon with holes in a hex pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>h</strong> &#8211; height</li>
+<li><strong>settings</strong> &#8211; (Default value = None)</li>
+<li><strong>grow</strong> &#8211; (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The boxes.Boxes main class</a><ul>
+<li><a class="reference internal" href="#basic-operation">Basic operation</a></li>
+<li><a class="reference internal" href="#generating-parts">Generating Parts</a><ul>
+<li><a class="reference internal" href="#the-callback-parameter">The callback parameter</a></li>
+<li><a class="reference internal" href="#the-move-parameter">The move parameter</a></li>
+<li><a class="reference internal" href="#the-edges-parameter">The edges parameter</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#navigation">Navigation</a></li>
+<li><a class="reference internal" href="#turtle-graphics-commands">Turtle Graphics commands</a><ul>
+<li><a class="reference internal" href="#special-functions">Special Functions</a></li>
+<li><a class="reference internal" href="#latch-and-grip">Latch and Grip</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#draw-commands">Draw Commands</a><ul>
+<li><a class="reference internal" href="#hexagonal-hole-patterns">Hexagonal Hole patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="README.html"
+                        title="previous chapter">What is this?</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="edges.html"
+                        title="next chapter">Edges</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Boxes.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="edges.html" title="Edges"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="README.html" title="What is this?"
+             >previous</a> |</li>
+        <li><a href="index.html">boxes.py 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Florian Festi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

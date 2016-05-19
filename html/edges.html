@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Edges &mdash; boxes.py 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="boxes.py 0.1 documentation" href="index.html" />
+    <link rel="next" title="To Do" href="TODO.html" />
+    <link rel="prev" title="The boxes.Boxes main class" href="Boxes.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="TODO.html" title="To Do"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Boxes.html" title="The boxes.Boxes main class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">boxes.py 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="edges">
+<h1>Edges<a class="headerlink" href="#edges" title="Permalink to this headline">¶</a></h1>
+<p>As edges started out as methods of the main Boxes class they still are
+callables. A set of instances are kept the <tt class="docutils literal"><span class="pre">.edges</span></tt> attribute of the
+<tt class="docutils literal"><span class="pre">Boxes</span></tt> class. It is a dict with strings of length one as keys:</p>
+<ul class="simple">
+<li>e : Edge</li>
+<li>E : OutSetEdge</li>
+<li>s : StackableEdge</li>
+<li>S : StackableEdgeTop</li>
+<li>f : FingerJointEdge</li>
+<li>F : FingerJointEdgeCounterPart</li>
+<li>h : FingerHoleEdge</li>
+<li>d : DoveTailJoint</li>
+<li>D : DoveTailJointCounterPart</li>
+</ul>
+<p>Edges of the same type share a settings instance to make sure both
+sides match (when the same length is given).</p>
+<div class="section" id="edge-base-class">
+<h2>Edge base class<a class="headerlink" href="#edge-base-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="boxes.edges.Edge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">Edge</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#Edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.Edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Straight edge</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.edges.Edge.__call__">
+<tt class="descclassname">Edge.</tt><tt class="descname">__call__</tt><big>(</big><em>length</em>, <em>**kw</em><big>)</big><a class="headerlink" href="#boxes.edges.Edge.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw edge of length mm</p>
+</dd></dl>
+
+</div>
+<div class="section" id="settings-class">
+<h2>Settings Class<a class="headerlink" href="#settings-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="boxes.edges.Settings">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">Settings</tt><big>(</big><em>thickness</em>, <em>relative=True</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#Settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generic Settings class</p>
+<p>Used by different other classes to store messurements and details.
+Supports absolute values and settings that grow with the thickness
+of the material used.</p>
+<p>Overload the absolute_params and relative_params class attributes with
+the suported keys and default values. The values are available via
+attribute access.</p>
+<dl class="method">
+<dt id="boxes.edges.Settings.setValues">
+<tt class="descname">setValues</tt><big>(</big><em>thickness</em>, <em>relative=True</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#Settings.setValues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.Settings.setValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set values</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>thickness</strong> &#8211; thickness of the material used</li>
+<li><strong>relative</strong> &#8211; (Default value = True) Do scale by thickness</li>
+<li><strong>**kw</strong> &#8211; parameters to set</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="straight-edges">
+<h2>Straight Edges<a class="headerlink" href="#straight-edges" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">Edge</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#Edge"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Straight edge</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.OutSetEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">OutSetEdge</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#OutSetEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.OutSetEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Straight edge out set by one thickness</p>
+</dd></dl>
+
+</div>
+<div class="section" id="stackable-edges">
+<h2>Stackable Edges<a class="headerlink" href="#stackable-edges" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="boxes.edges.StackableEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">StackableEdge</tt><big>(</big><em>boxes</em>, <em>settings</em>, <em>fingerjointsettings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#StackableEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.StackableEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge for having stackable Boxes. The Edge creates feet on the bottom
+and has matching recesses on the top corners.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.StackableEdgeTop">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">StackableEdgeTop</tt><big>(</big><em>boxes</em>, <em>settings</em>, <em>fingerjointsettings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#StackableEdgeTop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.StackableEdgeTop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="stackable-edge-settings">
+<h3>Stackable Edge Settings<a class="headerlink" href="#stackable-edge-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="boxes.edges.StackableSettings">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">StackableSettings</tt><big>(</big><em>thickness</em>, <em>relative=True</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#StackableSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.StackableSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Settings for StackableEdge classes</p>
+<p>Values:</p>
+<ul class="simple">
+<li>absolute_params<ul>
+<li>angle : 60 : inside angle of the feet</li>
+</ul>
+</li>
+<li>relative (in multiples of thickness)<ul>
+<li>height : 2.0 : height of the feet</li>
+<li>width  : 4.0 : width of the feet</li>
+<li>holedistance : 1.0 : distance from finger holes to bottom edge</li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="finger-joints">
+<h2>Finger joints<a class="headerlink" href="#finger-joints" title="Permalink to this headline">¶</a></h2>
+<p>Finger joints are a simple way of joining two sheets (e.g. of plywood). They
+work best at an 90° angle. There are two different sides matching each
+other. As a third alternative there are holes that the fingers of one
+sheet can plug into. This allows stable T connections especially
+useful for inner walls.</p>
+<dl class="class">
+<dt id="boxes.edges.FingerJointEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FingerJointEdge</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FingerJointEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.FingerJointEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finger joint edge</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.FingerJointEdgeCounterPart">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FingerJointEdgeCounterPart</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FingerJointEdgeCounterPart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.FingerJointEdgeCounterPart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finger joint edge - other side</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.FingerHoleEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FingerHoleEdge</tt><big>(</big><em>boxes</em>, <em>fingerHoles=None</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FingerHoleEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.FingerHoleEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge with holes for a parallel finger joint</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.CrossingFingerHoleEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">CrossingFingerHoleEdge</tt><big>(</big><em>boxes</em>, <em>height</em>, <em>fingerHoles=None</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#CrossingFingerHoleEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.CrossingFingerHoleEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge with holes for finger joints 90° above</p>
+</dd></dl>
+
+<p>In addition there is</p>
+<dl class="class">
+<dt id="boxes.edges.FingerHoles">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FingerHoles</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FingerHoles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.FingerHoles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hole matching a finger joint edge</p>
+</dd></dl>
+
+<p>which is no Edge but fits <tt class="docutils literal"><span class="pre">FingerJointEdge</span></tt>.</p>
+<p>An instance of is accessible as <strong>Boxes.fingerHolesAt</strong>.</p>
+<div class="section" id="finger-joint-settings">
+<h3>Finger Joint Settings<a class="headerlink" href="#finger-joint-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="boxes.edges.FingerJointSettings">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FingerJointSettings</tt><big>(</big><em>thickness</em>, <em>relative=True</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FingerJointSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.FingerJointSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Settings for finger joints</p>
+<p>Values:</p>
+<ul class="simple">
+<li>absolute<ul>
+<li>surroundingspaces : 2 : maximum space at the start and end in multiple
+of normal spaces</li>
+</ul>
+</li>
+<li>relative (in multiples of thickness)<ul>
+<li>space : 1.0 : space between fingers</li>
+<li>finger : 1.0 : width of the fingers</li>
+<li>height : 1.0 : length of the fingers</li>
+<li>width : 1.0 : width of finger holes</li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="bed-bolts">
+<h3>Bed Bolts<a class="headerlink" href="#bed-bolts" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="boxes.edges.BoltPolicy">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">BoltPolicy</tt><a class="reference internal" href="_modules/boxes/edges.html#BoltPolicy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.BoltPolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract class</p>
+<p>Distributes (bed) bolts on a number of segments
+(fingers of a finger joint)</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.Bolts">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">Bolts</tt><big>(</big><em>bolts=1</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#Bolts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.Bolts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distribute a fixed number of bolts evenly</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="dove-tail-joints">
+<h2>Dove Tail Joints<a class="headerlink" href="#dove-tail-joints" title="Permalink to this headline">¶</a></h2>
+<p>Dovetails joints can only be used to join two pieces flatly. This
+limits their use to closing some round form created with flex areas or
+for joining several parts to a bigger one. For this use case they are
+much stronger than simple finger joints and can also bare pulling forces.</p>
+<dl class="class">
+<dt id="boxes.edges.DoveTailJoint">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">DoveTailJoint</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#DoveTailJoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.DoveTailJoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge with dove tail joints</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.DoveTailJointCounterPart">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">DoveTailJointCounterPart</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#DoveTailJointCounterPart"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.DoveTailJointCounterPart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge for other side of dove joints</p>
+</dd></dl>
+
+<div class="section" id="dove-tail-settings">
+<h3>Dove Tail Settings<a class="headerlink" href="#dove-tail-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="boxes.edges.DoveTailSettings">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">DoveTailSettings</tt><big>(</big><em>thickness</em>, <em>relative=True</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#DoveTailSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.DoveTailSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Settings used for dove tail joints</p>
+<p>Values:</p>
+<ul class="simple">
+<li>absolute<ul>
+<li>angle : 50 : how much should fingers widen (-80 to 80)</li>
+</ul>
+</li>
+<li>relative (in multiples of thickness)<ul>
+<li>size : 3 : from one middle of a dove tail to another</li>
+<li>depth : 1.5 : how far the dove tails stick out of/into the edge</li>
+<li>radius : 0.2 : radius used on all four corners</li>
+</ul>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="flex">
+<h2>Flex<a class="headerlink" href="#flex" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="boxes.edges.FlexEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FlexEdge</tt><big>(</big><em>boxes</em>, <em>settings</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FlexEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.FlexEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge with flex cuts - use straight edge for the opposing side</p>
+</dd></dl>
+
+<div class="section" id="flex-settings">
+<h3>Flex Settings<a class="headerlink" href="#flex-settings" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="boxes.edges.FlexSettings">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">FlexSettings</tt><big>(</big><em>thickness</em>, <em>relative=True</em>, <em>**kw</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#FlexSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.FlexSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Settings for one directional flex cuts</p>
+<p>Values:</p>
+<ul class="simple">
+<li>absolute</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>stretch : 1.05 : Hint of how much the flex part should be shortend</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>relative (in multiples of thickness)</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>distance : 0.5 : width of the pattern perpendicular to the cuts</li>
+<li>connection : 1.0 : width of the gaps in the cuts</li>
+<li>width&#8221; : 5.0 : width of the pattern in direction of the cuts</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="slots">
+<h2>Slots<a class="headerlink" href="#slots" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="boxes.edges.Slot">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">Slot</tt><big>(</big><em>boxes</em>, <em>depth</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#Slot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.Slot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge with an slot to slid another pice through</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.SlottedEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">SlottedEdge</tt><big>(</big><em>boxes</em>, <em>sections</em>, <em>edge='e'</em>, <em>slots=0</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#SlottedEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlottedEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge with multiple slots</p>
+</dd></dl>
+
+</div>
+<div class="section" id="compoundedge">
+<h2>CompoundEdge<a class="headerlink" href="#compoundedge" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="boxes.edges.CompoundEdge">
+<em class="property">class </em><tt class="descclassname">boxes.edges.</tt><tt class="descname">CompoundEdge</tt><big>(</big><em>boxes</em>, <em>types</em>, <em>lengths</em><big>)</big><a class="reference internal" href="_modules/boxes/edges.html#CompoundEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.CompoundEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Edge composed of multiple different Edges</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Edges</a><ul>
+<li><a class="reference internal" href="#edge-base-class">Edge base class</a></li>
+<li><a class="reference internal" href="#settings-class">Settings Class</a></li>
+<li><a class="reference internal" href="#straight-edges">Straight Edges</a></li>
+<li><a class="reference internal" href="#stackable-edges">Stackable Edges</a><ul>
+<li><a class="reference internal" href="#stackable-edge-settings">Stackable Edge Settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#finger-joints">Finger joints</a><ul>
+<li><a class="reference internal" href="#finger-joint-settings">Finger Joint Settings</a></li>
+<li><a class="reference internal" href="#bed-bolts">Bed Bolts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dove-tail-joints">Dove Tail Joints</a><ul>
+<li><a class="reference internal" href="#dove-tail-settings">Dove Tail Settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flex">Flex</a><ul>
+<li><a class="reference internal" href="#flex-settings">Flex Settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#slots">Slots</a></li>
+<li><a class="reference internal" href="#compoundedge">CompoundEdge</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Boxes.html"
+                        title="previous chapter">The boxes.Boxes main class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="TODO.html"
+                        title="next chapter">To Do</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/edges.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="TODO.html" title="To Do"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Boxes.html" title="The boxes.Boxes main class"
+             >previous</a> |</li>
+        <li><a href="index.html">boxes.py 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Florian Festi.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
