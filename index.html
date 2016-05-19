@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Boxes : Python module for generationg SVG plots for laser cutting boxes">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Boxes</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/florianfesti/boxes">View on GitHub</a>
+
+          <h1 id="project_title">Boxes</h1>
+          <h2 id="project_tagline">Python module for generationg SVG plots for laser cutting boxes</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/florianfesti/boxes/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/florianfesti/boxes/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="what-is-this" class="anchor" href="#what-is-this" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is this?</h1>
+
+<p>This is a small python library for generating SVG drawings used for
+cutting out boxes or other structures using a laser cutter.</p>
+
+<p>It also comes with a set of ready-to-use, fully parametrized generators:</p>
+
+<ul>
+<li>Various simple boxes</li>
+<li>Flex boxes with rounded corners and living hinges</li>
+<li>Type trays with and without walls and floors</li>
+<li>Book cover with flex spine</li>
+<li>Magazine file</li>
+</ul>
+
+<p>And a few one trick ponies:</p>
+
+<ul>
+<li>A drill stand</li>
+<li>A castle tower</li>
+<li>A housing for a special kind of lamp</li>
+<li>A cutlery stand</li>
+</ul>
+
+<p>Have a look into the examples/ directory to see how the results look like.</p>
+
+<h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h1>
+
+<p>Of course the library and the generators allow selecting the "thickness"
+of the material used and automatically adjusts lengths and width of
+joining fingers and other elements.</p>
+
+<p>The "burn" parameter compensates for the material removed by the laser. This
+allows fine tuning the gaps between joins up to the point where plywood
+can be press fitted even without any glue.</p>
+
+<p>Finger Joints are the work horse of the library. They allow 90° edges
+and T connections. Their size is scaled up with the material
+"thickness" to maintain the same appearance. The library also allows
+putting holes and slots for screws (bed bolts) into finger joints,
+although this is currently not supported for the finished generators.</p>
+
+<p>Dovetail joints can be used to join pieces in the same plane.</p>
+
+<p>Flex allows bending and stretching the material in one direction. This
+is used for rounded edges and living hinges.</p>
+
+<h1>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>There are two ways to use the available generators:</p>
+
+<ul>
+<li>Execute the scripts/boxes tool and pass the name of the generator together with the measurements on the command line</li>
+<li>Run scripts/boxesserver which provides an web interface on port 8000</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Boxes maintained by <a href="https://github.com/florianfesti">florianfesti</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
