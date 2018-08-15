@@ -1,23 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>Edges &#8212; boxes.py 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -25,10 +23,9 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="boxes.py 0.1 documentation" href="index.html" />
     <link rel="prev" title="The boxes.Boxes main class" href="Boxes.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -109,8 +106,7 @@ sides match (when the same length is given).</p>
 <dl class="method">
 <dt id="boxes.edges.BaseEdge.__call__">
 <code class="descclassname">BaseEdge.</code><code class="descname">__call__</code><span class="sig-paren">(</span><em>length</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#BaseEdge.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.BaseEdge.__call__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Draw edge of length mm</p>
-</dd></dl>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="settings-class">
@@ -134,9 +130,9 @@ attribute access.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>boxes</strong> &#8211; Boxes object</li>
-<li><strong>chars</strong> &#8211; sequence of chars to be used by Edge objects</li>
-<li><strong>add</strong> &#8211; add the resulting Edge objects to the Boxes object&#8217;s edges</li>
+<li><strong>boxes</strong> – Boxes object</li>
+<li><strong>chars</strong> – sequence of chars to be used by Edge objects</li>
+<li><strong>add</strong> – add the resulting Edge objects to the Boxes object’s edges</li>
 </ul>
 </td>
 </tr>
@@ -153,9 +149,9 @@ attribute access.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>thickness</strong> &#8211; thickness of the material used</li>
-<li><strong>relative</strong> &#8211; (Default value = True) Do scale by thickness</li>
-<li><strong>**kw</strong> &#8211; parameters to set</li>
+<li><strong>thickness</strong> – thickness of the material used</li>
+<li><strong>relative</strong> – (Default value = True) Do scale by thickness</li>
+<li><strong>**kw</strong> – parameters to set</li>
 </ul>
 </td>
 </tr>
@@ -193,7 +189,7 @@ Values:</p>
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li>style : &#8220;wave : &#8220;wave&#8221; or &#8220;bumps&#8221;</li>
+<li>style : “wave : “wave” or “bumps”</li>
 <li>outset : True : extend outward the straight edge</li>
 </ul>
 </div></blockquote>
@@ -404,7 +400,7 @@ much stronger than simple finger joints and can also bare pulling forces.</p>
 <div><ul class="simple">
 <li>distance : 0.5 : width of the pattern perpendicular to the cuts</li>
 <li>connection : 1.0 : width of the gaps in the cuts</li>
-<li>width&#8221; : 5.0 : width of the pattern in direction of the cuts</li>
+<li>width” : 5.0 : width of the pattern in direction of the cuts</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -449,10 +445,10 @@ Values:</p>
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li>style : &#8220;outset&#8221; : &#8220;outset&#8221; or &#8220;flush&#8221;</li>
+<li>style : “outset” : “outset” or “flush”</li>
 <li>outset : False : have lid overlap at the sides (similar to OutSetEdge)</li>
 <li>pinwidth : 1.0 : set to lower value to get disks surrounding the pins</li>
-<li>grip_percentage&#8221; : 0 : percentage of the lid that should get grips</li>
+<li>grip_percentage” : 0 : percentage of the lid that should get grips</li>
 </ul>
 </div></blockquote>
 <ul class="simple">
@@ -535,7 +531,7 @@ Values:</p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/edges.txt"
+      <li><a href="_sources/edges.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -567,7 +563,7 @@ Values:</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>

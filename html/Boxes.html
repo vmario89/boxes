@@ -1,23 +1,21 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>The boxes.Boxes main class &#8212; boxes.py 0.1 documentation</title>
-    
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
         VERSION:     '0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -25,11 +23,10 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="top" title="boxes.py 0.1 documentation" href="index.html" />
     <link rel="next" title="Edges" href="edges.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
   </head>
-  <body role="document">
+  <body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -64,7 +61,7 @@ of global settings used for various drawing operations. See the
 <dl class="class">
 <dt id="boxes.Boxes">
 <em class="property">class </em><code class="descclassname">boxes.</code><code class="descname">Boxes</code><a class="reference internal" href="_modules/boxes.html#Boxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Main class &#8211; Generator should sub class this</p>
+<dd><p>Main class – Generator should sub class this</p>
 </dd></dl>
 
 <p>And easier way to get started is using the
@@ -84,7 +81,7 @@ of global settings used for various drawing operations. See the
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> &#8211; (Default value = None) parameters, None for using sys.argv</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> – (Default value = None) parameters, None for using sys.argv</td>
 </tr>
 </tbody>
 </table>
@@ -127,16 +124,16 @@ needed for burn compensation or joints.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; width</li>
-<li><strong>y</strong> &#8211; height</li>
-<li><strong>edges</strong> &#8211; (Default value = &#8220;eeee&#8221;) bottom, right, top, left</li>
-<li><strong>ignore_widths</strong> &#8211; list of edge_widths added to adjacent edge</li>
-<li><strong>holesMargin</strong> &#8211; (Default value = None)</li>
-<li><strong>holesSettings</strong> &#8211; (Default value = None)</li>
-<li><strong>bedBolts</strong> &#8211; (Default value = None)</li>
-<li><strong>bedBoltSettings</strong> &#8211; (Default value = None)</li>
-<li><strong>callback</strong> &#8211; (Default value = None)</li>
-<li><strong>move</strong> &#8211; (Default value = None)</li>
+<li><strong>x</strong> – width</li>
+<li><strong>y</strong> – height</li>
+<li><strong>edges</strong> – (Default value = “eeee”) bottom, right, top, left</li>
+<li><strong>ignore_widths</strong> – list of edge_widths added to adjacent edge</li>
+<li><strong>holesMargin</strong> – (Default value = None)</li>
+<li><strong>holesSettings</strong> – (Default value = None)</li>
+<li><strong>bedBolts</strong> – (Default value = None)</li>
+<li><strong>bedBoltSettings</strong> – (Default value = None)</li>
+<li><strong>callback</strong> – (Default value = None)</li>
+<li><strong>move</strong> – (Default value = None)</li>
 </ul>
 </td>
 </tr>
@@ -146,25 +143,24 @@ needed for burn compensation or joints.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.roundedPlate">
-<code class="descclassname">Boxes.</code><code class="descname">roundedPlate</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r</em>, <em>edge='f'</em>, <em>callback=None</em>, <em>holesMargin=None</em>, <em>holesSettings=None</em>, <em>bedBolts=None</em>, <em>bedBoltSettings=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.roundedPlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.roundedPlate" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">roundedPlate</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r</em>, <em>edge='f'</em>, <em>callback=None</em>, <em>holesMargin=None</em>, <em>holesSettings=None</em>, <em>bedBolts=None</em>, <em>bedBoltSettings=None</em>, <em>wallpieces=1</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.roundedPlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.roundedPlate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plate with rounded corner fitting to .surroundingWall()</p>
-<p>First edge is split to have a joint in the middle of the side
-callback is called at the beginning of the straight edges
-0, 1 for the two part of the first edge, 2, 3, 4 for the others</p>
+<p>For the callbacks the sides are counted depending on wallpieces</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; width</li>
-<li><strong>y</strong> &#8211; hight</li>
-<li><strong>r</strong> &#8211; radius of the corners</li>
-<li><strong>callback</strong> &#8211; (Default value = None)</li>
-<li><strong>holesMargin</strong> &#8211; (Default value = None) set to get hex holes</li>
-<li><strong>holesSettings</strong> &#8211; (Default value = None)</li>
-<li><strong>bedBolts</strong> &#8211; (Default value = None)</li>
-<li><strong>bedBoltSettings</strong> &#8211; (Default value = None)</li>
-<li><strong>move</strong> &#8211; (Default value = None)</li>
+<li><strong>x</strong> – width</li>
+<li><strong>y</strong> – hight</li>
+<li><strong>r</strong> – radius of the corners</li>
+<li><strong>callback</strong> – (Default value = None)</li>
+<li><strong>holesMargin</strong> – (Default value = None) set to get hex holes</li>
+<li><strong>holesSettings</strong> – (Default value = None)</li>
+<li><strong>bedBolts</strong> – (Default value = None)</li>
+<li><strong>bedBoltSettings</strong> – (Default value = None)</li>
+<li><strong>wallpieces</strong> – (Default value = 1) # of separate surrounding walls</li>
+<li><strong>move</strong> – (Default value = None)</li>
 </ul>
 </td>
 </tr>
@@ -174,28 +170,25 @@ callback is called at the beginning of the straight edges
 
 <dl class="method">
 <dt id="boxes.Boxes.surroundingWall">
-<code class="descclassname">Boxes.</code><code class="descname">surroundingWall</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r</em>, <em>h</em>, <em>bottom='e'</em>, <em>top='e'</em>, <em>left='D'</em>, <em>right='d'</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.surroundingWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.surroundingWall" title="Permalink to this definition">¶</a></dt>
-<dd><p>h : inner height, not counting the joints
-callback is called a beginn of the flat sides with</p>
-<ul class="simple">
-<li>0 for right half of first x side;</li>
-<li>1 and 3 for y sides;</li>
-<li>2 for second x side</li>
-<li>4 for second half of the first x side</li>
-</ul>
+<code class="descclassname">Boxes.</code><code class="descname">surroundingWall</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r</em>, <em>h</em>, <em>bottom='e'</em>, <em>top='e'</em>, <em>left='D'</em>, <em>right='d'</em>, <em>pieces=1</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.surroundingWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.surroundingWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wall(s) with flex fiting around a roundedPlate()</p>
+<p>For the callbacks the sides are counted depending on pieces</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; width of matching roundedPlate</li>
-<li><strong>y</strong> &#8211; height of matching roundedPlate</li>
-<li><strong>r</strong> &#8211; corner radius of matching roundedPlate</li>
-<li><strong>h</strong> &#8211; height of the wall</li>
-<li><strong>bottom</strong> &#8211; (Default value = &#8216;e&#8217;) Edge type</li>
-<li><strong>top</strong> &#8211; (Default value = &#8216;e&#8217;) Edge type</li>
-<li><strong>callback</strong> &#8211; (Default value = None)</li>
-<li><strong>move</strong> &#8211; (Default value = None)</li>
+<li><strong>x</strong> – width of matching roundedPlate</li>
+<li><strong>y</strong> – height of matching roundedPlate</li>
+<li><strong>r</strong> – corner radius of matching roundedPlate</li>
+<li><strong>h</strong> – inner height of the wall (without edges)</li>
+<li><strong>bottom</strong> – (Default value = ‘e’) Edge type</li>
+<li><strong>top</strong> – (Default value = ‘e’) Edge type</li>
+<li><strong>left</strong> – (Default value = ‘D’) left edge(s)</li>
+<li><strong>right</strong> – (Default value = ‘d’) right edge(s)</li>
+<li><strong>pieces</strong> – (Default value = 1) number of separate pieces</li>
+<li><strong>callback</strong> – (Default value = None)</li>
+<li><strong>move</strong> – (Default value = None)</li>
 </ul>
 </td>
 </tr>
@@ -227,10 +220,10 @@ calling the one building block funtion you need (e.g. fingerHolesAt).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>callback</strong> &#8211; callback (callable or list of callables)</li>
-<li><strong>number</strong> &#8211; number of the callback</li>
-<li><strong>x</strong> &#8211; (Default value = 0.0) x position to be call on</li>
-<li><strong>y</strong> &#8211; (Default value = None) y position to be called on (default does burn correction)</li>
+<li><strong>callback</strong> – callback (callable or list of callables)</li>
+<li><strong>number</strong> – number of the callback</li>
+<li><strong>x</strong> – (Default value = 0.0) x position to be call on</li>
+<li><strong>y</strong> – (Default value = None) y position to be called on (default does burn correction)</li>
 </ul>
 </td>
 </tr>
@@ -248,8 +241,8 @@ calling the one building block funtion you need (e.g. fingerHolesAt).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>param</strong> &#8211; list or item</li>
-<li><strong>idx</strong> &#8211; index in list</li>
+<li><strong>param</strong> – list or item</li>
+<li><strong>idx</strong> – index in list</li>
 </ul>
 </td>
 </tr>
@@ -267,7 +260,7 @@ with space separated words - at most one of each of those options:</p>
 <li>up / down</li>
 <li>only</li>
 </ul>
-<p>If &#8220;only&#8221; is given the part is not drawn but only the move is
+<p>If “only” is given the part is not drawn but only the move is
 done. This can be useful to go in one direction after having placed
 multiple parts in the other and have returned with <code class="docutils literal"><span class="pre">.ctx.restore()</span></code>.</p>
 <p>For implementing parts the following helper function can be used to
@@ -276,8 +269,8 @@ implement a <code class="docutils literal"><span class="pre">move</span></code> 
 <dt id="boxes.Boxes.move">
 <code class="descclassname">Boxes.</code><code class="descname">move</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>where</em>, <em>before=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intended to be used by parts
-where can be combinations of &#8220;up&#8221;, &#8220;down&#8221;, &#8220;left&#8221;, &#8220;right&#8221; and &#8220;only&#8221;
-when &#8220;only&#8221; is included the move is only done when before is True
+where can be combinations of “up”, “down”, “left”, “right” and “only”
+when “only” is included the move is only done when before is True
 The function returns whether actual drawing of the part
 should be omited.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -285,10 +278,10 @@ should be omited.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; width of part</li>
-<li><strong>y</strong> &#8211; height of part</li>
-<li><strong>where</strong> &#8211; which direction to move</li>
-<li><strong>before</strong> &#8211; (Default value = False) called before or after part being drawn</li>
+<li><strong>x</strong> – width of part</li>
+<li><strong>y</strong> – height of part</li>
+<li><strong>where</strong> – which direction to move</li>
+<li><strong>before</strong> – (Default value = False) called before or after part being drawn</li>
 </ul>
 </td>
 </tr>
@@ -330,9 +323,9 @@ denominate single edge (types) only.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; </li>
-<li><strong>y</strong> &#8211; (Default value = 0.0)</li>
-<li><strong>degrees</strong> &#8211; (Default value = 0)</li>
+<li><strong>x</strong> – </li>
+<li><strong>y</strong> – (Default value = 0.0)</li>
+<li><strong>degrees</strong> – (Default value = 0)</li>
 </ul>
 </td>
 </tr>
@@ -348,7 +341,7 @@ denominate single edge (types) only.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>angle</strong> &#8211; (Default value = 0) heading</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>angle</strong> – (Default value = 0) heading</td>
 </tr>
 </tbody>
 </table>
@@ -362,14 +355,14 @@ Boxes.ctx.restore()</p>
 <p>These commands all move the coordinate system with them.</p>
 <dl class="method">
 <dt id="boxes.Boxes.edge">
-<code class="descclassname">Boxes.</code><code class="descname">edge</code><span class="sig-paren">(</span><em>length</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.edge" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">edge</code><span class="sig-paren">(</span><em>length</em>, <em>tabs=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.edge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.edge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simple line
 :param length: length in mm</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="boxes.Boxes.corner">
-<code class="descclassname">Boxes.</code><code class="descname">corner</code><span class="sig-paren">(</span><em>degrees</em>, <em>radius=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.corner" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">corner</code><span class="sig-paren">(</span><em>degrees</em>, <em>radius=0</em>, <em>tabs=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.corner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.corner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a corner</p>
 <p>This is what does the burn corrections</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -377,8 +370,8 @@ Boxes.ctx.restore()</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>degrees</strong> &#8211; angle</li>
-<li><strong>radius</strong> &#8211; (Default value = 0)</li>
+<li><strong>degrees</strong> – angle</li>
+<li><strong>radius</strong> – (Default value = 0)</li>
 </ul>
 </td>
 </tr>
@@ -395,12 +388,12 @@ Boxes.ctx.restore()</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x1</strong> &#8211; </li>
-<li><strong>y1</strong> &#8211; </li>
-<li><strong>x2</strong> &#8211; </li>
-<li><strong>y2</strong> &#8211; </li>
-<li><strong>x3</strong> &#8211; </li>
-<li><strong>y3</strong> &#8211; </li>
+<li><strong>x1</strong> – </li>
+<li><strong>y1</strong> – </li>
+<li><strong>x2</strong> – </li>
+<li><strong>y2</strong> – </li>
+<li><strong>x3</strong> – </li>
+<li><strong>y3</strong> – </li>
 </ul>
 </td>
 </tr>
@@ -416,7 +409,7 @@ Boxes.ctx.restore()</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> &#8211; Alternating length in mm and angle. angle may be tuple
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Alternating length in mm and angle. angle may be tuple
 (angle, radius)</td>
 </tr>
 </tbody>
@@ -427,15 +420,15 @@ Boxes.ctx.restore()</p>
 <h3>Special Functions<a class="headerlink" href="#special-functions" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="boxes.Boxes.bedBoltHole">
-<code class="descclassname">Boxes.</code><code class="descname">bedBoltHole</code><span class="sig-paren">(</span><em>length</em>, <em>bedBoltSettings=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.bedBoltHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.bedBoltHole" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">bedBoltHole</code><span class="sig-paren">(</span><em>length</em>, <em>bedBoltSettings=None</em>, <em>tabs=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.bedBoltHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.bedBoltHole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw an edge with slot for a bed bolt</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>length</strong> &#8211; length of the edge in mm</li>
-<li><strong>bedBoltSettings</strong> &#8211; (Default value = None) Dimmensions of the slot</li>
+<li><strong>length</strong> – length of the edge in mm</li>
+<li><strong>bedBoltSettings</strong> – (Default value = None) Dimmensions of the slot</li>
 </ul>
 </td>
 </tr>
@@ -456,8 +449,8 @@ Boxes.ctx.restore()</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>length</strong> &#8211; length</li>
-<li><strong>depth</strong> &#8211; depth of the grooves</li>
+<li><strong>length</strong> – length</li>
+<li><strong>depth</strong> – depth of the grooves</li>
 </ul>
 </td>
 </tr>
@@ -474,9 +467,9 @@ Boxes.ctx.restore()</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>length</strong> &#8211; length in mm</li>
-<li><strong>positive</strong> &#8211; (Default value = True) False: Door side; True: Box side</li>
-<li><strong>reverse</strong> &#8211; (Default value = False) True when running away from the latch</li>
+<li><strong>length</strong> – length in mm</li>
+<li><strong>positive</strong> – (Default value = True) False: Door side; True: Box side</li>
+<li><strong>reverse</strong> – (Default value = False) True when running away from the latch</li>
 </ul>
 </td>
 </tr>
@@ -493,10 +486,10 @@ Boxes.ctx.restore()</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; width in mm</li>
-<li><strong>h</strong> &#8211; height in mm</li>
-<li><strong>hl</strong> &#8211; height if th grip hole</li>
-<li><strong>r</strong> &#8211; (Default value = 30) radius of the corners</li>
+<li><strong>x</strong> – width in mm</li>
+<li><strong>h</strong> – height in mm</li>
+<li><strong>hl</strong> – height if th grip hole</li>
+<li><strong>r</strong> – (Default value = 30) radius of the corners</li>
 </ul>
 </td>
 </tr>
@@ -514,16 +507,16 @@ hole or text. These artefacts are placed somewhere independently of
 some continuous outline of the part their on.</p>
 <dl class="method">
 <dt id="boxes.Boxes.hole">
-<code class="descclassname">Boxes.</code><code class="descname">hole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.hole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hole" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">hole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r=0.0</em>, <em>d=0.0</em>, <em>tabs=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.hole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a round hole</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; position</li>
-<li><strong>y</strong> &#8211; postion</li>
-<li><strong>r</strong> &#8211; radius</li>
+<li><strong>x</strong> – position</li>
+<li><strong>y</strong> – postion</li>
+<li><strong>r</strong> – radius</li>
 </ul>
 </td>
 </tr>
@@ -540,11 +533,11 @@ some continuous outline of the part their on.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; position</li>
-<li><strong>y</strong> &#8211; position</li>
-<li><strong>dx</strong> &#8211; width</li>
-<li><strong>dy</strong> &#8211; height</li>
-<li><strong>r</strong> &#8211; (Default value = 0) radius of the corners</li>
+<li><strong>x</strong> – position</li>
+<li><strong>y</strong> – position</li>
+<li><strong>dx</strong> – width</li>
+<li><strong>dy</strong> – height</li>
+<li><strong>r</strong> – (Default value = 0) radius of the corners</li>
 </ul>
 </td>
 </tr>
@@ -554,18 +547,18 @@ some continuous outline of the part their on.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.text">
-<code class="descclassname">Boxes.</code><code class="descname">text</code><span class="sig-paren">(</span><em>text</em>, <em>x=0</em>, <em>y=0</em>, <em>angle=0</em>, <em>align=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">text</code><span class="sig-paren">(</span><em>text, x=0, y=0, angle=0, align='', fontsize=10, color=[0.0, 0.0, 0.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw text</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>text</strong> &#8211; text to render</li>
-<li><strong>x</strong> &#8211; (Default value = 0)</li>
-<li><strong>y</strong> &#8211; (Default value = 0)</li>
-<li><strong>angle</strong> &#8211; (Default value = 0)</li>
-<li><strong>align</strong> &#8211; (Default value = &#8220;&#8221;) string with combinations of (top|middle|bottom) and (left|center|right) separated by a space</li>
+<li><strong>text</strong> – text to render</li>
+<li><strong>x</strong> – (Default value = 0)</li>
+<li><strong>y</strong> – (Default value = 0)</li>
+<li><strong>angle</strong> – (Default value = 0)</li>
+<li><strong>align</strong> – (Default value = “”) string with combinations of (top|middle|bottom) and (left|center|right) separated by a space</li>
 </ul>
 </td>
 </tr>
@@ -582,10 +575,10 @@ some continuous outline of the part their on.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>size</strong> &#8211; Nominal size in tenths of inches</li>
-<li><strong>x</strong> &#8211; (Default value = 0)</li>
-<li><strong>y</strong> &#8211; (Default value = 0)</li>
-<li><strong>angle</strong> &#8211; (Default value = 0)</li>
+<li><strong>size</strong> – Nominal size in tenths of inches</li>
+<li><strong>x</strong> – (Default value = 0)</li>
+<li><strong>y</strong> – (Default value = 0)</li>
+<li><strong>angle</strong> – (Default value = 0)</li>
 </ul>
 </td>
 </tr>
@@ -623,10 +616,10 @@ style : what types of holes (not yet implemented)</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; width</li>
-<li><strong>y</strong> &#8211; height</li>
-<li><strong>settings</strong> &#8211; (Default value = None)</li>
-<li><strong>skip</strong> &#8211; (Default value = None) function to check if hole should be present
+<li><strong>x</strong> – width</li>
+<li><strong>y</strong> – height</li>
+<li><strong>settings</strong> – (Default value = None)</li>
+<li><strong>skip</strong> – (Default value = None) function to check if hole should be present
 gets x, y, r, b, posx, posy</li>
 </ul>
 </td>
@@ -644,8 +637,8 @@ gets x, y, r, b, posx, posy</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>d</strong> &#8211; diameter of the circle</li>
-<li><strong>settings</strong> &#8211; (Default value = None)</li>
+<li><strong>d</strong> – diameter of the circle</li>
+<li><strong>settings</strong> – (Default value = None)</li>
 </ul>
 </td>
 </tr>
@@ -662,10 +655,10 @@ gets x, y, r, b, posx, posy</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> &#8211; width</li>
-<li><strong>y</strong> &#8211; height</li>
-<li><strong>rc</strong> &#8211; radius of the corners</li>
-<li><strong>settings</strong> &#8211; (Default value = None)</li>
+<li><strong>x</strong> – width</li>
+<li><strong>y</strong> – height</li>
+<li><strong>rc</strong> – radius of the corners</li>
+<li><strong>settings</strong> – (Default value = None)</li>
 </ul>
 </td>
 </tr>
@@ -682,9 +675,9 @@ gets x, y, r, b, posx, posy</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>h</strong> &#8211; height</li>
-<li><strong>settings</strong> &#8211; (Default value = None)</li>
-<li><strong>grow</strong> &#8211; (Default value = None)</li>
+<li><strong>h</strong> – height</li>
+<li><strong>settings</strong> – (Default value = None)</li>
+<li><strong>grow</strong> – (Default value = None)</li>
 </ul>
 </td>
 </tr>
@@ -735,7 +728,7 @@ gets x, y, r, b, posx, posy</li>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/Boxes.txt"
+      <li><a href="_sources/Boxes.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -770,7 +763,7 @@ gets x, y, r, b, posx, posy</li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
     </div>
   </body>
 </html>
