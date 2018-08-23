@@ -240,6 +240,8 @@
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">default</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">)):</span>
+            <span class="n">default</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
         <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;input name=&quot;</span><span class="si">%s</span><span class="s2">&quot; type=&quot;hidden&quot; value=&quot;0&quot;&gt;</span>
 <span class="s2">&lt;input name=&quot;</span><span class="si">%s</span><span class="s2">&quot; type=&quot;checkbox&quot; value=&quot;1&quot;</span><span class="si">%s</span><span class="s2">&gt;&quot;&quot;&quot;</span> <span class="o">%</span> \
             <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39; checked=&quot;checked&quot;&#39;</span> <span class="k">if</span> <span class="n">default</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -782,7 +784,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">side</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mf">360.</span><span class="o">/</span><span class="n">corners</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">regularPolygonWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corners</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="Boxes.regularPolygonWall"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.regularPolygonWall">[docs]</a>    <span class="k">def</span> <span class="nf">regularPolygonWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corners</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">side</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">edges</span><span class="o">=</span><span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create regular polygone as a wall</span>
 <span class="sd">        :param corners: number of corners of the polygone</span>
@@ -823,7 +825,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mf">360.0</span><span class="o">/</span><span class="n">corners</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.grip"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.grip">[docs]</a>    <span class="k">def</span> <span class="nf">grip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Corrugated edge useful as an gipping area</span>
@@ -941,7 +943,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">degrees</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">180.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">moveArc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<div class="viewcode-block" id="Boxes.moveArc"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.moveArc">[docs]</a>    <span class="k">def</span> <span class="nf">moveArc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param angle:</span>
 <span class="sd">        :param r: (Default value = 0.0)</span>
@@ -956,7 +958,7 @@
                         <span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)),</span> <span class="n">angle</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">rad</span><span class="p">),</span>
-                        <span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)),</span> <span class="n">angle</span><span class="p">)</span>
+                        <span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)),</span> <span class="n">angle</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.continueDirection"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.continueDirection">[docs]</a>    <span class="k">def</span> <span class="nf">continueDirection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1075,7 +1077,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span></div>
 
-    <span class="nd">@restore</span>
+<div class="viewcode-block" id="Boxes.dHole"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.dHole">[docs]</a>    <span class="nd">@restore</span>
     <span class="nd">@holeCol</span>
     <span class="k">def</span> <span class="nf">dHole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rel_w</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1093,9 +1095,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">r</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">burn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">360</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span></div>
 
-    <span class="nd">@restore</span>
+<div class="viewcode-block" id="Boxes.flatHole"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.flatHole">[docs]</a>    <span class="nd">@restore</span>
     <span class="nd">@holeCol</span>
     <span class="k">def</span> <span class="nf">flatHole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rel_w</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1117,7 +1119,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.text"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.text">[docs]</a>    <span class="nd">@restore</span>
     <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]):</span>
@@ -1195,9 +1197,16 @@
         <span class="mi">100</span> <span class="p">:</span> <span class="mf">16.00</span><span class="p">,</span>
         <span class="p">}</span>
 
-    <span class="nd">@restore</span>
+<div class="viewcode-block" id="Boxes.TX"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.TX">[docs]</a>    <span class="nd">@restore</span>
     <span class="nd">@holeCol</span>
     <span class="k">def</span> <span class="nf">TX</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Draw a star pattern</span>
+
+<span class="sd">        :param size: 1 to 100</span>
+<span class="sd">        :param x: (Default value = 0)</span>
+<span class="sd">        :param y: (Default value = 0)</span>
+<span class="sd">        :param angle: (Default value = 0)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
 
         <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tx_sizes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -1208,7 +1217,7 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="n">ri</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">150</span><span class="p">,</span> <span class="n">ro</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="n">ri</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="n">ri</span><span class="p">)</span></div>
 
     <span class="n">nema_sizes</span> <span class="o">=</span> <span class="p">{</span>
         <span class="c1">#    motor,flange, holes, screws</span>
@@ -1370,7 +1379,14 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">w</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dist</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">w</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">dist</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">flex2D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="Boxes.flex2D"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.flex2D">[docs]</a>    <span class="k">def</span> <span class="nf">flex2D</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fill a rectangle with a pattern allowing bending in both axis</span>
+
+<span class="sd">        :param x: width</span>
+<span class="sd">        :param y: height</span>
+<span class="sd">        :param width: width between the lines of the pattern in multiples of thickness</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">width</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">cx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="o">//</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">width</span><span class="p">))</span>
         <span class="n">wx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="mf">5.</span> <span class="o">/</span> <span class="n">cx</span>
@@ -1399,7 +1415,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">army</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span></div>
 
     <span class="c1">##################################################</span>
     <span class="c1">### parts</span>
@@ -1653,7 +1669,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">flangedWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s2">&quot;FFFF&quot;</span><span class="p">,</span> <span class="n">flanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+<div class="viewcode-block" id="Boxes.flangedWall"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.flangedWall">[docs]</a>    <span class="k">def</span> <span class="nf">flangedWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s2">&quot;FFFF&quot;</span><span class="p">,</span> <span class="n">flanges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
                <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Rectangular wall with flanges extending the regular size</span>
 
@@ -1703,9 +1719,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">])(</span><span class="n">l</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">flanges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">t</span><span class="o">-</span><span class="n">rr</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">rr</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">rectangularTriangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s2">&quot;eee&quot;</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<div class="viewcode-block" id="Boxes.rectangularTriangle"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.rectangularTriangle">[docs]</a>    <span class="k">def</span> <span class="nf">rectangularTriangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s2">&quot;eee&quot;</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                         <span class="n">bedBolts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1777,14 +1793,22 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">width</span><span class="o">+</span><span class="mi">1</span><span class="o">*</span><span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span> <span class="n">height</span><span class="o">-</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span> <span class="mi">180</span><span class="p">)</span>
 
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
     <span class="c1">##################################################</span>
     <span class="c1">### Place Parts</span>
     <span class="c1">##################################################</span>
 
-    <span class="k">def</span> <span class="nf">partsMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="n">part</span><span class="p">,</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<div class="viewcode-block" id="Boxes.partsMatrix"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.partsMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">partsMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="n">part</span><span class="p">,</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;place many of the same part</span>
 
+<span class="sd">        :param n: number of parts</span>
+<span class="sd">        :param width: number of parts in a row</span>
+<span class="sd">        :param move: (Default value = None)</span>
+<span class="sd">        :param part: callable that draws a part and knows move param</span>
+<span class="sd">        :param \*l: params for part</span>
+<span class="sd">        :param \*\*kw: keyword params for part</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span>
 
@@ -1828,7 +1852,7 @@
         <span class="k">if</span> <span class="s2">&quot;right&quot;</span> <span class="ow">in</span> <span class="n">move</span><span class="p">:</span>
             <span class="n">kw</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;right only&quot;</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
-                <span class="n">part</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></div>
+                <span class="n">part</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></div></div>
 </pre></div>
 
           </div>

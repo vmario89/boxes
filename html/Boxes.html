@@ -114,7 +114,7 @@ of global settings used for various drawing operations. See the
 <p>A couple of commands can create whole parts like walls. Typically the
 sizes given are the inner dimmensions not including additional space
 needed for burn compensation or joints.</p>
-<p>Currently there are only three such parts:</p>
+<p>Currently there are the following parts:</p>
 <dl class="method">
 <dt id="boxes.Boxes.rectangularWall">
 <code class="descclassname">Boxes.</code><code class="descname">rectangularWall</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>edges='eeee'</em>, <em>ignore_widths=[]</em>, <em>holesMargin=None</em>, <em>holesSettings=None</em>, <em>bedBolts=None</em>, <em>bedBoltSettings=None</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularWall" title="Permalink to this definition">¶</a></dt>
@@ -139,6 +139,60 @@ needed for burn compensation or joints.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.flangedWall">
+<code class="descclassname">Boxes.</code><code class="descname">flangedWall</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>edges='FFFF'</em>, <em>flanges=None</em>, <em>r=0.0</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.flangedWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.flangedWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rectangular wall with flanges extending the regular size</p>
+<p>This is similar to the rectangularWall but it may extend to either side
+replacing the F edge with fingerHoles. Use with E and F for edges only.
+:param x: width
+:param y: height
+:param edges:  (Default value = “FFFF”) bottom, right, top, left
+:param flanges: (Default value = None) list of width of the flanges
+:param r: radius of the corners of the flange
+:param callback:  (Default value = None)
+:param move:  (Default value = None)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.rectangularTriangle">
+<code class="descclassname">Boxes.</code><code class="descname">rectangularTriangle</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>edges='eee'</em>, <em>r=0.0</em>, <em>num=1</em>, <em>bedBolts=None</em>, <em>bedBoltSettings=None</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularTriangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularTriangle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rectangular triangular wall</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – width</li>
+<li><strong>y</strong> – height</li>
+<li><strong>edges</strong> – (Default value = “eee”) bottom, right[, diagonal]</li>
+<li><strong>r</strong> – radius towards the hypothenuse</li>
+<li><strong>num</strong> – (Default value = 1) number of triangles</li>
+<li><strong>bedBolts</strong> – (Default value = None)</li>
+<li><strong>bedBoltSettings</strong> – (Default value = None)</li>
+<li><strong>callback</strong> – (Default value = None)</li>
+<li><strong>move</strong> – (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.regularPolygonWall">
+<code class="descclassname">Boxes.</code><code class="descname">regularPolygonWall</code><span class="sig-paren">(</span><em>corners=3</em>, <em>r=None</em>, <em>h=None</em>, <em>side=None</em>, <em>edges='e'</em>, <em>hole=None</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.regularPolygonWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.regularPolygonWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create regular polygone as a wall
+:param corners: number of corners of the polygone
+:param radius: distance center to one of the corners
+:param h: distance center to one of the sides (height of sector)
+:param side: length of one side
+:param edges:  (Default value = “e”, may be string/list of length corners)
+:param hole: diameter of central hole (Default value = 0)
+:param callback:  (Default value = None, middle=0, then sides=1..)
+:param move:  (Default value = None)</p>
 </dd></dl>
 
 <dl class="method">
@@ -196,6 +250,98 @@ needed for burn compensation or joints.</p>
 </table>
 </dd></dl>
 
+<div class="section" id="parts-class">
+<h3>Parts Class<a class="headerlink" href="#parts-class" title="Permalink to this headline">¶</a></h3>
+<p>More parts are available in a separete class. An instance is available as
+<strong>Boxes.parts</strong></p>
+<dl class="method">
+<dt id="boxes.parts.Parts.disc">
+<code class="descclassname">Parts.</code><code class="descname">disc</code><span class="sig-paren">(</span><em>diameter</em>, <em>hole=0</em>, <em>callback=None</em>, <em>move=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/parts.html#Parts.disc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.parts.Parts.disc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple disc</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>diameter</strong> – diameter of the disc</li>
+<li><strong>hole</strong> – (Default value = 0)</li>
+<li><strong>callback</strong> – (Default value = None) called in the center</li>
+<li><strong>move</strong> – (Defaultvalue = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.parts.Parts.waivyKnob">
+<code class="descclassname">Parts.</code><code class="descname">waivyKnob</code><span class="sig-paren">(</span><em>diameter</em>, <em>n=20</em>, <em>angle=45</em>, <em>hole=0</em>, <em>callback=None</em>, <em>move=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/parts.html#Parts.waivyKnob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.parts.Parts.waivyKnob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disc with a waivy edge to be easier to be gripped</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>diameter</strong> – diameter of the knob</li>
+<li><strong>n</strong> – (Default value = 20) number of waves</li>
+<li><strong>angle</strong> – (Default value = 45) maximum angle of the wave</li>
+<li><strong>hole</strong> – (Default value = 0)</li>
+<li><strong>callback</strong> – (Default value = None) called in the center</li>
+<li><strong>move</strong> – (Defaultvalue = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.parts.Parts.concaveKnob">
+<code class="descclassname">Parts.</code><code class="descname">concaveKnob</code><span class="sig-paren">(</span><em>diameter</em>, <em>n=3</em>, <em>rounded=0.2</em>, <em>angle=70</em>, <em>hole=0</em>, <em>callback=None</em>, <em>move=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/parts.html#Parts.concaveKnob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.parts.Parts.concaveKnob" title="Permalink to this definition">¶</a></dt>
+<dd><p>Knob with dents to be easier to be gripped</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>diameter</strong> – diameter of the knob</li>
+<li><strong>n</strong> – (Default value = 3) number of dents</li>
+<li><strong>rounded</strong> – (Default value = 0.2) proportion of circumferen remaining</li>
+<li><strong>angle</strong> – (Default value = 70) angle the dentsmeet the circumference</li>
+<li><strong>hole</strong> – (Default value = 0)</li>
+<li><strong>callback</strong> – (Default value = None) called in the center</li>
+<li><strong>move</strong> – (Defaultvalue = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.parts.Parts.ringSegment">
+<code class="descclassname">Parts.</code><code class="descname">ringSegment</code><span class="sig-paren">(</span><em>r_outside</em>, <em>r_inside</em>, <em>angle</em>, <em>n=1</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/parts.html#Parts.ringSegment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.parts.Parts.ringSegment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ring Segment</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>r_outside</strong> – outer radius</li>
+<li><strong>r_inside</strong> – inner radius</li>
+<li><strong>angle</strong> – anlge the segment is spanning</li>
+<li><strong>n</strong> – (Default value = 1) number of segments</li>
+<li><strong>move</strong> – (Defaultvalue = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>There are a few parameter shared by many of those parts:</p>
+</div>
 <div class="section" id="the-callback-parameter">
 <h3>The callback parameter<a class="headerlink" href="#the-callback-parameter" title="Permalink to this headline">¶</a></h3>
 <p>The callback parameter can take on of the following forms:</p>
@@ -312,6 +458,34 @@ default the following character are supported:</p>
 denominate single edge (types) only.</p>
 </div>
 </div>
+<div class="section" id="partsmatrix">
+<h2>PartsMatrix<a class="headerlink" href="#partsmatrix" title="Permalink to this headline">¶</a></h2>
+<p>To place many of the same part partMatrix can used:</p>
+<dl class="method">
+<dt id="boxes.Boxes.partsMatrix">
+<code class="descclassname">Boxes.</code><code class="descname">partsMatrix</code><span class="sig-paren">(</span><em>n</em>, <em>width</em>, <em>move</em>, <em>part</em>, <em>*l</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.partsMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.partsMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>place many of the same part</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n</strong> – number of parts</li>
+<li><strong>width</strong> – number of parts in a row</li>
+<li><strong>move</strong> – (Default value = None)</li>
+<li><strong>part</strong> – callable that draws a part and knows move param</li>
+<li><strong>*l</strong> – params for part</li>
+<li><strong>**kw</strong> – keyword params for part</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>It creates one big block of parts. The move param treat this block like on big
+part.</p>
+</div>
 <div class="section" id="navigation">
 <h2>Navigation<a class="headerlink" href="#navigation" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
@@ -334,6 +508,23 @@ denominate single edge (types) only.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="boxes.Boxes.moveArc">
+<code class="descclassname">Boxes.</code><code class="descname">moveArc</code><span class="sig-paren">(</span><em>angle</em>, <em>r=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.moveArc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.moveArc" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>angle</strong> – </li>
+<li><strong>r</strong> – (Default value = 0.0)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="boxes.Boxes.continueDirection">
 <code class="descclassname">Boxes.</code><code class="descname">continueDirection</code><span class="sig-paren">(</span><em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.continueDirection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.continueDirection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set coordinate system to current position (end point)</p>
@@ -347,8 +538,9 @@ denominate single edge (types) only.</p>
 </table>
 </dd></dl>
 
-<p>Boxes.ctx.save()
-Boxes.ctx.restore()</p>
+<p><strong>Boxes.ctx.save()</strong> allows to save (among other things) the current position.
+<strong>Boxes.ctx.restore()</strong> restores the previously saved state. Always make sure
+to have balanced calls to those two functions.</p>
 </div>
 <div class="section" id="turtle-graphics-commands">
 <h2>Turtle Graphics commands<a class="headerlink" href="#turtle-graphics-commands" title="Permalink to this headline">¶</a></h2>
@@ -546,6 +738,16 @@ some continuous outline of the part their on.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="boxes.Boxes.dHole">
+<code class="descclassname">Boxes.</code><code class="descname">dHole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r=None</em>, <em>d=None</em>, <em>w=None</em>, <em>rel_w=0.75</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.dHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.dHole" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.flatHole">
+<code class="descclassname">Boxes.</code><code class="descname">flatHole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r=None</em>, <em>d=None</em>, <em>w=None</em>, <em>rel_w=0.75</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.flatHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.flatHole" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="boxes.Boxes.text">
 <code class="descclassname">Boxes.</code><code class="descname">text</code><span class="sig-paren">(</span><em>text, x=0, y=0, angle=0, align='', fontsize=10, color=[0.0, 0.0, 0.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw text</p>
@@ -586,6 +788,51 @@ some continuous outline of the part their on.</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="boxes.Boxes.TX">
+<code class="descclassname">Boxes.</code><code class="descname">TX</code><span class="sig-paren">(</span><em>size</em>, <em>x=0</em>, <em>y=0</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.TX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.TX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw a star pattern</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>size</strong> – 1 to 100</li>
+<li><strong>x</strong> – (Default value = 0)</li>
+<li><strong>y</strong> – (Default value = 0)</li>
+<li><strong>angle</strong> – (Default value = 0)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.flex2D">
+<code class="descclassname">Boxes.</code><code class="descname">flex2D</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>width=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.flex2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.flex2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fill a rectangle with a pattern allowing bending in both axis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – width</li>
+<li><strong>y</strong> – height</li>
+<li><strong>width</strong> – width between the lines of the pattern in multiples of thickness</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="NutHole">
+<em class="property">class </em><code class="descname">NutHole</code><a class="headerlink" href="#NutHole" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>An instance is available as <strong>boxes.Boxes.nutHole()</strong></p>
 <p>An instance of</p>
 <dl class="class">
 <dt>
@@ -603,6 +850,9 @@ the parameters to the calls. For other use cases these more low level
 methods can be used.</p>
 <p>For now this is the only supported pattern for ventilation slots. More
 may be added in the future.</p>
+<p>There is a global Boxes.hexHolesSettings object that is used if no settings are
+passed. It currently is just a tuple of (r, dist, style) defualting to
+(5, 3, ‘circle’) but might be replace by a Settings instance in the future.</p>
 <dl class="method">
 <dt id="boxes.Boxes.hexHolesRectangle">
 <code class="descclassname">Boxes.</code><code class="descname">hexHolesRectangle</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>settings=None</em>, <em>skip=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.hexHolesRectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hexHolesRectangle" title="Permalink to this definition">¶</a></dt>
@@ -700,11 +950,13 @@ gets x, y, r, b, posx, posy</li>
 <li><a class="reference internal" href="#">The boxes.Boxes main class</a><ul>
 <li><a class="reference internal" href="#basic-operation">Basic operation</a></li>
 <li><a class="reference internal" href="#generating-parts">Generating Parts</a><ul>
+<li><a class="reference internal" href="#parts-class">Parts Class</a></li>
 <li><a class="reference internal" href="#the-callback-parameter">The callback parameter</a></li>
 <li><a class="reference internal" href="#the-move-parameter">The move parameter</a></li>
 <li><a class="reference internal" href="#the-edges-parameter">The edges parameter</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#partsmatrix">PartsMatrix</a></li>
 <li><a class="reference internal" href="#navigation">Navigation</a></li>
 <li><a class="reference internal" href="#turtle-graphics-commands">Turtle Graphics commands</a><ul>
 <li><a class="reference internal" href="#special-functions">Special Functions</a></li>
