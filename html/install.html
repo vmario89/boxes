@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The boxes.Boxes main class" href="Boxes.html" />
+    <link rel="next" title="Using Boxes.py" href="usermanual.html" />
     <link rel="prev" title="Boxes.py" href="README.html" /> 
   </head>
   <body>
@@ -34,7 +34,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Boxes.html" title="The boxes.Boxes main class"
+          <a href="usermanual.html" title="Using Boxes.py"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="README.html" title="Boxes.py"
@@ -71,6 +71,12 @@ used to format the description texts.</p>
 <h3>LXML<a class="headerlink" href="#lxml" title="Permalink to this headline">¶</a></h3>
 <p>lxml (package name may be python-lxml or python3-lxml) is needed for
 the Inkscape plugin.</p>
+</div>
+<div class="section" id="setuptools">
+<h3>setuptools<a class="headerlink" href="#setuptools" title="Permalink to this headline">¶</a></h3>
+<p>Setup.py uses the setuptools library (package name may be
+python*-setuptools). You only need it if you want to build the
+package.</p>
 </div>
 <div class="section" id="ps2edit">
 <h3>ps2edit<a class="headerlink" href="#ps2edit" title="Permalink to this headline">¶</a></h3>
@@ -117,10 +123,13 @@ that is in the path or installing the package on the system.</p>
 <div class="section" id="boxes-py-on-windows">
 <h2>Boxes.py on Windows<a class="headerlink" href="#boxes-py-on-windows" title="Permalink to this headline">¶</a></h2>
 <p>While there is no known reason why Boxes.py should not run on Windows
-there is no upstream experience with doing so. Getting the Inkscape
-plugins to run will likely need manual installation (see above). If
-you run into trouble or have better installation instructions please
-open a ticket on Git Hub.</p>
+there is no upstream experience with doing so. The tricky part is
+getting the cairo library installed and to run with the Python version
+used. Python version and the architecture (32 or 64 bit) must match.</p>
+<p>Getting the Inkscape plugins to run will likely need manual
+installation (see above). Note that Inkscape may come with its own
+Python. If you run into trouble or have better installation
+instructions please open a ticket on Git Hub.</p>
 </div>
 </div>
 
@@ -137,6 +146,7 @@ open a ticket on Git Hub.</p>
 <li><a class="reference internal" href="#cairo">Cairo</a></li>
 <li><a class="reference internal" href="#markdown">Markdown</a></li>
 <li><a class="reference internal" href="#lxml">LXML</a></li>
+<li><a class="reference internal" href="#setuptools">setuptools</a></li>
 <li><a class="reference internal" href="#ps2edit">ps2edit</a></li>
 <li><a class="reference internal" href="#python">Python</a></li>
 </ul>
@@ -152,8 +162,8 @@ open a ticket on Git Hub.</p>
   <p class="topless"><a href="README.html"
                         title="previous chapter">Boxes.py</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="Boxes.html"
-                        title="next chapter">The boxes.Boxes main class</a></p>
+  <p class="topless"><a href="usermanual.html"
+                        title="next chapter">Using Boxes.py</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -182,7 +192,7 @@ open a ticket on Git Hub.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Boxes.html" title="The boxes.Boxes main class"
+          <a href="usermanual.html" title="Using Boxes.py"
              >next</a> |</li>
         <li class="right" >
           <a href="README.html" title="Boxes.py"

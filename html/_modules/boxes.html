@@ -202,7 +202,9 @@
         <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t understand sections string&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">ArgparseEdgeType</span><span class="p">:</span>
+<div class="viewcode-block" id="ArgparseEdgeType"><a class="viewcode-back" href="../apiintro.html#boxes.ArgparseEdgeType">[docs]</a><span class="k">class</span> <span class="nc">ArgparseEdgeType</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;argparse type to select from a set of edge types&quot;&quot;&quot;</span>
+
     <span class="n">names</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="n">getDescriptions</span><span class="p">()</span>
     <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -231,7 +233,7 @@
                 <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;        &lt;item value=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&lt;/item&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
                     <span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
                          <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">))</span> <span class="o">+</span>
-                <span class="s1">&#39;      &lt;/param&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="s1">&#39;      &lt;/param&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 <span class="k">class</span> <span class="nc">BoolArg</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
@@ -284,13 +286,13 @@
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;format of resulting file&quot;</span><span class="p">)</span>
         <span class="n">defaultgroup</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s2">&quot;--tabs&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;width of tabs holding th parts in place (not supported everywhere)&quot;</span><span class="p">)</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;width of tabs holding th parts in place in mm (not supported everywhere)&quot;</span><span class="p">)</span>
         <span class="n">defaultgroup</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s2">&quot;--debug&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">boolarg</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print surrounding boxes for some structures&quot;</span><span class="p">)</span>
         <span class="n">defaultgroup</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s2">&quot;--reference&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print reference rectangle with given length&quot;</span><span class="p">)</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;print reference rectangle with given length (zero to disable)&quot;</span><span class="p">)</span>
         <span class="n">defaultgroup</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s2">&quot;--burn&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;burn correction in mm (bigger values for tighter fit)&quot;</span><span class="p">)</span></div>
@@ -321,12 +323,20 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span></div>
 
-    <span class="k">def</span> <span class="nf">buildArgParser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<div class="viewcode-block" id="Boxes.buildArgParser"><a class="viewcode-back" href="../apiintro.html#boxes.Boxes.buildArgParser">[docs]</a>    <span class="k">def</span> <span class="nf">buildArgParser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add commonly used commandf line parameters</span>
+<span class="sd">        Add commonly used arguments</span>
 
 <span class="sd">        :param \*l: parameter names</span>
+<span class="sd">        :param \*\*kw: parameters with new default values</span>
 
+<span class="sd">        Supported parameters are</span>
+
+<span class="sd">        * floats: x, y, h, hi</span>
+<span class="sd">        * argparseSections: sx, sy</span>
+<span class="sd">        * ArgparseEdgeType: bottom_edge, top_edge</span>
+<span class="sd">        * boolarg: outside</span>
+<span class="sd">        * str (selection): nema_mount</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
             <span class="n">kw</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -389,7 +399,7 @@
                     <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nema_sizes</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
                     <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;NEMA size of motor&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No default for argument&quot;</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No default for argument&quot;</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">addSettingsArgs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">):</span>
         <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="ow">or</span> <span class="n">settings</span><span class="o">.</span><span class="vm">__name__</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;Settings&quot;</span><span class="p">)]</span>
@@ -1072,7 +1082,7 @@
 <span class="sd">        :param r:  (Default value = 0) radius of the corners</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">r</span> <span class="o">-</span> <span class="n">dx</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">dy</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">r</span> <span class="o">-</span> <span class="n">dx</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">dy</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span></div>
