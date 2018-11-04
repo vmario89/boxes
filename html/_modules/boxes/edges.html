@@ -4,27 +4,21 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>boxes.edges &#8212; boxes.py 0.1 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../../',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -592,12 +586,12 @@
         <span class="s2">&quot;play&quot;</span> <span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;fFh&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="FingerJointSettings.edgeObjects"><a class="viewcode-back" href="../../edges.html#boxes.edges.FingerJointSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;fFh&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">FingerJointEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
                  <span class="n">FingerJointEdgeCounterPart</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
                  <span class="n">FingerHoleEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
         <span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div></div>
 
 <span class="k">class</span> <span class="nc">FingerJointBase</span><span class="p">:</span>
 
@@ -813,11 +807,11 @@
         <span class="s2">&quot;holedistance&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;sS&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fingersettings</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="StackableSettings.edgeObjects"><a class="viewcode-back" href="../../edges.html#boxes.edges.StackableSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;sS&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fingersettings</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">fingersettings</span> <span class="o">=</span> <span class="n">fingersettings</span> <span class="ow">or</span> <span class="n">boxes</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">settings</span>
         <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">StackableEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">fingersettings</span><span class="p">),</span>
                  <span class="n">StackableEdgeTop</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">fingersettings</span><span class="p">)]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="StackableEdge"><a class="viewcode-back" href="../../edges.html#boxes.edges.StackableEdge">[docs]</a><span class="k">class</span> <span class="nc">StackableEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Edge for having stackable Boxes. The Edge creates feet on the bottom</span>
@@ -1287,7 +1281,7 @@
 <span class="sd"> * bore : 3.2 : diameter of the pin hole in mm</span>
 <span class="sd"> * eyes_per_hinge : 5 : pieces per hinge</span>
 <span class="sd"> * hinges : 2 : number of hinges per edge</span>
-
+<span class="sd"> * style : inside : style of hinge used</span>
 <span class="sd">* relative (in multiples of thickness)</span>
 
 <span class="sd"> * eye : 1.5 : radius of the eye (in multiples of thickness)</span>
@@ -1298,6 +1292,7 @@
         <span class="s2">&quot;bore&quot;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span>
         <span class="s2">&quot;eyes_per_hinge&quot;</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
         <span class="s2">&quot;hinges&quot;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;style&quot;</span> <span class="p">:</span> <span class="p">(</span><span class="s2">&quot;inside&quot;</span><span class="p">,</span> <span class="s2">&quot;outside&quot;</span><span class="p">),</span>
     <span class="p">}</span>
 
     <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
@@ -1339,7 +1334,9 @@
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">spacing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">spacing</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angled</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;outside&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">angled</span><span class="p">:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">angled</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">:</span>
             <span class="c1"># move hinge up to leave space for lid</span>
             <span class="n">e</span> <span class="o">-=</span> <span class="n">t</span>
 
@@ -1377,7 +1374,9 @@
 
         <span class="n">poly</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__poly</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angled</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;outside&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">angled</span><span class="p">:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">angled</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span><span class="p">:</span>
             <span class="c1"># move hinge up to leave space for lid</span>
             <span class="n">e</span> <span class="o">-=</span> <span class="n">t</span>
 
@@ -1404,10 +1403,37 @@
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">eyes_per_hinge</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hinges</span>
         <span class="n">pairs</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
 
-        <span class="n">th</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">e</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span>
-        <span class="n">tw</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">pairs</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;outside&quot;</span><span class="p">:</span>
+            <span class="n">th</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">e</span> <span class="o">+</span> <span class="mi">4</span><span class="o">*</span><span class="n">t</span>
+            <span class="n">tw</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">th</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">e</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span>
+            <span class="n">tw</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">*</span> <span class="n">pairs</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="n">tw</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;outside&quot;</span><span class="p">:</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">t</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">e</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">ax</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angled</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="n">l</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">ax</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">l</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">ax</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">l</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">t</span> <span class="o">+</span> <span class="n">e</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">b</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+                <span class="n">da</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">((</span><span class="n">t</span><span class="o">-</span><span class="n">ax</span><span class="p">)</span> <span class="o">/</span> <span class="n">e</span><span class="p">)</span>
+                <span class="n">dad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+                <span class="n">dy</span> <span class="o">=</span> <span class="n">e</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">da</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">180</span><span class="o">-</span><span class="n">dad</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="o">+</span><span class="n">dad</span><span class="p">),</span> <span class="n">dy</span><span class="o">+</span><span class="n">l</span><span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span>
+                              <span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="o">+</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">l</span><span class="o">-</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">e</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">max</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">spacing</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span>
             <span class="k">return</span>
 
         <span class="k">if</span> <span class="n">e</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">:</span>
@@ -1745,10 +1771,10 @@
         <span class="s2">&quot;radius&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
     <span class="p">}</span>
 
-    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;dD&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="DoveTailSettings.edgeObjects"><a class="viewcode-back" href="../../edges.html#boxes.edges.DoveTailSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;dD&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">DoveTailJoint</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
                  <span class="n">DoveTailJointCounterPart</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="DoveTailJoint"><a class="viewcode-back" href="../../edges.html#boxes.edges.DoveTailJoint">[docs]</a><span class="k">class</span> <span class="nc">DoveTailJoint</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Edge with dove tail joints &quot;&quot;&quot;</span>
@@ -1928,12 +1954,14 @@
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -1953,7 +1981,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1.
     </div>
   </body>
 </html>

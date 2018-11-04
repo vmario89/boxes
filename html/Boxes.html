@@ -4,29 +4,23 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>The boxes.Boxes main class &#8212; boxes.py 0.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
-        VERSION:     '0.1',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Edges" href="edges.html" />
     <link rel="prev" title="Using the Boxes.py library" href="apiintro.html" /> 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -53,11 +47,11 @@
 <div class="toctree-wrapper compound">
 </div>
 <p>There is basically one class that takes care of everything. You are
-supposed to sub class it and implement the <code class="docutils literal"><span class="pre">.__init__()</span></code> and
-<code class="docutils literal"><span class="pre">.render()</span></code> method. This Boxes class keeps a cairo canvas object
+supposed to sub class it and implement the <code class="docutils literal notranslate"><span class="pre">.__init__()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">.render()</span></code> method. This Boxes class keeps a cairo canvas object
 (self.ctx) that all drawing is made on. In addition it keeps a couple
 of global settings used for various drawing operations. See the
-<code class="docutils literal"><span class="pre">.__init__()</span></code> method for the details.</p>
+<code class="docutils literal notranslate"><span class="pre">.__init__()</span></code> method for the details.</p>
 <dl class="class">
 <dt id="boxes.Boxes">
 <em class="property">class </em><code class="descclassname">boxes.</code><code class="descname">Boxes</code><a class="reference internal" href="_modules/boxes.html#Boxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes" title="Permalink to this definition">¶</a></dt>
@@ -65,7 +59,7 @@ of global settings used for various drawing operations. See the
 </dd></dl>
 
 <p>And easier way to get started is using the
-<code class="docutils literal"><span class="pre">boxes/generators/_template.py</span></code> as a basis for your own generators.</p>
+<code class="docutils literal notranslate"><span class="pre">boxes/generators/_template.py</span></code> as a basis for your own generators.</p>
 <div class="section" id="basic-operation">
 <h2>Basic operation<a class="headerlink" href="#basic-operation" title="Permalink to this headline">¶</a></h2>
 <dl class="method">
@@ -399,7 +393,7 @@ calling the one building block funtion you need (e.g. fingerHolesAt).</p>
 </div>
 <div class="section" id="the-move-parameter">
 <h3>The move parameter<a class="headerlink" href="#the-move-parameter" title="Permalink to this headline">¶</a></h3>
-<p>For placing the parts the <code class="docutils literal"><span class="pre">move</span></code> parameter can be used. It is string
+<p>For placing the parts the <code class="docutils literal notranslate"><span class="pre">move</span></code> parameter can be used. It is string
 with space separated words - at most one of each of those options:</p>
 <ul class="simple">
 <li>left / right</li>
@@ -408,15 +402,17 @@ with space separated words - at most one of each of those options:</p>
 </ul>
 <p>If “only” is given the part is not drawn but only the move is
 done. This can be useful to go in one direction after having placed
-multiple parts in the other and have returned with <code class="docutils literal"><span class="pre">.ctx.restore()</span></code>.</p>
+multiple parts in the other and have returned with <code class="docutils literal notranslate"><span class="pre">.ctx.restore()</span></code>.</p>
 <p>For implementing parts the following helper function can be used to
-implement a <code class="docutils literal"><span class="pre">move</span></code> parameter:</p>
+implement a <code class="docutils literal notranslate"><span class="pre">move</span></code> parameter:</p>
 <dl class="method">
 <dt id="boxes.Boxes.move">
 <code class="descclassname">Boxes.</code><code class="descname">move</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>where</em>, <em>before=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intended to be used by parts
-where can be combinations of “up”, “down”, “left”, “right” and “only”
+where can be combinations of “up” or “down”, “left” or “right”, “only”,
+“mirror”
 when “only” is included the move is only done when before is True
+“mirror” will flip the part along the y axis
 The function returns whether actual drawing of the part
 should be omited.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -436,13 +432,13 @@ should be omited.</p>
 </dd></dl>
 
 <p>It needs to be called before and after drawing the actual part with
-the proper <code class="docutils literal"><span class="pre">before</span></code> paramter set.</p>
+the proper <code class="docutils literal notranslate"><span class="pre">before</span></code> paramter set.</p>
 </div>
 <div class="section" id="the-edges-parameter">
 <h3>The edges parameter<a class="headerlink" href="#the-edges-parameter" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal"><span class="pre">edges</span></code> parameter needs to be an iterable of Edge instances to be
+<p>The <code class="docutils literal notranslate"><span class="pre">edges</span></code> parameter needs to be an iterable of Edge instances to be
 used as edges of the part. Instead of instances it is possible to pass
-a single character that is looked up in the <code class="docutils literal"><span class="pre">.edges</span></code> dict. This
+a single character that is looked up in the <code class="docutils literal notranslate"><span class="pre">.edges</span></code> dict. This
 allows to pass a string with the desired characters per edge. By
 default the following character are supported:</p>
 <ul class="simple">
@@ -453,8 +449,8 @@ default the following character are supported:</p>
 <li>d, D : dove tail joints</li>
 </ul>
 <p>Generators can register their own Edges by putting them into the
-<code class="docutils literal"><span class="pre">.edges</span></code> dictionary.</p>
-<p>Same applies to the parameters of <code class="docutils literal"><span class="pre">.surroundingWall</span></code> although they
+<code class="docutils literal notranslate"><span class="pre">.edges</span></code> dictionary.</p>
+<p>Same applies to the parameters of <code class="docutils literal notranslate"><span class="pre">.surroundingWall</span></code> although they
 denominate single edge (types) only.</p>
 </div>
 </div>
@@ -699,7 +695,7 @@ hole or text. These artefacts are placed somewhere independently of
 some continuous outline of the part their on.</p>
 <dl class="method">
 <dt id="boxes.Boxes.hole">
-<code class="descclassname">Boxes.</code><code class="descname">hole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r=0.0</em>, <em>d=0.0</em>, <em>tabs=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.hole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hole" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">hole</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.hole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a round hole</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -718,7 +714,7 @@ some continuous outline of the part their on.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.rectangularHole">
-<code class="descclassname">Boxes.</code><code class="descname">rectangularHole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>dx</em>, <em>dy</em>, <em>r=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularHole" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">rectangularHole</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularHole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw an rectangulat hole</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -739,17 +735,17 @@ some continuous outline of the part their on.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.dHole">
-<code class="descclassname">Boxes.</code><code class="descname">dHole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r=None</em>, <em>d=None</em>, <em>w=None</em>, <em>rel_w=0.75</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.dHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.dHole" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">dHole</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.dHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.dHole" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="boxes.Boxes.flatHole">
-<code class="descclassname">Boxes.</code><code class="descname">flatHole</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>r=None</em>, <em>d=None</em>, <em>w=None</em>, <em>rel_w=0.75</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.flatHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.flatHole" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">flatHole</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.flatHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.flatHole" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="boxes.Boxes.text">
-<code class="descclassname">Boxes.</code><code class="descname">text</code><span class="sig-paren">(</span><em>text, x=0, y=0, angle=0, align='', fontsize=10, color=[0.0, 0.0, 0.0]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">text</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw text</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -770,7 +766,7 @@ some continuous outline of the part their on.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.NEMA">
-<code class="descclassname">Boxes.</code><code class="descname">NEMA</code><span class="sig-paren">(</span><em>size</em>, <em>x=0</em>, <em>y=0</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.NEMA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.NEMA" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">NEMA</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.NEMA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.NEMA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw holes for mounting a NEMA stepper motor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -790,7 +786,7 @@ some continuous outline of the part their on.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.TX">
-<code class="descclassname">Boxes.</code><code class="descname">TX</code><span class="sig-paren">(</span><em>size</em>, <em>x=0</em>, <em>y=0</em>, <em>angle=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.TX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.TX" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">Boxes.</code><code class="descname">TX</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.TX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.TX" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a star pattern</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -844,8 +840,8 @@ some continuous outline of the part their on.</p>
 <div class="section" id="hexagonal-hole-patterns">
 <h3>Hexagonal Hole patterns<a class="headerlink" href="#hexagonal-hole-patterns" title="Permalink to this headline">¶</a></h3>
 <p>Hexagonal hole patterns are one way to have some ventilation for
-housings maded with Boxes.py. Right now both <code class="docutils literal"><span class="pre">.rectangularWall()</span></code>
-and <code class="docutils literal"><span class="pre">.roundedPlate()</span></code> do supports this pattern directly by passing
+housings maded with Boxes.py. Right now both <code class="docutils literal notranslate"><span class="pre">.rectangularWall()</span></code>
+and <code class="docutils literal notranslate"><span class="pre">.roundedPlate()</span></code> do supports this pattern directly by passing
 the parameters to the calls. For other use cases these more low level
 methods can be used.</p>
 <p>For now this is the only supported pattern for ventilation slots. More
@@ -945,7 +941,7 @@ gets x, y, r, b, posx, posy</li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">The boxes.Boxes main class</a><ul>
 <li><a class="reference internal" href="#basic-operation">Basic operation</a></li>
@@ -986,12 +982,14 @@ gets x, y, r, b, posx, posy</li>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -1015,7 +1013,7 @@ gets x, y, r, b, posx, posy</li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.6.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.1.
     </div>
   </body>
 </html>
