@@ -647,7 +647,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">arc_negative</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn</span> <span class="o">-</span> <span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn</span> <span class="o">-</span> <span class="n">radius</span><span class="p">,</span>
                                   <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">+</span> <span class="n">rad</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">continueDirection</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_continueDirection</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.edge"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.edge">[docs]</a>    <span class="k">def</span> <span class="nf">edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -691,7 +691,7 @@
         <span class="n">dx</span> <span class="o">=</span> <span class="n">x3</span> <span class="o">-</span> <span class="n">x2</span>
         <span class="n">dy</span> <span class="o">=</span> <span class="n">y3</span> <span class="o">-</span> <span class="n">y2</span>
         <span class="n">rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">dy</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">continueDirection</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_continueDirection</span><span class="p">(</span><span class="n">rad</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.polyline"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.polyline">[docs]</a>    <span class="k">def</span> <span class="nf">polyline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -963,7 +963,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="o">-</span><span class="n">rad</span><span class="p">),</span>
                         <span class="o">-</span><span class="n">r</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">rad</span><span class="p">)),</span> <span class="n">angle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Boxes.continueDirection"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.continueDirection">[docs]</a>    <span class="k">def</span> <span class="nf">continueDirection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_continueDirection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set coordinate system to current position (end point)</span>
 
@@ -971,7 +971,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">get_current_point</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Boxes.move"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.move">[docs]</a>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> <span class="n">before</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Intended to be used by parts</span>
