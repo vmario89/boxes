@@ -1945,6 +1945,74 @@
 
     <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">dimension</span> <span class="o">*</span> <span class="mf">1.1</span>
+
+<span class="k">class</span> <span class="nc">RoundedTriangleEdgeSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Settings for RoundedTriangleEdge</span>
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute_params</span>
+
+<span class="sd"> * height : 150. : height above the wall</span>
+<span class="sd"> * radius : 30. : radius of top corner</span>
+<span class="sd"> * r_hole : 0. : radius of hole</span>
+
+<span class="sd">* relative (in multiples of thickness)</span>
+
+<span class="sd"> * outset : 0 : extend the triangle along the length of the edge</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;height&quot;</span> <span class="p">:</span> <span class="mf">150.</span><span class="p">,</span>
+        <span class="s2">&quot;radius&quot;</span> <span class="p">:</span> <span class="mf">30.</span><span class="p">,</span>
+        <span class="s2">&quot;r_hole&quot;</span> <span class="p">:</span> <span class="mf">2.</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;outset&quot;</span> <span class="p">:</span> <span class="mf">0.</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">RoundedTriangleEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">RoundedTriangleEdge</span><span class="p">(</span><span class="n">Edge</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Makes an &#39;edge&#39; with a rounded triangular bumpout and</span>
+<span class="sd">       optional hole&quot;&quot;&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Triangle for handle&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;t&quot;</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">length</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">outset</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">radius</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;</span>  <span class="n">length</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">length</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span><span class="p">:</span> <span class="c1"># avoid division by zero</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="mi">90</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span><span class="p">)))</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="n">angle</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span>
+                <span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">)))</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">outset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">outset</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">r_hole</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">length</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">r_hole</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="n">angle</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">outset</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">outset</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">radius</span>
 </pre></div>
 
           </div>
