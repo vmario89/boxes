@@ -66,7 +66,15 @@
     <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">edge</span><span class="o">.</span><span class="n">char</span><span class="p">:</span> <span class="n">edge</span><span class="o">.</span><span class="n">description</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
          <span class="k">if</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">BaseEdge</span><span class="p">)</span>
          <span class="ow">and</span> <span class="n">edge</span><span class="o">.</span><span class="n">char</span><span class="p">}</span>
-    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Straight edge with hinge eye (both ends)&quot;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;j&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (other end)&quot;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;J&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (other end)&quot;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (both ends)&quot;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;K&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (both ends)&quot;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; (other end)&#39;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; (other end)&#39;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;U&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; top side&#39;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; for 90° lid&#39;</span>
+    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;V&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; 90° lid&#39;</span>
     <span class="k">return</span> <span class="n">d</span>
 
 
@@ -1157,7 +1165,7 @@
 
 <span class="k">class</span> <span class="nc">ChestHinge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
 
-    <span class="s2">&quot;Edge with chest hinge&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Edge with chest hinge&quot;</span>
 
     <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;o&quot;</span>
 
@@ -1242,7 +1250,7 @@
 
 <span class="k">class</span> <span class="nc">ChestHingePin</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
 
-    <span class="s2">&quot;Edge with pins for an chest hinge&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Edge with pins for an chest hinge&quot;</span>
 
     <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;q&quot;</span>
 
@@ -1259,9 +1267,9 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">pin_height</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hinge_strength</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">ChestHingeFront</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ChestHingeFront</span><span class="p">(</span><span class="n">Edge</span><span class="p">):</span>
 
-    <span class="s2">&quot;Edge opposing a chest hinge&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Edge opposing a chest hinge&quot;</span>
 
     <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;Q&quot;</span>
 
@@ -1314,7 +1322,7 @@
 <span class="k">class</span> <span class="nc">CabinetHingeEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Edge with cabinet hinges&quot;&quot;&quot;</span>
 
-    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;v&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;u&quot;</span>
     <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Edge with cabinet hinges&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">angled</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1913,6 +1921,16 @@
 
 <span class="k">class</span> <span class="nc">GearSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
 
+    <span class="sd">&quot;&quot;&quot;Settings for rack (and pinion) edge</span>
+<span class="sd">Values:</span>
+<span class="sd">* absolute_params</span>
+
+<span class="sd"> * dimension : 3.0 : modulus of the gear (in mm)</span>
+<span class="sd"> * angle : 20.0 : pressure angle</span>
+<span class="sd"> * profile_shift : 20.0 : Profile shift</span>
+<span class="sd"> * clearance : 0.0 : clearance</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
     <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;dimension&quot;</span> <span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
         <span class="s2">&quot;angle&quot;</span> <span class="p">:</span> <span class="mf">20.0</span><span class="p">,</span>
@@ -1925,6 +1943,8 @@
 <span class="k">class</span> <span class="nc">RackEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
 
     <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;R&quot;</span>
+
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Rack (and pinion) Edge&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">RackEdge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
