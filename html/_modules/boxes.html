@@ -66,6 +66,7 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
 <span class="kn">from</span> <span class="nn">xml.sax.saxutils</span> <span class="k">import</span> <span class="n">quoteattr</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
 
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">edges</span>
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">formats</span>
@@ -73,7 +74,7 @@
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">gears</span>
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">pulley</span>
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">parts</span>
-
+<span class="kn">from</span> <span class="nn">boxes.Color</span>  <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1">### Helpers</span>
 
@@ -86,7 +87,6 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">dx</span> <span class="o">*</span> <span class="n">dx</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">dy</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
 
-
 <span class="k">def</span> <span class="nf">restore</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper: Restore coordiantes after function</span>
@@ -97,10 +97,9 @@
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-        <span class="n">pt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">get_current_point</span><span class="p">()</span>
-        <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+            <span class="n">pt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">get_current_point</span><span class="p">()</span>
+            <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="o">*</span><span class="n">pt</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">f</span>
@@ -117,10 +116,10 @@
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-        <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_source_color</span><span class="p">(</span><span class="n">Color</span><span class="o">.</span><span class="n">BLUE</span><span class="p">)</span>
+            <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">f</span>
 
@@ -291,18 +290,44 @@
             <span class="s2">&quot;--burn&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;burn correction in mm (bigger values for tighter fit)&quot;</span><span class="p">)</span></div>
 
+    <span class="nd">@contextmanager</span>
+    <span class="k">def</span> <span class="nf">saved_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generator: for saving and restoring cairo contexts.</span>
+<span class="sd">        :param cr: cairo context</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span>
+        <span class="n">cr</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">cr</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cr</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_source_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the color of the pen.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="o">*</span><span class="n">color</span><span class="p">)</span>
+
 <div class="viewcode-block" id="Boxes.open"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prepare for rendering</span>
 
 <span class="sd">        Call this function from your .render() method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">bedBoltSettings</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>  <span class="c1"># d, d_nut, h_nut, l, l1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;circle&#39;</span><span class="p">)</span>  <span class="c1"># r, dist, style</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">surface</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">getSurface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;svg_Ponoko&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_source_color</span><span class="p">(</span><span class="n">Color</span><span class="o">.</span><span class="n">BLUE</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_source_color</span><span class="p">(</span><span class="n">Color</span><span class="o">.</span><span class="n">BLACK</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">select_font_face</span><span class="p">(</span><span class="s2">&quot;sans-serif&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_buildObjects</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference</span><span class="p">:</span>
@@ -423,8 +448,9 @@
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
         <span class="c1"># Change file ending to format if not given explicitly</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="s2">&quot;svg&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;box.svg&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;box.&#39;</span> <span class="o">+</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="s2">&quot;svg&quot;</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;box.&#39;</span> <span class="o">+</span> <span class="nb">format</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
     <span class="k">def</span> <span class="nf">addPart</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">part</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -553,13 +579,12 @@
                 <span class="k">pass</span>
 
         <span class="k">if</span> <span class="n">callback</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="n">callback</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">callback</span><span class="p">()</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">callback</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">callback</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">callback</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.getEntry"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.getEntry">[docs]</a>    <span class="k">def</span> <span class="nf">getEntry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
@@ -912,20 +937,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">hl</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-
         <span class="c1"># Hole</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">hl</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">hl</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">hl</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">hl</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">curveTo</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="n">h</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span>
@@ -1176,15 +1199,15 @@
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown alignment: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">align</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_source_color</span><span class="p">(</span><span class="n">Color</span><span class="o">.</span><span class="n">WHITE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="o">*</span><span class="n">color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_source_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">show_text</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.4</span> <span class="o">*</span> <span class="o">-</span><span class="n">lheight</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_source_rgb</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_source_color</span><span class="p">(</span><span class="n">Color</span><span class="o">.</span><span class="n">BLACK</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">set_font_size</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span></div>
 
     <span class="n">tx_sizes</span> <span class="o">=</span> <span class="p">{</span>
@@ -1414,23 +1437,19 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cx</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cy</span><span class="p">):</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">armx</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">armx</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">armx</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">armx</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">army</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">army</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+                    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">army</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">((</span><span class="mi">5</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">wx</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">wy</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">army</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span></div>
 
     <span class="c1">##################################################</span>
@@ -1585,21 +1604,19 @@
                 <span class="n">bottom</span><span class="p">(</span><span class="n">l</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
                 <span class="n">tops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
                 <span class="c1"># complete wall segment</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-                <span class="n">right</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">tops</span><span class="p">)):</span>
-                    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span> <span class="c1"># flex</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">top</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-                <span class="n">left</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                    <span class="n">right</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">tops</span><span class="p">)):</span>
+                        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span> <span class="c1"># flex</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">top</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                    <span class="n">left</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="n">nr</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">sides</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="k">break</span>
@@ -1844,15 +1861,14 @@
                     <span class="n">part</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="c1"># draw matrix</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
-                <span class="k">if</span> <span class="s2">&quot;only&quot;</span> <span class="ow">in</span> <span class="n">move</span><span class="p">:</span>
-                    <span class="k">break</span>
-                <span class="k">if</span> <span class="n">width</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
-                    <span class="k">break</span>
-                <span class="n">kw</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
-                <span class="n">part</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="s2">&quot;only&quot;</span> <span class="ow">in</span> <span class="n">move</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="k">if</span> <span class="n">width</span><span class="o">*</span><span class="n">i</span><span class="o">+</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+                        <span class="k">break</span>
+                    <span class="n">kw</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span>
+                    <span class="n">part</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
             <span class="n">kw</span><span class="p">[</span><span class="s2">&quot;move&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;up only&quot;</span>
             <span class="n">part</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
 
@@ -1902,7 +1918,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     </div>
   </body>
 </html>
