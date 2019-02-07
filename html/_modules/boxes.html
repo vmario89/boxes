@@ -857,7 +857,6 @@
             <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">side</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mf">360.0</span><span class="o">/</span><span class="n">corners</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.grip"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.grip">[docs]</a>    <span class="k">def</span> <span class="nf">grip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">depth</span><span class="p">):</span>
@@ -1539,7 +1538,7 @@
                 <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesPlate</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">holesMargin</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">holesMargin</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span>
                                <span class="n">settings</span><span class="o">=</span><span class="n">holesSettings</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.surroundingWall"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.surroundingWall">[docs]</a>    <span class="k">def</span> <span class="nf">surroundingWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span>
@@ -1636,8 +1635,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">](</span><span class="n">c4</span><span class="p">,</span> <span class="n">h</span> <span class="o">+</span> <span class="n">topwidth</span> <span class="o">+</span> <span class="n">bottomwidth</span><span class="p">)</span>
             <span class="n">tops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c4</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Boxes.rectangularWall"><a class="viewcode-back" href="../Boxes.html#boxes.Boxes.rectangularWall">[docs]</a>    <span class="k">def</span> <span class="nf">rectangularWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s2">&quot;eeee&quot;</span><span class="p">,</span>
@@ -1696,8 +1693,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">holesMargin</span><span class="p">,</span>
                         <span class="n">holesMargin</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesRectangle</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">holesMargin</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">holesMargin</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
