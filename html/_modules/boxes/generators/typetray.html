@@ -126,7 +126,6 @@
         <span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hi</span> <span class="ow">or</span> <span class="n">h</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
 
         <span class="c1"># outer walls</span>
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_edge</span>
@@ -183,10 +182,9 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">closedtop</span> <span class="ow">and</span> <span class="n">sameh</span><span class="p">:</span>
                 <span class="n">e</span> <span class="o">=</span> <span class="p">[</span><span class="n">edges</span><span class="o">.</span><span class="n">SlottedEdge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span> <span class="n">be</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">hi</span><span class="p">),</span><span class="s2">&quot;f&quot;</span><span class="p">,</span>
                      <span class="n">edges</span><span class="o">.</span><span class="n">SlottedEdge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;f&quot;</span><span class="p">),</span> <span class="s2">&quot;f&quot;</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;up&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;up&quot;</span><span class="p">)</span></div>
 
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
 </pre></div>
