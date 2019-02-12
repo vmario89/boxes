@@ -112,9 +112,8 @@ different amounts of force needed to press plywood together.</p>
 <div class="section" id="format">
 <h3>format<a class="headerlink" href="#format" title="Permalink to this headline">¶</a></h3>
 <p>Boxes.py is able to create multiple formats. For most of them it
-requires <code class="docutils literal notranslate"><span class="pre">ps2edit</span></code>. Unfortunately it is currently not available on
-the server running the public web instance. Without it only <code class="docutils literal notranslate"><span class="pre">SVG</span></code>
-and <code class="docutils literal notranslate"><span class="pre">postscript</span></code> (ps) is supported. With <code class="docutils literal notranslate"><span class="pre">ps2edit</span></code> you can also
+requires <code class="docutils literal notranslate"><span class="pre">ps2edit</span></code>. Without <code class="docutils literal notranslate"><span class="pre">ps2edit</span></code> only <code class="docutils literal notranslate"><span class="pre">SVG</span></code>
+and <code class="docutils literal notranslate"><span class="pre">postscript</span></code> (ps) is supported. Otherwise you can also
 select</p>
 <ul class="simple">
 <li>ai</li>
@@ -123,15 +122,15 @@ select</p>
 <li>pdf</li>
 <li>plt</li>
 </ul>
-<p>Other formats supported by <code class="docutils literal notranslate"><span class="pre">ps2edit</span></code> can be easily added. Please
-open a ticket if you need one.</p>
+<p>Other formats supported by <code class="docutils literal notranslate"><span class="pre">ps2edit</span></code> can be added easily. Please
+open a ticket on GitHub if you need one.</p>
 </div>
 <div class="section" id="tabs">
 <h3>tabs<a class="headerlink" href="#tabs" title="Permalink to this headline">¶</a></h3>
 <p>Tabs are small bridges between the parts and surrounding material that
 keep the part from falling out. In theory their width should be
 affected by the burn parameter. But it is more practical to have both
-be separate so you can tune them separately. Most parts and generators
+independent so you can tune them separately. Most parts and generators
 support this features but there may be some that don’t.</p>
 <p>For plywood values of 0.2 to 0.3mm still allow getting the parts out
 by hand (Depending on you laser cutter and the exact material). With

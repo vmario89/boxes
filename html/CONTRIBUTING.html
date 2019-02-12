@@ -97,7 +97,7 @@ Boxes.py. Here are some guidelines that make it easier to get them added:</p>
 <ul class="simple">
 <li>Start with a copy of another generator or <em>boxes/generators/_template.py</em></li>
 <li>Commit changes to the library in separate patches</li>
-<li>Use arguments with sane defaults instead of hard coding measurements</li>
+<li>Use parameters with sane defaults instead of hard coding dimmensions</li>
 <li>Simple generators can end up as one single commit</li>
 <li>For more complicated generators there can be multiple patches -
 each adding another feature</li>
@@ -112,9 +112,10 @@ has a tendency to get outdated. If you encounter outdated pieces of
 documentation feel free to submit a pull request or open a ticket
 pointing out what should be changed or even suggesting a better text.</p>
 <p>To get the docs updated the docs need to be build with <em>make html</em> in
-<em>documentation/src</em> and then the files need ot be updated in the <em>gh-pages</em>
-branch. That’s a bit tricky. Feel free to not even bother with this
-and just submit the changes to the sources or just open a ticket.</p>
+<em>documentation/src</em>. This places the compliled documentation in
+<em>documentation/build/html</em>.</p>
+<p>The online documentation gets build and updated automatically by the Travis CI
+as soon as the changes makes it into the GitHub master branch.</p>
 </div>
 <div class="section" id="improving-the-user-interface">
 <h2>Improving the User Interface<a class="headerlink" href="#improving-the-user-interface" title="Permalink to this headline">¶</a></h2>
