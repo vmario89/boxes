@@ -91,14 +91,16 @@ of global settings used for various drawing operations. See the
 <dt id="boxes.Boxes.open">
 <code class="descclassname">Boxes.</code><code class="descname">open</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.open" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare for rendering</p>
-<p>Call this function from your .render() method</p>
+<p>Create canvas and edge and other objects
+Call this before .render()</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="boxes.Boxes.close">
 <code class="descclassname">Boxes.</code><code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finish rendering</p>
-<p>Call at the end of your .render() method</p>
+<p>Flush canvas to disk and convert output to requested format if needed.
+Call after .render()</p>
 </dd></dl>
 
 </div>
@@ -321,7 +323,7 @@ replacing the F edge with fingerHoles. Use with E and F for edges only.</p>
 <li><strong>diameter</strong> – diameter of the knob</li>
 <li><strong>n</strong> – (Default value = 3) number of dents</li>
 <li><strong>rounded</strong> – (Default value = 0.2) proportion of circumferen remaining</li>
-<li><strong>angle</strong> – (Default value = 70) angle the dentsmeet the circumference</li>
+<li><strong>angle</strong> – (Default value = 70) angle the dents meet the circumference</li>
 <li><strong>hole</strong> – (Default value = 0)</li>
 <li><strong>callback</strong> – (Default value = None) called in the center</li>
 <li><strong>move</strong> – (Defaultvalue = None)</li>
@@ -602,11 +604,12 @@ to have balanced calls to those two functions.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Alternating length in mm and angle. angle may be tuple
-(angle, radius)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>*args</strong> – Alternating length in mm and angle in degrees.</td>
 </tr>
 </tbody>
 </table>
+<p>lengths may be a tuple (length, #tabs)
+angles may be tuple (angle, radius)</p>
 </dd></dl>
 
 <div class="section" id="special-functions">
