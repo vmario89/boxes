@@ -24,6 +24,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">boxes.py 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../boxes.html" accesskey="U">boxes</a> &#187;</li> 
@@ -39,13 +42,13 @@
 <span></span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">vectors</span>
 
-<span class="k">def</span> <span class="nf">arcOnCircle</span><span class="p">(</span><span class="n">spanning_angle</span><span class="p">,</span> <span class="n">outgoing_angle</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<div class="viewcode-block" id="arcOnCircle"><a class="viewcode-back" href="../../boxes.html#boxes.parts.arcOnCircle">[docs]</a><span class="k">def</span> <span class="nf">arcOnCircle</span><span class="p">(</span><span class="n">spanning_angle</span><span class="p">,</span> <span class="n">outgoing_angle</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">spanning_angle</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">outgoing_angle</span>
     <span class="n">radius</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">spanning_angle</span><span class="p">))</span> <span class="o">/</span> <span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="mi">180</span> <span class="o">-</span> <span class="n">outgoing_angle</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">spanning_angle</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">angle</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">radius</span><span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">Parts</span><span class="p">:</span>
+<div class="viewcode-block" id="Parts"><a class="viewcode-back" href="../../boxes.html#boxes.parts.Parts">[docs]</a><span class="k">class</span> <span class="nc">Parts</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span>
 
@@ -63,7 +66,7 @@
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Parts.disc"><a class="viewcode-back" href="../../Boxes.html#boxes.parts.Parts.disc">[docs]</a>    <span class="k">def</span> <span class="nf">disc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Parts.disc"><a class="viewcode-back" href="../../boxes.html#boxes.parts.Parts.disc">[docs]</a>    <span class="k">def</span> <span class="nf">disc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Simple disc</span>
 
 <span class="sd">        :param diameter: diameter of the disc</span>
@@ -87,7 +90,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">360</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Parts.waivyKnob"><a class="viewcode-back" href="../../Boxes.html#boxes.parts.Parts.waivyKnob">[docs]</a>    <span class="k">def</span> <span class="nf">waivyKnob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Parts.waivyKnob"><a class="viewcode-back" href="../../boxes.html#boxes.parts.Parts.waivyKnob">[docs]</a>    <span class="k">def</span> <span class="nf">waivyKnob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Disc with a waivy edge to be easier to be gripped</span>
 
 <span class="sd">        :param diameter: diameter of the knob</span>
@@ -122,7 +125,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Parts.concaveKnob"><a class="viewcode-back" href="../../Boxes.html#boxes.parts.Parts.concaveKnob">[docs]</a>    <span class="k">def</span> <span class="nf">concaveKnob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<div class="viewcode-block" id="Parts.concaveKnob"><a class="viewcode-back" href="../../boxes.html#boxes.parts.Parts.concaveKnob">[docs]</a>    <span class="k">def</span> <span class="nf">concaveKnob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rounded</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                     <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Knob with dents to be easier to be gripped</span>
 
@@ -163,7 +166,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Parts.ringSegment"><a class="viewcode-back" href="../../Boxes.html#boxes.parts.Parts.ringSegment">[docs]</a>    <span class="k">def</span> <span class="nf">ringSegment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_outside</span><span class="p">,</span> <span class="n">r_inside</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="Parts.ringSegment"><a class="viewcode-back" href="../../boxes.html#boxes.parts.Parts.ringSegment">[docs]</a>    <span class="k">def</span> <span class="nf">ringSegment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_outside</span><span class="p">,</span> <span class="n">r_inside</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Ring Segment</span>
 
 <span class="sd">        :param r_outside: outer radius</span>
@@ -188,7 +191,7 @@
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">vectors</span><span class="o">.</span><span class="n">circlepoint</span><span class="p">(</span><span class="n">r_outside</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="o">+</span><span class="n">space</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">r_outside</span><span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="n">angle</span><span class="o">+</span><span class="n">space</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">r_outside</span><span class="p">,</span> <span class="n">r_outside</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">n</span></div>
+        <span class="k">return</span> <span class="n">n</span></div></div>
 </pre></div>
 
           </div>
@@ -221,6 +224,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../../genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">boxes.py 0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../boxes.html" >boxes</a> &#187;</li> 
