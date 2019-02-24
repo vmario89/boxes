@@ -17,7 +17,7 @@
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Examples" href="api_examples.html" />
+    <link rel="next" title="Burn correction" href="api_burn.html" />
     <link rel="prev" title="Edges" href="api_edges.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -30,7 +30,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api_examples.html" title="Examples"
+          <a href="api_burn.html" title="Burn correction"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="api_edges.html" title="Edges"
@@ -195,6 +195,19 @@ angles may be tuple (angle, radius)</p>
 </table>
 </dd></dl>
 
+</div>
+<div class="section" id="tab-support">
+<h3>Tab support<a class="headerlink" href="#tab-support" title="Permalink to this headline">¶</a></h3>
+<p>Tabs are small interuptions in the border of a part to keep it in
+place. They are enabled with the <strong>tabs</strong> parameter. All
+<strong>Edges</strong> automatically create about two tabs. So parts like
+<a class="reference internal" href="boxes.html#boxes.Boxes.rectangularWall" title="boxes.Boxes.rectangularWall"><code class="xref py py-meth docutils literal notranslate"><span class="pre">boxes.Boxes.rectangularWall()</span></code></a> will have 8 tabs holding them
+in place. Because of this developers often don’t need to be concerned
+about tabs. But some part may be complitely drawn by low level Turtle
+Graphics commands. For those both <a class="reference internal" href="boxes.html#boxes.Boxes.edge" title="boxes.Boxes.edge"><code class="xref py py-meth docutils literal notranslate"><span class="pre">boxes.Boxes.edge()</span></code></a> and
+<a class="reference internal" href="boxes.html#boxes.Boxes.corner" title="boxes.Boxes.corner"><code class="xref py py-meth docutils literal notranslate"><span class="pre">boxes.Boxes.corner()</span></code></a> do support a <strong>tabs</strong> parameter. In
+addition the length of the line segments in <code class="xref py py-meth docutils literal notranslate"><span class="pre">boxes.Boxes.poyline()</span></code> can
+be given as a tuple <strong>(length, tabs)</strong>.</p>
 </div>
 </div>
 <div class="section" id="draw-commands">
@@ -460,6 +473,7 @@ gets x, y, r, b, posx, posy</li>
 <li><a class="reference internal" href="#turtle-graphics-commands">Turtle Graphics commands</a><ul>
 <li><a class="reference internal" href="#special-functions">Special Functions</a></li>
 <li><a class="reference internal" href="#latch-and-grip">Latch and Grip</a></li>
+<li><a class="reference internal" href="#tab-support">Tab support</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#draw-commands">Draw Commands</a><ul>
@@ -474,8 +488,8 @@ gets x, y, r, b, posx, posy</li>
   <p class="topless"><a href="api_edges.html"
                         title="previous chapter">Edges</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="api_examples.html"
-                        title="next chapter">Examples</a></p>
+  <p class="topless"><a href="api_burn.html"
+                        title="next chapter">Burn correction</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -509,7 +523,7 @@ gets x, y, r, b, posx, posy</li>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api_examples.html" title="Examples"
+          <a href="api_burn.html" title="Burn correction"
              >next</a> |</li>
         <li class="right" >
           <a href="api_edges.html" title="Edges"
