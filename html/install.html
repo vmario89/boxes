@@ -47,73 +47,73 @@
   <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>Boxes.py is a pure Python project that does support the regular setuptools
-method of shipping with <em>setup.py</em>. <em>setup.py –help-commands</em> and
-<em>setup.py CMD –help</em> provide the necessary documentation for building,
+method of shipping with <code class="code docutils literal notranslate"><span class="pre">setup.py</span></code>. <code class="code docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">--help-commands</span></code> and
+<code class="code docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">CMD</span> <span class="pre">--help</span></code> provide the necessary documentation for building,
 installing or building binary formats.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="cairo">
 <h3>Cairo<a class="headerlink" href="#cairo" title="Permalink to this headline">¶</a></h3>
 <p>Boxes.py is based on the cairo graphics library. It supports both the PyPi
-version <em>cairocffi</em> and python-cairo that might be shipped with your
-distribution.</p>
+version <code class="code docutils literal notranslate"><span class="pre">cairocffi</span></code> and <code class="code docutils literal notranslate"><span class="pre">python-cairo</span></code> that might be shipped with
+your distribution.</p>
 </div>
 <div class="section" id="markdown">
 <h3>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h3>
-<p>Markdown (package name may be python-markdown or python3-markdown) is
-used to format the description texts.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">Markdown</span></code> (package name may be <code class="code docutils literal notranslate"><span class="pre">python-markdown</span></code> or
+<code class="code docutils literal notranslate"><span class="pre">python3-markdown</span></code>) is used to format the description texts.</p>
 </div>
 <div class="section" id="lxml">
 <h3>LXML<a class="headerlink" href="#lxml" title="Permalink to this headline">¶</a></h3>
-<p>lxml (package name may be python-lxml or python3-lxml) is needed for
-the Inkscape plugin.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">lxml</span></code> (package name may be <code class="code docutils literal notranslate"><span class="pre">python-lxml</span></code> or <code class="code docutils literal notranslate"><span class="pre">python3-lxml</span></code>)
+is needed for the Inkscape plugin.</p>
 </div>
 <div class="section" id="setuptools">
 <h3>setuptools<a class="headerlink" href="#setuptools" title="Permalink to this headline">¶</a></h3>
-<p>Setup.py uses the setuptools library (package name may be
-python*-setuptools). You only need it if you want to build the
+<p>Setup.py uses the <code class="code docutils literal notranslate"><span class="pre">setuptools</span></code> library (package name may be
+<code class="code docutils literal notranslate"><span class="pre">python*-setuptools</span></code>). You only need it if you want to build the
 package.</p>
 </div>
 <div class="section" id="ps2edit">
 <h3>ps2edit<a class="headerlink" href="#ps2edit" title="Permalink to this headline">¶</a></h3>
-<p>While not a hard requirement Boxes.py uses ps2edit to offer formats that are
-not supported by Cairo: DXF, gcode, PLT. Currently the location Boxes.py looks
-for <em>ps2edit</em> is hard coded to <em>/usr/bin/pstoedit</em> in the
-<em>boxes.formats.Formats</em> class.</p>
+<p>While not a hard requirement Boxes.py uses <code class="code docutils literal notranslate"><span class="pre">ps2edit</span></code> to offer formats
+that are not supported by Cairo: DXF, gcode, PLT. Currently the location
+Boxes.py looks for <code class="code docutils literal notranslate"><span class="pre">ps2edit</span></code> is hard coded to <code class="code docutils literal notranslate"><span class="pre">/usr/bin/pstoedit</span></code>
+in the <code class="code docutils literal notranslate"><span class="pre">boxes.formats.Formats</span></code> class.</p>
 </div>
 <div class="section" id="python">
 <h3>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
-<p>Boxes.py - while defaulting to Python3 - can also run on Python
-2.7. If you encounter any compatibility issues please report them at the
+<p>Boxes.py - while defaulting to Python 3 - can also run on Python 2.7.
+If you encounter any compatibility issues please report them at the
 <a class="reference external" href="https://github.com/florianfesti/boxes">GitHub project</a>.</p>
 </div>
 </div>
 <div class="section" id="running-from-working-dir">
 <h2>Running from working dir<a class="headerlink" href="#running-from-working-dir" title="Permalink to this headline">¶</a></h2>
-<p>Due to lazy developer(s) Boxes.py can also run from the git check
-out. The scripts in <em>scripts/</em> are all suppossed to just work right
-after <em>git clone</em>. The Inkscape needs a bit manual work to get
+<p>Due to lazy developer(s) Boxes.py can also run from the Git checkout.
+The scripts in <code class="code docutils literal notranslate"><span class="pre">scripts/</span></code> are all suppossed to just work right
+after <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>. The Inkscape needs a bit manual work to get
 running. See below.</p>
 </div>
 <div class="section" id="inkscape">
 <h2>Inkscape<a class="headerlink" href="#inkscape" title="Permalink to this headline">¶</a></h2>
 <p>Boxes.py can be used as a set of Inkscape plugins. The package does
-install the necessary .inx files to <em>/usr/share/inkscape/extensions</em>
-on unix operating systems. The .inx files assume that the <em>boxes</em>
-executable is available in the path (which it is when installing the
-binary package)</p>
-<p>On non unix operating systems or when running Boxes.py from git
-checkout the .inx files need to be copied by hand. <em>setup.py build</em>
-creares them in the <em>inkex/</em> directory. They then have to be copied in
+install the necessary .inx files to <code class="code docutils literal notranslate"><span class="pre">/usr/share/inkscape/extensions</span></code>
+on unix operating systems. The .inx files assume that the <code class="code docutils literal notranslate"><span class="pre">boxes</span></code>
+executable is available in the <code class="code docutils literal notranslate"><span class="pre">PATH</span></code> (which it is when installing the
+binary package).</p>
+<p>On non-Unix operating systems or when running Boxes.py from Git
+checkout the .inx files need to be copied by hand. <code class="code docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">build</span></code>
+creates them in the <code class="code docutils literal notranslate"><span class="pre">inkex/</span></code> directory. They then have to be copied in
 either the global or the per user extension directory of
-Inkscape. These are <em>/usr/share/inkscape/extensions/</em> and
-<em>~/.config/inkscape/extensions/</em> on Unix. On other Operating systems
+Inkscape. These are <code class="code docutils literal notranslate"><span class="pre">/usr/share/inkscape/extensions/</span></code> and
+<code class="code docutils literal notranslate"><span class="pre">~/.config/inkscape/extensions/</span></code> on Unix. On other operating systems
 you can look up <em>Edit -&gt; Preferences… -&gt; System</em> in the Inkscape
 menu to look up <em>User extensions</em> and <em>Inkscape extensions</em>. It may be
 more convenient to generate the .inx files right in place by executing
-<em>scripts/boxes2inkscape</em> with the taget path as only parameter.</p>
-<p>After placing the .inx files you need to make the <em>boxes</em> script
-available in the path. One way is to create a symlink from a location
+<code class="code docutils literal notranslate"><span class="pre">scripts/boxes2inkscape</span></code> with the target path as only parameter.</p>
+<p>After placing the .inx files you need to make the <code class="code docutils literal notranslate"><span class="pre">boxes</span></code> script
+available in the <code class="code docutils literal notranslate"><span class="pre">PATH</span></code>. One way is to create a symlink from a location
 that is in the path or installing the package on the system.</p>
 </div>
 <div class="section" id="platform-specific-instructions">
