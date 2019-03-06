@@ -100,7 +100,7 @@ running. See below.</p>
 <p><strong>As binary</strong></p>
 <p>Boxes.py can be used as a set of Inkscape plugins. The package does
 install the necessary .inx files to <code class="code docutils literal notranslate"><span class="pre">/usr/share/inkscape/extensions</span></code>
-on unix operating systems. The .inx files assume that the <em>boxes</em>
+on unix operating systems. The .inx files assume that the <code class="code docutils literal notranslate"><span class="pre">boxes</span></code>
 executable is available in the path (which it is when installing the
 binary package)</p>
 <p><strong>git repository easy way</strong></p>
@@ -115,13 +115,13 @@ path as only parameter.</p>
 up the directories <em>“User extensions”</em> and <em>“Inkscape extensions”</em> within
 the Inkscape preferences <em>Edit -&gt; Preferences… -&gt; System</em>.</p>
 <p><strong>git repository manual way</strong></p>
-<p><em>setup.py build</em> creates the <em>.inx files in the *inkex/</em> directory.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">setup.py</span> <span class="pre">build</span></code> creates the <code class="code docutils literal notranslate"><span class="pre">*.inx</span></code> files in the <code class="code docutils literal notranslate"><span class="pre">inkex/</span></code> directory.</p>
 <p>They then have to be copied in either the global or the per user
 extension directory of Inkscape. These are
 <code class="code docutils literal notranslate"><span class="pre">/usr/share/inkscape/extensions/</span></code> and
 <code class="code docutils literal notranslate"><span class="pre">~/.config/inkscape/extensions/</span></code> on a unix operating system.
 On non unix operating the target directories may differ. You can look
-up the directories <em>User extensions</em> and <em>Inkscape extensions</em> within
+up the directories <em>“User extensions”</em> and <em>“Inkscape extensions”</em> within
 the Inkscape preferences <em>Edit -&gt; Preferences… -&gt; System</em>.</p>
 <p>As an alternative you can create a symlink to the <code class="code docutils literal notranslate"><span class="pre">inkex/</span></code> directory
 within the desired inkscape extension directory.</p>
