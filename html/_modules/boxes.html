@@ -69,6 +69,7 @@
 <span class="kn">from</span> <span class="nn">functools</span> <span class="k">import</span> <span class="n">wraps</span>
 <span class="kn">from</span> <span class="nn">xml.sax.saxutils</span> <span class="k">import</span> <span class="n">quoteattr</span>
 <span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
+<span class="kn">import</span> <span class="nn">copy</span>
 
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">edges</span>
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">formats</span>
@@ -648,6 +649,11 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">degrees</span><span class="p">,</span> <span class="n">radius</span> <span class="o">=</span> <span class="n">degrees</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
         <span class="n">rad</span> <span class="o">=</span> <span class="n">degrees</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">180</span>
 
         <span class="k">if</span> <span class="n">tabs</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">:</span>
@@ -659,7 +665,8 @@
                 <span class="n">tabrad</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">tabs</span> <span class="o">/</span> <span class="n">r_</span>
 
             <span class="n">length</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r_</span> <span class="o">*</span> <span class="n">rad</span><span class="p">)</span>
-            <span class="n">tabs</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">tabs</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">length</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">tabs</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">))))</span>
+            <span class="n">tabs</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">tabs</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">//</span> <span class="p">(</span><span class="n">tabs</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">tabs</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">:</span>
             <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">tabs</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="p">)</span> <span class="o">/</span> <span class="n">tabs</span>
             <span class="n">lang</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">l</span> <span class="o">/</span> <span class="n">r_</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">degrees</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -1838,6 +1845,158 @@
 
 
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
+
+
+    <span class="c1">### polygonWall and friends</span>
+
+    <span class="k">def</span> <span class="nf">_polygonWallExtend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borders</span><span class="p">,</span> <span class="n">edge</span><span class="p">,</span> <span class="n">close</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">0.0</span> <span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">def</span> <span class="nf">checkpoint</span><span class="p">(</span><span class="n">ext</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="n">ext</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ext</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">ext</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ext</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">ext</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ext</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">ext</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ext</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">borders</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">a</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                    <span class="n">angle</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">%</span> <span class="mi">360</span>
+                    <span class="k">continue</span>
+                <span class="n">centerx</span> <span class="o">=</span> <span class="n">posx</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="o">+</span><span class="mi">90</span><span class="p">))</span>
+                <span class="n">centery</span> <span class="o">=</span> <span class="n">posy</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="o">+</span><span class="mi">90</span><span class="p">))</span>
+
+                <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">270</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">((</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span>
+                         <span class="n">angle</span> <span class="o">&lt;=</span> <span class="n">direction</span> <span class="ow">and</span> <span class="n">angle</span> <span class="o">+</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="n">direction</span><span class="p">)</span> <span class="ow">or</span>
+                        <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span>
+                         <span class="n">angle</span> <span class="o">&gt;=</span> <span class="n">direction</span> <span class="ow">and</span> <span class="n">angle</span> <span class="o">+</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">direction</span><span class="p">)):</span>
+                        <span class="n">checkpoint</span><span class="p">(</span><span class="n">ext</span><span class="p">,</span> <span class="n">centerx</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">direction</span><span class="p">)),</span> <span class="n">centery</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">direction</span><span class="p">)))</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="p">(</span><span class="n">angle</span> <span class="o">+</span> <span class="n">a</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span>
+                <span class="n">posx</span> <span class="o">=</span> <span class="n">centerx</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="o">-</span><span class="mi">90</span><span class="p">))</span>
+                <span class="n">posy</span> <span class="o">=</span> <span class="n">centery</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="o">-</span><span class="mi">90</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">posx</span> <span class="o">+=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+                <span class="n">posy</span> <span class="o">+=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+            <span class="n">checkpoint</span><span class="p">(</span><span class="n">ext</span><span class="p">,</span> <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span><span class="p">)</span>
+
+        <span class="n">ext</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">edge</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
+        <span class="n">ext</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">edge</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
+        <span class="n">ext</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">edge</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
+        <span class="n">ext</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="n">edge</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">ext</span>
+
+<div class="viewcode-block" id="Boxes.polygonWall"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.polygonWall">[docs]</a>    <span class="k">def</span> <span class="nf">polygonWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borders</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="s2">&quot;f&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="c1"># XXX edge.margin()</span>
+
+        <span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_polygonWallExtend</span><span class="p">(</span><span class="n">borders</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+        <span class="n">tw</span><span class="p">,</span> <span class="n">th</span> <span class="o">=</span> <span class="n">maxx</span> <span class="o">-</span> <span class="n">minx</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">-</span> <span class="n">miny</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+            <span class="k">return</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="o">-</span><span class="n">minx</span><span class="p">,</span> <span class="o">-</span><span class="n">miny</span><span class="p">)</span>
+
+        <span class="n">length_correction</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">borders</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">length_correction</span><span class="p">)</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">length_correction</span>
+            <span class="n">next_angle</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">next_angle</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">and</span> <span class="n">next_angle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">length_correction</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">((</span><span class="o">-</span><span class="n">next_angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">length_correction</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">l</span> <span class="o">-=</span> <span class="n">length_correction</span>
+            <span class="n">e</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">length_correction</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">next_angle</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Boxes.polygonWalls"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.polygonWalls">[docs]</a>    <span class="nd">@restore</span>
+    <span class="k">def</span> <span class="nf">polygonWalls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borders</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="n">symetrical</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">bottom</span><span class="p">)</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">top</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="c1"># XXX edge.margin()</span>
+
+        <span class="n">leftsettings</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+        <span class="n">lf</span><span class="p">,</span> <span class="n">lF</span><span class="p">,</span> <span class="n">lh</span> <span class="o">=</span> <span class="n">leftsettings</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">rightsettings</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+        <span class="n">rf</span><span class="p">,</span> <span class="n">rF</span><span class="p">,</span> <span class="n">rh</span> <span class="o">=</span> <span class="n">rightsettings</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">length_correction</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">angle</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">part_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">bottom</span><span class="o">.</span><span class="n">margin</span><span class="p">())</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">borders</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">symetrical</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">part_cnt</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lf</span><span class="p">,</span> <span class="n">rf</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lF</span><span class="p">,</span> <span class="n">rF</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lf</span><span class="p">,</span> <span class="n">rF</span>
+
+            <span class="n">top_lengths</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">top_edges</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">left</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">length_correction</span>
+            <span class="n">leftsettings</span><span class="o">.</span><span class="n">setValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">angle</span><span class="p">)</span>
+            <span class="n">angle</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">while</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                <span class="n">bottom</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+                <span class="n">angle</span><span class="p">,</span> <span class="n">radius</span> <span class="o">=</span> <span class="n">angle</span>
+                <span class="n">lr</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="o">*</span> <span class="n">radius</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">](</span><span class="n">lr</span><span class="p">,</span> <span class="n">h</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1"># XXX</span>
+                <span class="n">top_lengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+                <span class="n">top_lengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span>
+                <span class="n">top_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+                <span class="n">top_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">)</span>
+
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>
+                <span class="n">l</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="n">borders</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">rightsettings</span><span class="o">.</span><span class="n">setValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="n">angle</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">length_correction</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">((</span><span class="o">-</span><span class="n">angle</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">length_correction</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">l</span> <span class="o">-=</span> <span class="n">length_correction</span>
+
+            <span class="n">bottom</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+            <span class="n">top_lengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="n">top_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">top</span><span class="p">)</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">bottom</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                <span class="n">right</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+
+                <span class="n">top_edges</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                <span class="n">top_lengths</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+                <span class="n">edges</span><span class="o">.</span><span class="n">CompoundEdge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">top_edges</span><span class="p">,</span> <span class="n">top_lengths</span><span class="p">)(</span><span class="nb">sum</span><span class="p">(</span><span class="n">top_lengths</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                <span class="n">left</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">)</span>
+            <span class="n">part_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span></div>
+
 
     <span class="c1">##################################################</span>
     <span class="c1">### Place Parts</span>

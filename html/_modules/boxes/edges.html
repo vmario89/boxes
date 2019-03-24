@@ -625,6 +625,10 @@
         <span class="k">if</span> <span class="n">angle</span> <span class="o">&gt;=</span><span class="mi">90</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="mi">0</span>
 
+        <span class="k">if</span> <span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="o">-</span><span class="n">angle</span><span class="p">))</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="mi">0</span>
+
+        <span class="c1"># 0 to 90</span>
         <span class="n">a</span> <span class="o">=</span> <span class="mi">90</span> <span class="o">-</span> <span class="p">(</span><span class="mi">180</span><span class="o">-</span><span class="n">angle</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
         <span class="n">fingerlength</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
         <span class="n">b</span> <span class="o">=</span> <span class="mi">90</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span>
