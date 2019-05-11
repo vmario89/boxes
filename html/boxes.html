@@ -2335,7 +2335,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.pathre">
-<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x1309370&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2617c50&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2345,7 +2345,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.transformre">
-<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x130a2d0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2618bb0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2942,6 +2942,42 @@ gets x, y, r, b, posx, posy</li>
 <li><strong>length</strong> – length in mm</li>
 <li><strong>positive</strong> – (Default value = True) False: Door side; True: Box side</li>
 <li><strong>reverse</strong> – (Default value = False) True when running away from the latch</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.mirrorX">
+<code class="descname">mirrorX</code><span class="sig-paren">(</span><em>f</em>, <em>offset=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.mirrorX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.mirrorX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap a function to draw mirrored at the y axis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>f</strong> – function to wrap</li>
+<li><strong>offset</strong> – (default value = 0.0) axis to mirror at</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.mirrorY">
+<code class="descname">mirrorY</code><span class="sig-paren">(</span><em>f</em>, <em>offset=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.mirrorY"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.mirrorY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap a function to draw mirrored at the x axis</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>f</strong> – function to wrap</li>
+<li><strong>offset</strong> – (default value = 0.0) axis to mirror at</li>
 </ul>
 </td>
 </tr>
