@@ -362,7 +362,7 @@
 <span class="sd">        Supported parameters are</span>
 
 <span class="sd">        * floats: x, y, h, hi</span>
-<span class="sd">        * argparseSections: sx, sy</span>
+<span class="sd">        * argparseSections: sx, sy, sh</span>
 <span class="sd">        * ArgparseEdgeType: bottom_edge, top_edge</span>
 <span class="sd">        * boolarg: outside</span>
 <span class="sd">        * str (selection): nema_mount</span>
@@ -385,14 +385,19 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
                     <span class="s2">&quot;--sx&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">argparseSections</span><span class="p">,</span>
                     <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
-                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;sections left to right in mm. Possible formats: overallwidth/numberof sections e.g. &quot;250/5&quot;; sectionwidth*numberofsections e.g. &quot;50*5&quot;; section widths separated by &quot;:&quot; e.g. &quot;30:25.5:70&quot;</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;sections left to right in mm. See --sy for format&quot;&quot;&quot;</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;sy&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;50*3&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
                     <span class="s2">&quot;--sy&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">argparseSections</span><span class="p">,</span>
                     <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
-                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;sections back to front in mm. See --sx for format&quot;&quot;&quot;</span><span class="p">)</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;sections back to front in mm. Possible formats: overallwidth/numberof sections e.g. &quot;250/5&quot;; sectionwidth*numberofsections e.g. &quot;50*5&quot;; section widths separated by &quot;:&quot; e.g. &quot;30:25.5:70&quot;&quot;&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;sh&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;50*3&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+                    <span class="s2">&quot;--sh&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">argparseSections</span><span class="p">,</span>
+                    <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
+                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;sections bottom to top in mm. See --sy for format&quot;&quot;&quot;</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="mf">100.0</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
