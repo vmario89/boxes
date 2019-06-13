@@ -2032,6 +2032,196 @@
 
 <div class="viewcode-block" id="RoundedTriangleEdge.margin"><a class="viewcode-back" href="../../boxes.html#boxes.edges.RoundedTriangleEdge.margin">[docs]</a>    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">radius</span></div></div>
+
+<span class="c1">#############################################################################</span>
+<span class="c1">####     Slat wall</span>
+<span class="c1">#############################################################################</span>
+
+<div class="viewcode-block" id="SlatWallSettings"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallSettings">[docs]</a><span class="k">class</span> <span class="nc">SlatWallSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Settings for SlatWallEdges</span>
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute_params</span>
+
+
+<span class="sd">* relative (in multiples of thickness)</span>
+
+<span class="sd"> * hook_extra_height : 2.0 : space surrounding connectors (in multiples of thickness)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;hook_extra_height&quot;</span> <span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="SlatWallSettings.edgeObjects"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;aAbBcC&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">SlatWallEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+                 <span class="n">SlatWallEdgeReversed</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+                 <span class="n">SlatWallJoinedEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+                 <span class="n">SlatWallJoinedEdgeReversed</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+                 <span class="n">SlatWallBackEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+                 <span class="n">SlatWallBackEdgeReversed</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="SlatWallEdge"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallEdge">[docs]</a><span class="k">class</span> <span class="nc">SlatWallEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span>
+    <span class="n">reversed_</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_top_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">ro</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">ri</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">rt</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mf">5.5</span><span class="o">-</span><span class="n">ri</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">ri</span><span class="p">),</span> <span class="mi">12</span><span class="o">-</span><span class="n">ri</span><span class="o">-</span><span class="n">w</span><span class="o">-</span><span class="n">rt</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">rt</span><span class="p">),</span>
+                <span class="n">w</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">rt</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">rt</span><span class="p">),</span> <span class="mi">12</span><span class="o">-</span><span class="n">ro</span><span class="o">-</span><span class="n">rt</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">ro</span><span class="p">),</span> <span class="mf">5.5</span><span class="o">+</span><span class="n">w</span><span class="o">-</span><span class="n">ro</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">reversed_</span><span class="p">:</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">poly</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_top_hook_len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_bottom_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">slot</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">r_plug</span> <span class="o">=</span> <span class="n">slot</span><span class="o">*.</span><span class="mi">4</span>
+        <span class="n">slotslot</span> <span class="o">=</span> <span class="n">slot</span> <span class="o">-</span> <span class="n">r_plug</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="mf">0.5</span>
+        <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                <span class="mf">5.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="n">r_plug</span><span class="p">),</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">slotslot</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="n">r_plug</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">reversed_</span><span class="p">:</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">poly</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_bottom_hook_len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">slot</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">slot</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">tht</span><span class="p">,</span> <span class="n">thb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_top_hook_len</span><span class="p">()</span>
+        <span class="n">bht</span><span class="p">,</span> <span class="n">bhb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook_len</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;=</span> <span class="n">step</span> <span class="o">+</span> <span class="n">tht</span> <span class="o">+</span> <span class="n">bhb</span><span class="p">:</span>
+            <span class="n">top_len</span> <span class="o">=</span> <span class="p">((</span><span class="n">length</span><span class="o">-</span><span class="n">tht</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">step</span><span class="p">)</span> <span class="o">*</span> <span class="n">step</span> <span class="o">-</span> <span class="n">thb</span> <span class="o">-</span> <span class="n">bht</span>
+            <span class="n">bottom_len</span> <span class="o">=</span> <span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="n">tht</span><span class="p">)</span> <span class="o">%</span> <span class="n">step</span> <span class="o">-</span> <span class="n">bhb</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">top_len</span> <span class="o">=</span> <span class="n">length</span><span class="o">-</span><span class="n">tht</span><span class="o">-</span><span class="n">thb</span>
+            <span class="n">bottom_len</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reversed_</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">bottom_len</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">bottom_len</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">top_len</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_top_hook</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_top_hook</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">top_len</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">bottom_len</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">bottom_len</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SlatWallEdge.margin"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallEdge.margin">[docs]</a>    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">6</span><span class="o">+</span><span class="mf">5.5</span></div></div>
+
+<div class="viewcode-block" id="SlatWallEdgeReversed"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallEdgeReversed">[docs]</a><span class="k">class</span> <span class="nc">SlatWallEdgeReversed</span><span class="p">(</span><span class="n">SlatWallEdge</span><span class="p">):</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span>
+    <span class="n">reversed_</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="SlatWallJoinedEdge"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallJoinedEdge">[docs]</a><span class="k">class</span> <span class="nc">SlatWallJoinedEdge</span><span class="p">(</span><span class="n">SlatWallEdge</span><span class="p">):</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">](</span><span class="n">length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SlatWallJoinedEdge.start_width"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallJoinedEdge.start_width">[docs]</a>    <span class="k">def</span> <span class="nf">start_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span></div></div>
+
+<div class="viewcode-block" id="SlatWallJoinedEdgeReversed"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallJoinedEdgeReversed">[docs]</a><span class="k">class</span> <span class="nc">SlatWallJoinedEdgeReversed</span><span class="p">(</span><span class="n">SlatWallJoinedEdge</span><span class="p">):</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>
+    <span class="n">reversed_</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="SlatWallBackEdge"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallBackEdge">[docs]</a><span class="k">class</span> <span class="nc">SlatWallBackEdge</span><span class="p">(</span><span class="n">SlatWallEdge</span><span class="p">):</span>
+
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;c&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_top_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_top_hook_len</span><span class="p">()))</span>
+
+    <span class="k">def</span> <span class="nf">_bottom_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook_len</span><span class="p">()))</span>
+
+    <span class="k">def</span> <span class="nf">_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">](</span><span class="n">length</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SlatWallBackEdge.margin"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallBackEdge.margin">[docs]</a>    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span></div></div>
+
+<div class="viewcode-block" id="SlatWallBackEdgeReversed"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallBackEdgeReversed">[docs]</a><span class="k">class</span> <span class="nc">SlatWallBackEdgeReversed</span><span class="p">(</span><span class="n">SlatWallBackEdge</span><span class="p">):</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
+    <span class="n">reversed_</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="SlatWallHoles"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallHoles">[docs]</a><span class="k">class</span> <span class="nc">SlatWallHoles</span><span class="p">(</span><span class="n">SlatWallEdge</span><span class="p">):</span>
+
+    <span class="n">reversed_</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_top_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_top_hook_len</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_bottom_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook_len</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_joint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Draw holes for a matching SlatWallJoinedEdge</span>
+
+<span class="sd">        :param x: position</span>
+<span class="sd">        :param y: position</span>
+<span class="sd">        :param length: length of matching edge</span>
+<span class="sd">        :param angle:  (Default value = 90)</span>
+<span class="sd">        :param bedBolts:  (Default value = None)</span>
+<span class="sd">        :param bedBoltSettings:  (Default value = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">burn</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span> <span class="c1"># XXX</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="o">-</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span>
+                                   <span class="n">length</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+
+            <span class="n">SlatWallEdge</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
