@@ -1744,9 +1744,10 @@ attribute access.</p>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="boxes.edges.SlatWallJoinedEdge.start_width">
-<code class="descname">start_width</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallJoinedEdge.start_width"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallJoinedEdge.start_width" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dt id="boxes.edges.SlatWallJoinedEdge.startwidth">
+<code class="descname">startwidth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallJoinedEdge.startwidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallJoinedEdge.startwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Amount of space the beginning of the edge is set below the inner space of the part</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -1774,6 +1775,13 @@ attribute access.</p>
 Values:</p>
 <ul class="simple">
 <li>absolute_params</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>bottom_hook : “hook” : “spring”, “stud” or “none”</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
 <li>relative (in multiples of thickness)</li>
 </ul>
 <blockquote>
@@ -1784,7 +1792,7 @@ Values:</p>
 </div></blockquote>
 <dl class="attribute">
 <dt id="boxes.edges.SlatWallSettings.absolute_params">
-<code class="descname">absolute_params</code><em class="property"> = {}</em><a class="headerlink" href="#boxes.edges.SlatWallSettings.absolute_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">absolute_params</code><em class="property"> = {'bottom_hook': ('hook', 'spring', 'stud', 'none')}</em><a class="headerlink" href="#boxes.edges.SlatWallSettings.absolute_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2539,7 +2547,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.pathre">
-<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x19f8640&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x1b0cb50&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2549,7 +2557,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.transformre">
-<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x228f8a0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x1b0dab0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3540,6 +3548,51 @@ angles may be tuple (angle, radius)</p>
 <li><strong>y</strong> – (Default value = 0)</li>
 <li><strong>angle</strong> – (Default value = 0)</li>
 <li><strong>align</strong> – (Default value = “”) string with combinations of (top|middle|bottom) and (left|center|right) separated by a space</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.trapezoidSideWall">
+<code class="descname">trapezoidSideWall</code><span class="sig-paren">(</span><em>w</em>, <em>h0</em>, <em>h1</em>, <em>edges='eeee'</em>, <em>radius=0.0</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.trapezoidSideWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.trapezoidSideWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rectangular trapezoidal wall</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>w</strong> – width</li>
+<li><strong>h0</strong> – left height</li>
+<li><strong>h1</strong> – right height</li>
+<li><strong>edges</strong> – (Default value = “eeee”) bottom, right, left</li>
+<li><strong>radius</strong> – (Default vaule = 0.0) radius of upper corners</li>
+<li><strong>callback</strong> – (Default value = None)</li>
+<li><strong>move</strong> – (Default value = None)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="boxes.Boxes.trapezoidWall">
+<code class="descname">trapezoidWall</code><span class="sig-paren">(</span><em>w</em>, <em>h0</em>, <em>h1</em>, <em>edges='eeee'</em>, <em>callback=None</em>, <em>move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.trapezoidWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.trapezoidWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rectangular trapezoidal wall</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>w</strong> – width</li>
+<li><strong>h0</strong> – left height</li>
+<li><strong>h1</strong> – right height</li>
+<li><strong>edges</strong> – (Default value = “eee”) bottom, right, left</li>
+<li><strong>callback</strong> – (Default value = None)</li>
+<li><strong>move</strong> – (Default value = None)</li>
 </ul>
 </td>
 </tr>

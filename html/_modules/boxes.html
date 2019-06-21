@@ -187,19 +187,28 @@
 <span class="sd">    :param s: string to parse</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d+(\.\d+)?)/(\d+)&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-        <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(\d+(\.\d+)?)\*(\d+)&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-        <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))]</span> <span class="o">*</span> <span class="n">n</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">part</span><span class="p">)</span> <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)]</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t understand sections string&quot;</span><span class="p">)</span></div>
 
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s|:&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(\d+(\.\d+)?)/(\d+)$&quot;</span><span class="p">,</span> <span class="n">part</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">n</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(\d+(\.\d+)?)\*(\d+)$&quot;</span><span class="p">,</span> <span class="n">part</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span><span class="p">:</span>
+                <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))]</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">part</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t understand sections string&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="ArgparseEdgeType"><a class="viewcode-back" href="../boxes.html#boxes.ArgparseEdgeType">[docs]</a><span class="k">class</span> <span class="nc">ArgparseEdgeType</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;argparse type to select from a set of edge types&quot;&quot;&quot;</span>
@@ -1851,6 +1860,104 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="Boxes.trapezoidWall"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.trapezoidWall">[docs]</a>    <span class="k">def</span> <span class="nf">trapezoidWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s2">&quot;eeee&quot;</span><span class="p">,</span>
+                           <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rectangular trapezoidal wall</span>
+
+<span class="sd">        :param w: width</span>
+<span class="sd">        :param h0: left height</span>
+<span class="sd">        :param h1: right height</span>
+<span class="sd">        :param edges:  (Default value = &quot;eee&quot;) bottom, right, left</span>
+<span class="sd">        :param callback:  (Default value = None)</span>
+<span class="sd">        :param move:  (Default value = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">]</span>
+
+        <span class="n">overallwidth</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+        <span class="n">overallheight</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="n">before</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">((</span><span class="n">h1</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">))</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">((</span><span class="n">h0</span><span class="o">-</span><span class="n">h1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">margin</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">())</span>
+        <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">())</span>
+        <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">h1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;e&quot;</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">edges</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">l</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;e&quot;</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">())</span>
+        <span class="n">edges</span><span class="p">[</span><span class="mi">3</span><span class="p">](</span><span class="n">h0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Boxes.trapezoidSideWall"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.trapezoidSideWall">[docs]</a>    <span class="k">def</span> <span class="nf">trapezoidSideWall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s2">&quot;eeee&quot;</span><span class="p">,</span>
+                          <span class="n">radius</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rectangular trapezoidal wall</span>
+
+<span class="sd">        :param w: width</span>
+<span class="sd">        :param h0: left height</span>
+<span class="sd">        :param h1: right height</span>
+<span class="sd">        :param edges:  (Default value = &quot;eeee&quot;) bottom, right, left</span>
+<span class="sd">        :param radius: (Default vaule = 0.0) radius of upper corners</span>
+<span class="sd">        :param callback:  (Default value = None)</span>
+<span class="sd">        :param move:  (Default value = None)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">]</span>
+
+        <span class="n">overallwidth</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+        <span class="n">overallheight</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span> <span class="o">+</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="n">before</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">h0</span><span class="o">-</span><span class="n">h1</span><span class="p">))</span>
+        <span class="n">ws</span> <span class="o">=</span> <span class="n">w</span><span class="o">-</span><span class="n">r</span>
+        <span class="k">if</span> <span class="n">h0</span> <span class="o">&gt;</span> <span class="n">h1</span><span class="p">:</span>
+            <span class="n">ws</span> <span class="o">+=</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endwidth</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ws</span> <span class="o">+=</span> <span class="n">edges</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span>
+        <span class="n">hs</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">h1</span><span class="o">-</span><span class="n">h0</span><span class="p">)</span> <span class="o">-</span> <span class="n">r</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">hs</span><span class="o">/</span><span class="n">ws</span><span class="p">))</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="p">(</span><span class="n">ws</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">hs</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">margin</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">())</span>
+        <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">](</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">())</span>
+        <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="n">h1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">h0</span> <span class="o">&gt;</span> <span class="n">h1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">edges</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">l</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">edges</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">(),</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">endwidth</span><span class="p">(),</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">edges</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="n">l</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startwidth</span><span class="p">())</span>
+        <span class="n">edges</span><span class="p">[</span><span class="mi">3</span><span class="p">](</span><span class="n">h0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edgeCorner</span><span class="p">(</span><span class="n">edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">90</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">overallwidth</span><span class="p">,</span> <span class="n">overallheight</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
     <span class="c1">### polygonWall and friends</span>
 

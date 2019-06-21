@@ -2044,6 +2044,7 @@
 
 <span class="sd">* absolute_params</span>
 
+<span class="sd"> * bottom_hook : &quot;hook&quot; : &quot;spring&quot;, &quot;stud&quot; or &quot;none&quot;</span>
 
 <span class="sd">* relative (in multiples of thickness)</span>
 
@@ -2053,6 +2054,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;bottom_hook&quot;</span> <span class="p">:</span> <span class="p">(</span><span class="s2">&quot;hook&quot;</span><span class="p">,</span> <span class="s2">&quot;spring&quot;</span><span class="p">,</span> <span class="s2">&quot;stud&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">),</span>
     <span class="p">}</span>
 
     <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{</span>
@@ -2096,12 +2098,27 @@
 
     <span class="k">def</span> <span class="nf">_bottom_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reversed_</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">slot</span> <span class="o">=</span> <span class="mi">8</span>
-        <span class="n">r_plug</span> <span class="o">=</span> <span class="n">slot</span><span class="o">*.</span><span class="mi">4</span>
-        <span class="n">slotslot</span> <span class="o">=</span> <span class="n">slot</span> <span class="o">-</span> <span class="n">r_plug</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="mf">0.5</span>
-        <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
-                <span class="mf">5.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="n">r_plug</span><span class="p">),</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">slotslot</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="n">r_plug</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bottom_hook</span> <span class="o">==</span> <span class="s2">&quot;spring&quot;</span><span class="p">:</span>
+            <span class="n">r_plug</span> <span class="o">=</span> <span class="n">slot</span><span class="o">*.</span><span class="mi">4</span>
+            <span class="n">slotslot</span> <span class="o">=</span> <span class="n">slot</span> <span class="o">-</span> <span class="n">r_plug</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="mf">0.5</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                    <span class="mf">5.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="n">r_plug</span><span class="p">),</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">slotslot</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                    <span class="p">(</span><span class="mi">135</span><span class="p">,</span> <span class="n">r_plug</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bottom_hook</span> <span class="o">==</span> <span class="s2">&quot;hook&quot;</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span> <span class="o">+</span> <span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                    <span class="mf">5.5</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">slot</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span>
+                    <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bottom_hook</span> <span class="o">==</span> <span class="s2">&quot;stud&quot;</span><span class="p">:</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                    <span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">,</span> <span class="n">slot</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">poly</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hook_extra_height</span> <span class="o">+</span> <span class="n">slot</span><span class="p">]</span>
+
         <span class="k">if</span> <span class="n">reversed_</span><span class="p">:</span>
             <span class="n">poly</span> <span class="o">=</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">poly</span><span class="p">)</span>
@@ -2115,11 +2132,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="n">step</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="mf">101.6</span> <span class="c1"># 4&quot;</span>
         <span class="n">tht</span><span class="p">,</span> <span class="n">thb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_top_hook_len</span><span class="p">()</span>
         <span class="n">bht</span><span class="p">,</span> <span class="n">bhb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook_len</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;=</span> <span class="n">step</span> <span class="o">+</span> <span class="n">tht</span> <span class="o">+</span> <span class="n">bhb</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">&gt;=</span> <span class="n">step</span> <span class="o">+</span> <span class="n">tht</span> <span class="o">+</span> <span class="n">bhb</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">bottom_hook</span> <span class="o">!=</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
             <span class="n">top_len</span> <span class="o">=</span> <span class="p">((</span><span class="n">length</span><span class="o">-</span><span class="n">tht</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">step</span><span class="p">)</span> <span class="o">*</span> <span class="n">step</span> <span class="o">-</span> <span class="n">thb</span> <span class="o">-</span> <span class="n">bht</span>
             <span class="n">bottom_len</span> <span class="o">=</span> <span class="p">(</span><span class="n">length</span><span class="o">-</span><span class="n">tht</span><span class="p">)</span> <span class="o">%</span> <span class="n">step</span> <span class="o">-</span> <span class="n">bhb</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2134,10 +2151,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_top_hook</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_top_hook</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">top_len</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">top_len</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">bottom_len</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">bottom_len</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_bottom_hook</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_joint</span><span class="p">(</span><span class="n">bottom_len</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SlatWallEdge.margin"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallEdge.margin">[docs]</a>    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="mi">6</span><span class="o">+</span><span class="mf">5.5</span></div></div>
@@ -2155,7 +2172,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">](</span><span class="n">length</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SlatWallJoinedEdge.start_width"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallJoinedEdge.start_width">[docs]</a>    <span class="k">def</span> <span class="nf">start_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SlatWallJoinedEdge.startwidth"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallJoinedEdge.startwidth">[docs]</a>    <span class="k">def</span> <span class="nf">startwidth</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span></div></div>
 
 <div class="viewcode-block" id="SlatWallJoinedEdgeReversed"><a class="viewcode-back" href="../../boxes.html#boxes.edges.SlatWallJoinedEdgeReversed">[docs]</a><span class="k">class</span> <span class="nc">SlatWallJoinedEdgeReversed</span><span class="p">(</span><span class="n">SlatWallJoinedEdge</span><span class="p">):</span>
