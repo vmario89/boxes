@@ -1681,6 +1681,49 @@ attribute access.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="boxes.edges.SlatWallHoleEdge">
+<em class="property">class </em><code class="descclassname">boxes.edges.</code><code class="descname">SlatWallHoleEdge</code><span class="sig-paren">(</span><em>boxes</em>, <em>slatWallHoles=None</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallHoleEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallHoleEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boxes.edges.BaseEdge" title="boxes.edges.BaseEdge"><code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.edges.BaseEdge</span></code></a></p>
+<p>Edge with holes for a parallel finger joint</p>
+<dl class="attribute">
+<dt id="boxes.edges.SlatWallHoleEdge.char">
+<code class="descname">char</code><em class="property"> = 'd'</em><a class="headerlink" href="#boxes.edges.SlatWallHoleEdge.char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="boxes.edges.SlatWallHoleEdge.description">
+<code class="descname">description</code><em class="property"> = 'Edge (parallel slot wall Holes)'</em><a class="headerlink" href="#boxes.edges.SlatWallHoleEdge.description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="boxes.edges.SlatWallHoleEdge.reversed_">
+<code class="descname">reversed_</code><em class="property"> = False</em><a class="headerlink" href="#boxes.edges.SlatWallHoleEdge.reversed_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="boxes.edges.SlatWallHoleEdge.startwidth">
+<code class="descname">startwidth</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallHoleEdge.startwidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallHoleEdge.startwidth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="boxes.edges.SlatWallHoleEdgeReversed">
+<em class="property">class </em><code class="descclassname">boxes.edges.</code><code class="descname">SlatWallHoleEdgeReversed</code><span class="sig-paren">(</span><em>boxes</em>, <em>slatWallHoles=None</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallHoleEdgeReversed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallHoleEdgeReversed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boxes.edges.SlatWallHoleEdge" title="boxes.edges.SlatWallHoleEdge"><code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.edges.SlatWallHoleEdge</span></code></a></p>
+<dl class="attribute">
+<dt id="boxes.edges.SlatWallHoleEdgeReversed.char">
+<code class="descname">char</code><em class="property"> = 'D'</em><a class="headerlink" href="#boxes.edges.SlatWallHoleEdgeReversed.char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="boxes.edges.SlatWallHoleEdgeReversed.reversed_">
+<code class="descname">reversed_</code><em class="property"> = True</em><a class="headerlink" href="#boxes.edges.SlatWallHoleEdgeReversed.reversed_" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="boxes.edges.SlatWallHoles">
 <em class="property">class </em><code class="descclassname">boxes.edges.</code><code class="descname">SlatWallHoles</code><span class="sig-paren">(</span><em>boxes</em>, <em>settings</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallHoles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallHoles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#boxes.edges.SlatWallEdge" title="boxes.edges.SlatWallEdge"><code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.edges.SlatWallEdge</span></code></a></p>
@@ -1736,6 +1779,7 @@ Values:</p>
 <blockquote>
 <div><ul class="simple">
 <li>hook_extra_height : 2.0 : space surrounding connectors (in multiples of thickness)</li>
+<li>edge_width : 1.0 : space below holes of FingerHoleEdge</li>
 </ul>
 </div></blockquote>
 <dl class="attribute">
@@ -1745,7 +1789,7 @@ Values:</p>
 
 <dl class="method">
 <dt id="boxes.edges.SlatWallSettings.edgeObjects">
-<code class="descname">edgeObjects</code><span class="sig-paren">(</span><em>boxes</em>, <em>chars='aAbBcC'</em>, <em>add=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallSettings.edgeObjects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallSettings.edgeObjects" title="Permalink to this definition">¶</a></dt>
+<code class="descname">edgeObjects</code><span class="sig-paren">(</span><em>boxes</em>, <em>chars='aAbBcCdD'</em>, <em>add=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#SlatWallSettings.edgeObjects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.SlatWallSettings.edgeObjects" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate Edge objects using this kind of settings</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1764,7 +1808,7 @@ Values:</p>
 
 <dl class="attribute">
 <dt id="boxes.edges.SlatWallSettings.relative_params">
-<code class="descname">relative_params</code><em class="property"> = {'hook_extra_height': 2.0}</em><a class="headerlink" href="#boxes.edges.SlatWallSettings.relative_params" title="Permalink to this definition">¶</a></dt>
+<code class="descname">relative_params</code><em class="property"> = {'edge_width': 1.0, 'hook_extra_height': 2.0}</em><a class="headerlink" href="#boxes.edges.SlatWallSettings.relative_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2495,7 +2539,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.pathre">
-<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2b1f770&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x19f8640&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2505,7 +2549,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.transformre">
-<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2b206d0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x228f8a0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
