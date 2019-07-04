@@ -2527,37 +2527,58 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 <div class="section" id="module-boxes.svgutil">
 <span id="boxes-svgutil-module"></span><h2>boxes.svgutil module<a class="headerlink" href="#module-boxes.svgutil" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
+<dt id="boxes.svgutil.Extend">
+<em class="property">class </em><code class="descclassname">boxes.svgutil.</code><code class="descname">Extend</code><a class="reference internal" href="_modules/boxes/svgutil.html#Extend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.Extend" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="boxes.svgutil.Extend.addExtend">
+<code class="descname">addExtend</code><span class="sig-paren">(</span><em>extend</em>, <em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#Extend.addExtend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.Extend.addExtend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="boxes.svgutil.Extend.addPoint">
+<code class="descname">addPoint</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#Extend.addPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.Extend.addPoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="boxes.svgutil.SVGFile">
 <em class="property">class </em><code class="descclassname">boxes.svgutil.</code><code class="descname">SVGFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="boxes.svgutil.SVGFile.fix">
+<code class="descname">fix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.fix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.fix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="boxes.svgutil.SVGFile.getEnvelope">
 <code class="descname">getEnvelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.getEnvelope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.getEnvelope" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="boxes.svgutil.SVGFile.handleEndElement">
-<code class="descname">handleEndElement</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.handleEndElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.handleEndElement" title="Permalink to this definition">¶</a></dt>
+<dt id="boxes.svgutil.SVGFile.getExtend">
+<code class="descname">getExtend</code><span class="sig-paren">(</span><em>element</em>, <em>extend</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.getExtend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.getExtend" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="boxes.svgutil.SVGFile.handleStartElement">
-<code class="descname">handleStartElement</code><span class="sig-paren">(</span><em>name</em>, <em>attrs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.handleStartElement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.handleStartElement" title="Permalink to this definition">¶</a></dt>
+<dt id="boxes.svgutil.SVGFile.moveOrigin">
+<code class="descname">moveOrigin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.moveOrigin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.moveOrigin" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.pathre">
-<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x23afdf0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2617980&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="boxes.svgutil.SVGFile.rewriteViewPort">
 <code class="descname">rewriteViewPort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.rewriteViewPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.rewriteViewPort" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Modify SVG file to have the correct width, height and viewPort attributes.</p>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.transformre">
-<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x23b0ac0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2679f60&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
