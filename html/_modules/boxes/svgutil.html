@@ -55,7 +55,7 @@
 <span class="c1">#   You should have received a copy of the GNU General Public License</span>
 <span class="c1">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">datetime</span>
 
 <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">cElementTree</span> <span class="k">as</span> <span class="n">ElementTree</span>
 
@@ -101,9 +101,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tree</span> <span class="o">=</span> <span class="n">ElementTree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">symbol_extends</span> <span class="o">=</span> <span class="p">{}</span>
 
-<div class="viewcode-block" id="SVGFile.fix"><a class="viewcode-back" href="../../boxes.html#boxes.svgutil.SVGFile.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SVGFile.fix"><a class="viewcode-back" href="../../boxes.html#boxes.svgutil.SVGFile.fix">[docs]</a>    <span class="k">def</span> <span class="nf">fix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">getEnvelope</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moveOrigin</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addMetadata</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rewriteViewPort</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SVGFile.getExtend"><a class="viewcode-back" href="../../boxes.html#boxes.svgutil.SVGFile.getExtend">[docs]</a>    <span class="k">def</span> <span class="nf">getExtend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">extend</span><span class="p">):</span>
@@ -127,13 +128,11 @@
                 <span class="n">extend</span><span class="o">.</span><span class="n">addPoint</span><span class="p">(</span><span class="n">tx</span><span class="p">,</span> <span class="n">ty</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">element</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;}use&quot;</span><span class="p">):</span>
             <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
             <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_extends</span><span class="p">[</span><span class="n">element</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;{http://www.w3.org/1999/xlink}href&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]]</span>
             <span class="n">extend</span><span class="o">.</span><span class="n">addExtend</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">element</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">tag</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;}symbol&quot;</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">attrib</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">symbol_extends</span><span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getExtend</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Extend</span><span class="p">())</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">getExtend</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">extend</span><span class="p">)</span>
@@ -199,7 +198,22 @@
         <span class="n">root</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%i</span><span class="s2">mm&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">maxy</span><span class="o">-</span><span class="n">miny</span><span class="p">))</span>
         <span class="n">root</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;viewBox&#39;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%i</span><span class="s2"> </span><span class="si">%i</span><span class="s2"> </span><span class="si">%i</span><span class="s2"> </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">minx</span><span class="p">,</span> <span class="n">miny</span><span class="p">,</span> <span class="n">maxx</span> <span class="o">-</span> <span class="n">minx</span><span class="p">,</span> <span class="n">maxy</span> <span class="o">-</span> <span class="n">miny</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SVGFile.addMetadata"><a class="viewcode-back" href="../../boxes.html#boxes.svgutil.SVGFile.addMetadata">[docs]</a>    <span class="k">def</span> <span class="nf">addMetadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">md</span><span class="p">):</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="si">{name}</span><span class="s2"> - </span><span class="si">{description}</span><span class="s2"></span>
+<span class="s2">Created with Boxes.py (http://festi.info/boxes.py)</span>
+<span class="s2">Creation date: </span><span class="si">{date}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span> <span class="p">,</span> <span class="o">**</span><span class="n">md</span><span class="p">)</span>
+
+        <span class="n">txt</span> <span class="o">+=</span> <span class="s2">&quot;Command line (remove spaces beteen dashes): </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">md</span><span class="p">[</span><span class="s2">&quot;cli&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="s2">&quot;- -&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">md</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]:</span>
+            <span class="n">txt</span><span class="o">+=</span> <span class="s2">&quot;Url: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">md</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+            <span class="n">txt</span><span class="o">+=</span> <span class="s2">&quot;SettingsUrl: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&amp;render=[01]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">md</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">])</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">ElementTree</span><span class="o">.</span><span class="n">Comment</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span></div></div>
 
 <span class="n">unit2mm</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;mm&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
            <span class="s2">&quot;cm&quot;</span> <span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>

@@ -138,11 +138,11 @@
 
         <span class="k">return</span> <span class="n">surface</span><span class="p">,</span> <span class="n">ctx</span></div>
 
-<div class="viewcode-block" id="Formats.convert"><a class="viewcode-back" href="../../boxes.html#boxes.formats.Formats.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">fmt</span><span class="p">):</span>
+<div class="viewcode-block" id="Formats.convert"><a class="viewcode-back" href="../../boxes.html#boxes.formats.Formats.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;svg&#39;</span><span class="p">,</span> <span class="s1">&#39;svg_Ponoko&#39;</span><span class="p">]:</span>
             <span class="n">svg</span> <span class="o">=</span> <span class="n">svgutil</span><span class="o">.</span><span class="n">SVGFile</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-            <span class="n">svg</span><span class="o">.</span><span class="n">fix</span><span class="p">()</span>
+            <span class="n">svg</span><span class="o">.</span><span class="n">fix</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">ps</span> <span class="o">=</span> <span class="n">PSFile</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
             <span class="n">ps</span><span class="o">.</span><span class="n">adjustDocumentMedia</span><span class="p">()</span>

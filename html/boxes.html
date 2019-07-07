@@ -1980,7 +1980,7 @@ and has matching recesses on the top corners.</p>
 <em class="property">class </em><code class="descclassname">boxes.formats.</code><code class="descname">Formats</code><a class="reference internal" href="_modules/boxes/formats.html#Formats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.formats.Formats" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="method">
 <dt id="boxes.formats.Formats.convert">
-<code class="descname">convert</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/formats.html#Formats.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.formats.Formats.convert" title="Permalink to this definition">¶</a></dt>
+<code class="descname">convert</code><span class="sig-paren">(</span><em>filename</em>, <em>fmt</em>, <em>metadata=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/formats.html#Formats.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.formats.Formats.convert" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -2546,8 +2546,13 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 <em class="property">class </em><code class="descclassname">boxes.svgutil.</code><code class="descname">SVGFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
+<dt id="boxes.svgutil.SVGFile.addMetadata">
+<code class="descname">addMetadata</code><span class="sig-paren">(</span><em>md</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.addMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.addMetadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="boxes.svgutil.SVGFile.fix">
-<code class="descname">fix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.fix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.fix" title="Permalink to this definition">¶</a></dt>
+<code class="descname">fix</code><span class="sig-paren">(</span><em>metadata=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.fix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.fix" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2567,7 +2572,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.pathre">
-<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x303f800&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x237c240&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2578,7 +2583,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.transformre">
-<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x30a2ee0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2380500&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
