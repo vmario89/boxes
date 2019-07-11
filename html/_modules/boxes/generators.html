@@ -77,6 +77,8 @@
             <span class="n">path</span><span class="o">=</span><span class="n">__path__</span><span class="p">,</span>
             <span class="n">prefix</span><span class="o">=</span><span class="vm">__name__</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
         <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">modname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">module</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">):</span>
+            <span class="k">continue</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="n">boxes</span><span class="o">.</span><span class="n">Boxes</span><span class="p">:</span>
                 <span class="k">continue</span>
