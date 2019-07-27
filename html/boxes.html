@@ -1220,7 +1220,7 @@ Values:</p>
 
 <dl class="attribute">
 <dt id="boxes.edges.LidEdge.description">
-<code class="descname">description</code><em class="property"> = 'Edge for slide on lid'</em><a class="headerlink" href="#boxes.edges.LidEdge.description" title="Permalink to this definition">¶</a></dt>
+<code class="descname">description</code><em class="property"> = 'Edge for slide on lid (back)'</em><a class="headerlink" href="#boxes.edges.LidEdge.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1236,7 +1236,7 @@ Values:</p>
 
 <dl class="attribute">
 <dt id="boxes.edges.LidHoleEdge.description">
-<code class="descname">description</code><em class="property"> = 'Edge for slide on lid'</em><a class="headerlink" href="#boxes.edges.LidHoleEdge.description" title="Permalink to this definition">¶</a></dt>
+<code class="descname">description</code><em class="property"> = 'Edge for slide on lid (box back)'</em><a class="headerlink" href="#boxes.edges.LidHoleEdge.description" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1305,6 +1305,7 @@ Values:</p>
 <em class="property">class </em><code class="descclassname">boxes.edges.</code><code class="descname">LidSettings</code><span class="sig-paren">(</span><em>thickness</em>, <em>relative=True</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#LidSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.LidSettings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#boxes.edges.FingerJointSettings" title="boxes.edges.FingerJointSettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.edges.FingerJointSettings</span></code></a></p>
 <p>Settings for Slide-on Lids</p>
+<p>Note that edge_width below also determines how much the sides extend above the lid.</p>
 <p>Inherited:</p>
 <blockquote>
 <div>Settings for Finger Joints</div></blockquote>
@@ -2577,7 +2578,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.pathre">
-<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2a86a80&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">pathre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x1414870&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -2588,7 +2589,7 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 
 <dl class="attribute">
 <dt id="boxes.svgutil.SVGFile.transformre">
-<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x2a879e0&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
+<code class="descname">transformre</code><em class="property"> = &lt;_sre.SRE_Pattern object at 0x1418800&gt;</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2720,7 +2721,7 @@ Assumes a closed loop of points</p>
 
 <dl class="attribute">
 <dt id="boxes.ArgparseEdgeType.names">
-<code class="descname">names</code><em class="property"> = {'A': 'Abstract Edge Class', 'B': 'Abstract Edge Class', 'C': 'Abstract Edge Class', 'D': 'Dove Tail Joint (opposing side)', 'E': 'Straight Edge (outset by thickness)', 'F': 'Finger Joint (opposing side)', 'I': 'Edge with hinge pin', 'J': 'Edge with hinge pin (other end)', 'K': 'Edge with hinge pin (both ends)', 'L': 'Edge for slide on lid', 'M': 'Edge for slide on lid (box left)', 'N': 'Edge for slide on lid (box right)', 'O': 'Edge with chest hinge (other end)', 'P': 'Edge with chest hinge (other end)', 'Q': 'Edge opposing a chest hinge', 'R': 'Rack (and pinion) Edge', 'S': 'Stackable (top)', 'U': 'Edge with cabinet hinges top side', 'V': u'Edge with cabinet hinges 90\xb0 lid', 'X': 'Flex cut', 'a': 'Abstract Edge Class', 'b': 'Abstract Edge Class', 'c': 'Abstract Edge Class', 'd': 'Dove Tail Joint', 'e': 'Straight Edge', 'f': 'Finger Joint', 'g': 'Corrugated edge useful as an gipping area', 'h': 'Edge (parallel Finger Joint Holes)', 'i': 'Straight edge with hinge eye', 'j': 'Straight edge with hinge eye (other end)', 'k': 'Straight edge with hinge eye (both ends)', 'l': 'Edge for slide on lid', 'm': 'Edge for slide on lid (left)', 'n': 'Edge for slide on lid (right)', 'o': 'Edge with chest hinge', 'p': 'Edge with chest hinge', 'q': 'Edge with pins for an chest hinge', 's': 'Stackable (bottom, finger joint holes)', 't': 'Triangle for handle', 'u': 'Edge with cabinet hinges', 'v': u'Edge with cabinet hinges for 90\xb0 lid', '|': 'Edge (orthogonal Finger Joint Holes)'}</em><a class="headerlink" href="#boxes.ArgparseEdgeType.names" title="Permalink to this definition">¶</a></dt>
+<code class="descname">names</code><em class="property"> = {'A': 'Abstract Edge Class', 'B': 'Abstract Edge Class', 'C': 'Abstract Edge Class', 'D': 'Dove Tail Joint (opposing side)', 'E': 'Straight Edge (outset by thickness)', 'F': 'Finger Joint (opposing side)', 'I': 'Edge with hinge pin', 'J': 'Edge with hinge pin (other end)', 'K': 'Edge with hinge pin (both ends)', 'L': 'Edge for slide on lid (box back)', 'M': 'Edge for slide on lid (box left)', 'N': 'Edge for slide on lid (box right)', 'O': 'Edge with chest hinge (other end)', 'P': 'Edge with chest hinge (other end)', 'Q': 'Edge opposing a chest hinge', 'R': 'Rack (and pinion) Edge', 'S': 'Stackable (top)', 'U': 'Edge with cabinet hinges top side', 'V': u'Edge with cabinet hinges 90\xb0 lid', 'X': 'Flex cut', 'a': 'Abstract Edge Class', 'b': 'Abstract Edge Class', 'c': 'Abstract Edge Class', 'd': 'Dove Tail Joint', 'e': 'Straight Edge', 'f': 'Finger Joint', 'g': 'Corrugated edge useful as an gipping area', 'h': 'Edge (parallel Finger Joint Holes)', 'i': 'Straight edge with hinge eye', 'j': 'Straight edge with hinge eye (other end)', 'k': 'Straight edge with hinge eye (both ends)', 'l': 'Edge for slide on lid (back)', 'm': 'Edge for slide on lid (left)', 'n': 'Edge for slide on lid (right)', 'o': 'Edge with chest hinge', 'p': 'Edge with chest hinge', 'q': 'Edge with pins for an chest hinge', 's': 'Stackable (bottom, finger joint holes)', 't': 'Triangle for handle', 'u': 'Edge with cabinet hinges', 'v': u'Edge with cabinet hinges for 90\xb0 lid', '|': 'Edge (orthogonal Finger Joint Holes)'}</em><a class="headerlink" href="#boxes.ArgparseEdgeType.names" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
