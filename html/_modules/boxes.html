@@ -560,6 +560,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">addPart</span><span class="p">(</span><span class="n">parts</span><span class="o">.</span><span class="n">Parts</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
 <div class="viewcode-block" id="Boxes.adjustSize"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.adjustSize">[docs]</a>    <span class="k">def</span> <span class="nf">adjustSize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">e1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">e2</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="c1"># Char to edge object</span>
+        <span class="n">e1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e1</span><span class="p">)</span>
+        <span class="n">e2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">e2</span><span class="p">,</span> <span class="n">e2</span><span class="p">)</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
             <span class="n">walls</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
@@ -573,7 +577,7 @@
             <span class="n">walls</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e2</span><span class="p">,</span> <span class="n">edges</span><span class="o">.</span><span class="n">BaseEdge</span><span class="p">):</span>
-            <span class="n">walls</span> <span class="o">+=</span> <span class="n">e2</span><span class="o">.</span><span class="n">startwidth</span> <span class="o">+</span> <span class="n">e2</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
+            <span class="n">walls</span> <span class="o">+=</span> <span class="n">e2</span><span class="o">.</span><span class="n">startwidth</span><span class="p">()</span> <span class="o">+</span> <span class="n">e2</span><span class="o">.</span><span class="n">margin</span><span class="p">()</span>
         <span class="k">elif</span> <span class="n">e2</span><span class="p">:</span>
             <span class="n">walls</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
 
