@@ -80,6 +80,12 @@
             <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;traylayout.txt&quot;</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of the layout text file&quot;</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
     <span class="k">def</span> <span class="nf">fillDefault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span>
@@ -125,6 +131,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
                 <span class="s2">&quot;--layout&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+
+    <span class="nb">open</span> <span class="o">=</span> <span class="n">Boxes</span><span class="o">.</span><span class="n">open</span>
+    <span class="n">close</span> <span class="o">=</span> <span class="n">Boxes</span><span class="o">.</span><span class="n">close</span>
 
     <span class="k">def</span> <span class="nf">vWalls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="s2">&quot;Number of vertical walls at a crossing&quot;</span>
