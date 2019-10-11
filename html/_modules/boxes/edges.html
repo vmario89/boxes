@@ -567,7 +567,7 @@
 <span class="sd">Values:</span>
 
 <span class="sd">* absolute</span>
-
+<span class="sd">  * style : &quot;rectangular&quot; : style of the fingers</span>
 <span class="sd">  * surroundingspaces : 2 : maximum space at the start and end in multiple of normal spaces</span>
 <span class="sd">  * angle: 90 : Angle of the walls meeting</span>
 
@@ -582,6 +582,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;style&quot;</span> <span class="p">:</span> <span class="p">(</span><span class="s2">&quot;rectangular&quot;</span><span class="p">,</span> <span class="s2">&quot;springs&quot;</span><span class="p">),</span>
         <span class="s2">&quot;surroundingspaces&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
         <span class="s2">&quot;angle&quot;</span> <span class="p">:</span> <span class="mf">90.0</span><span class="p">,</span>
     <span class="p">}</span>
@@ -673,7 +674,15 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">positive</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">style</span> <span class="o">==</span> <span class="s2">&quot;springs&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="mf">0.8</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">h</span><span class="p">),</span>
+                    <span class="mf">0.1</span> <span class="o">*</span> <span class="n">h</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mf">0.9</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mf">0.9</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span>
+                    <span class="n">f</span> <span class="o">-</span> <span class="mf">0.6</span><span class="o">*</span><span class="n">h</span><span class="p">,</span>
+                    <span class="mi">90</span><span class="p">,</span> <span class="mf">0.9</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mf">0.9</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">h</span><span class="p">,</span>
+                <span class="p">(</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="mf">0.2</span> <span class="o">*</span><span class="n">h</span><span class="p">),</span> <span class="mf">0.8</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">leftover</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
