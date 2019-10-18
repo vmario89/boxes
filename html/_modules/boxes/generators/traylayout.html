@@ -62,6 +62,8 @@
 
 <div class="viewcode-block" id="TrayLayout"><a class="viewcode-back" href="../../../generators.html#boxes.generators.traylayout.TrayLayout">[docs]</a><span class="k">class</span> <span class="nc">TrayLayout</span><span class="p">(</span><span class="n">Boxes</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate a typetray from a layout file&quot;&quot;&quot;</span>
+    <span class="c1"># This class generates the skeleton text file that can then be edited</span>
+    <span class="c1"># to describe the actual box</span>
 
     <span class="n">webinterface</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -79,6 +81,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;traylayout.txt&quot;</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;name of the layout text file&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Use empty open and close methods to avoid initializing the whole</span>
+    <span class="c1"># drawing infrastructure</span>
 
     <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
@@ -116,6 +121,9 @@
 <div class="viewcode-block" id="TrayLayout2"><a class="viewcode-back" href="../../../generators.html#boxes.generators.traylayout.TrayLayout2">[docs]</a><span class="k">class</span> <span class="nc">TrayLayout2</span><span class="p">(</span><span class="n">TrayLayout</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate a typetray from a layout file&quot;&quot;&quot;</span>
 
+    <span class="c1"># This class reads in the layout either from a file (with --input) or</span>
+    <span class="c1"># as string (with --layout) and turns it into a drawing for a box.</span>
+
     <span class="n">webinterface</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">webargs</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -132,6 +140,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
                 <span class="s2">&quot;--layout&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
+    <span class="c1"># Use normal open and close</span>
     <span class="nb">open</span> <span class="o">=</span> <span class="n">Boxes</span><span class="o">.</span><span class="n">open</span>
     <span class="n">close</span> <span class="o">=</span> <span class="n">Boxes</span><span class="o">.</span><span class="n">close</span>
 
