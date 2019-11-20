@@ -71,7 +71,15 @@
         <span class="n">Boxes</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">addSettingsArgs</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">FingerJointSettings</span><span class="p">)</span>
-        
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--banana-socket-diameter&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">8.0</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;diameter of the banana socket mounting holes&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--flipswitch-diameter&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span>
+            <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">6.3</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;diameter of the flipswitch mounting hole&quot;</span><span class="p">)</span>
+
 
     <span class="k">def</span> <span class="nf">side</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
@@ -83,7 +91,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">l</span><span class="o">-</span><span class="n">h</span><span class="o">/</span><span class="mi">3</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">h</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="o">**</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">](</span><span class="n">l</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">side2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -99,7 +107,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">l</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">h</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
                       <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">l</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-        
+
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span>
 
 
@@ -111,17 +119,18 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mf">30.5</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mf">30.5</span><span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span><span class="p">)</span>
 
-        <span class="c1">#self.rectangularHole(m-19, 23, 0.8, 6.25)</span>
-        <span class="c1">#self.rectangularHole(m+19, 23, 0.8, 6.25)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">19</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">6.25</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">19</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">6.25</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">front</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">5.9</span><span class="p">)</span>
+        <span class="n">d_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">banana_socket_diameter</span>
+        <span class="n">d_f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flipswitch_diameter</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d_b</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d_b</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d_f</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="mi">76</span><span class="p">,</span> <span class="mf">6.4</span><span class="p">,</span> <span class="mf">12.4</span><span class="p">,</span> <span class="mf">12.4</span><span class="p">)</span>
 
@@ -137,14 +146,13 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">38.5</span><span class="p">]:</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">65</span><span class="p">]:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
-        
+
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># adjust to the variables you want in the local scope</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
 
         <span class="n">l</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l</span> <span class="o">=</span> <span class="mi">64</span>
         <span class="n">hm</span> <span class="o">=</span> <span class="mf">15.5</span>
-        <span class="c1">#w = self.w = 72</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">35</span>
 
@@ -158,16 +166,10 @@
             <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">-</span><span class="mi">20</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">76</span><span class="p">,</span> <span class="mi">40</span><span class="p">)],</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ffff&quot;</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;left up only&quot;</span><span class="p">)</span>
 
-        <span class="c1">#self.rectangularWall(72, l, callback=[self.bottom], move=&quot;right&quot;)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">hm</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">side</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">hm</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right mirror&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">side2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">hm</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">side2</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">hm</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right mirror&quot;</span><span class="p">)</span></div>
-
-        <span class="c1">#self.rectangularWall(42, l+12-t, &quot;efff&quot;, callback=[self.regulatorCB], move=&quot;right&quot;)</span>
-        <span class="c1">#self.rectangularWall(16, l+12-t, &quot;eFFe&quot;, move=&quot;right&quot;)</span>
-        <span class="c1">#self.rectangularWall(16, l+12-t, &quot;eFFe&quot;, move=&quot;right&quot;)</span>
-        <span class="c1">#self.rectangularWall(16, 42, &quot;fFfe&quot;, move=&quot;right&quot;)</span>
 </pre></div>
 
           </div>
