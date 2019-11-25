@@ -211,6 +211,9 @@
     <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentTypeError</span><span class="p">(</span><span class="s2">&quot;Don&#39;t understand sections string&quot;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="ArgparseEdgeType"><a class="viewcode-back" href="../boxes.html#boxes.ArgparseEdgeType">[docs]</a><span class="k">class</span> <span class="nc">ArgparseEdgeType</span><span class="p">:</span>
@@ -919,7 +922,7 @@
 <span class="sd">        :param depth: depth of the grooves</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">grooves</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">//</span> <span class="p">(</span><span class="n">depth</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">grooves</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">//</span> <span class="p">(</span><span class="n">depth</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">depth</span> <span class="o">=</span> <span class="n">length</span> <span class="o">/</span> <span class="n">grooves</span> <span class="o">/</span> <span class="mf">4.0</span>
         <span class="k">for</span> <span class="n">groove</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grooves</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="n">depth</span><span class="p">)</span>
