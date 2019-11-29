@@ -37,8 +37,8 @@
           <div class="body" role="main">
             
   <h1>Source code for boxes.parts</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">vectors</span>
+<span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="n">vectors</span>
 
 <div class="viewcode-block" id="arcOnCircle"><a class="viewcode-back" href="../../boxes.html#boxes.parts.arcOnCircle">[docs]</a><span class="k">def</span> <span class="nf">arcOnCircle</span><span class="p">(</span><span class="n">spanning_angle</span><span class="p">,</span> <span class="n">outgoing_angle</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
     <span class="n">angle</span> <span class="o">=</span> <span class="n">spanning_angle</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">outgoing_angle</span>
@@ -47,7 +47,7 @@
 
 
 <div class="viewcode-block" id="Parts"><a class="viewcode-back" href="../../boxes.html#boxes.parts.Parts">[docs]</a><span class="k">class</span> <span class="nc">Parts</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
@@ -61,7 +61,7 @@
 <span class="sd">        self.move(size, size, move)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Parts.disc"><a class="viewcode-back" href="../../boxes.html#boxes.parts.Parts.disc">[docs]</a>    <span class="k">def</span> <span class="nf">disc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diameter</span><span class="p">,</span> <span class="n">hole</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>

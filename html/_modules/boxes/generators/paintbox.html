@@ -54,7 +54,7 @@
 <span class="c1">#   You should have received a copy of the GNU General Public License</span>
 <span class="c1">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
-<span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">Boxes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">boolarg</span>
+<span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="n">Boxes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">boolarg</span>
 
 <div class="viewcode-block" id="PaintStorage"><a class="viewcode-back" href="../../../generators.html#boxes.generators.paintbox.PaintStorage">[docs]</a><span class="k">class</span> <span class="nc">PaintStorage</span><span class="p">(</span><span class="n">Boxes</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stackable paint storage&quot;&quot;&quot;</span>
@@ -62,7 +62,7 @@
     <span class="n">webinterface</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">ui_group</span> <span class="o">=</span> <span class="s2">&quot;Shelf&quot;</span> <span class="c1"># see ./__init__.py for names</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Boxes</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">addSettingsArgs</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">FingerJointSettings</span><span class="p">)</span>

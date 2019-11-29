@@ -50,14 +50,14 @@
 
 <div class="viewcode-block" id="RobotArg"><a class="viewcode-back" href="../../boxes.html#boxes.robot.RobotArg">[docs]</a><span class="k">class</span> <span class="nc">RobotArg</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">includenone</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">includenone</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">robotarms</span> <span class="o">=</span> <span class="p">[</span>
             <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">globals</span><span class="p">()[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">[</span><span class="mi">23</span><span class="p">:])</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">__all__</span>
             <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;RobotArm&quot;</span><span class="p">)]</span>
         <span class="k">if</span> <span class="n">includenone</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">robotarms</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RobotArg.choices"><a class="viewcode-back" href="../../boxes.html#boxes.robot.RobotArg.choices">[docs]</a>    <span class="k">def</span> <span class="nf">choices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -73,18 +73,18 @@
 
 <span class="k">class</span> <span class="nc">_RobotArm</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">servo</span><span class="p">,</span> <span class="n">servo2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">servo</span><span class="p">,</span> <span class="n">servo2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">servo</span> <span class="o">=</span> <span class="n">servo</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">servo2</span> <span class="o">=</span> <span class="n">servo2</span> <span class="ow">or</span> <span class="n">servo</span>
 
-    <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Hack for easy access of Boxes methods&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RobotArmMM"><a class="viewcode-back" href="../../boxes.html#boxes.robot.RobotArmMM">[docs]</a><span class="k">class</span> <span class="nc">RobotArmMM</span><span class="p">(</span><span class="n">_RobotArm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Robot arm segment with two parallel servos&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">height</span>
         <span class="n">l</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">length</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">length</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">axle_pos</span><span class="p">)</span>
@@ -112,7 +112,7 @@
 
 <div class="viewcode-block" id="RobotArmMm"><a class="viewcode-back" href="../../boxes.html#boxes.robot.RobotArmMm">[docs]</a><span class="k">class</span> <span class="nc">RobotArmMm</span><span class="p">(</span><span class="n">_RobotArm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Robot arm segment with two orthogonal servos&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">height</span>
         <span class="n">w2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo2</span><span class="o">.</span><span class="n">height</span>
@@ -141,7 +141,7 @@
 
 <div class="viewcode-block" id="RobotArmUU"><a class="viewcode-back" href="../../boxes.html#boxes.robot.RobotArmUU">[docs]</a><span class="k">class</span> <span class="nc">RobotArmUU</span><span class="p">(</span><span class="n">_RobotArm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Robot arm segment with two parallel sets of hinge knuckles&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">hinge_width</span><span class="p">()</span>
         <span class="n">l</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
@@ -168,7 +168,7 @@
 
 <div class="viewcode-block" id="RobotArmUu"><a class="viewcode-back" href="../../boxes.html#boxes.robot.RobotArmUu">[docs]</a><span class="k">class</span> <span class="nc">RobotArmUu</span><span class="p">(</span><span class="n">_RobotArm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Robot arm segment with two orthogonal sets of hinge knuckles&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">hinge_width</span><span class="p">()</span>
         <span class="n">w2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo2</span><span class="o">.</span><span class="n">hinge_width</span><span class="p">()</span>
@@ -195,7 +195,7 @@
 
 <div class="viewcode-block" id="RobotArmMu"><a class="viewcode-back" href="../../boxes.html#boxes.robot.RobotArmMu">[docs]</a><span class="k">class</span> <span class="nc">RobotArmMu</span><span class="p">(</span><span class="n">_RobotArm</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Robot arm segment with a servo and an orthogonal sets of hinge knuckles&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">height</span>
         <span class="n">w2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">servo2</span><span class="o">.</span><span class="n">hinge_width</span><span class="p">()</span>

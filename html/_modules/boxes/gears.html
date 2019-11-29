@@ -80,11 +80,11 @@
 <span class="sd">			Fixed https://github.com/jnweiger/inkscape-gears-dev</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
-<span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">devnull</span> <span class="c1"># for debugging</span>
-<span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">sqrt</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">devnull</span> <span class="c1"># for debugging</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">degrees</span><span class="p">,</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">sqrt</span>
 <span class="n">two_pi</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
-<span class="kn">from</span> <span class="nn">boxes.vectors</span> <span class="k">import</span> <span class="n">kerf</span><span class="p">,</span> <span class="n">vdiff</span><span class="p">,</span> <span class="n">vlength</span>
+<span class="kn">from</span> <span class="nn">boxes.vectors</span> <span class="kn">import</span> <span class="n">kerf</span><span class="p">,</span> <span class="n">vdiff</span><span class="p">,</span> <span class="n">vlength</span>
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.9&#39;</span>
 
@@ -302,7 +302,7 @@
 
 <div class="viewcode-block" id="Gears"><a class="viewcode-back" href="../../boxes.html#boxes.gears.Gears">[docs]</a><span class="k">class</span> <span class="nc">Gears</span><span class="p">():</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="c1"># an alternate way to get debug info:</span>
         <span class="c1"># could use inkex.debug(string) instead...</span>
         <span class="k">try</span><span class="p">:</span>
@@ -607,7 +607,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">teeth_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">teeth_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; Calculate Gear factors from inputs.</span>
 <span class="sd">            - Make list of radii, angles, and centers for each tooth and </span>
 <span class="sd">              iterate through them</span>

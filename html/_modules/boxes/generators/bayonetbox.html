@@ -54,7 +54,7 @@
 <span class="c1">#   You should have received a copy of the GNU General Public License</span>
 <span class="c1">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
-<span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="BayonetBox"><a class="viewcode-back" href="../../../generators.html#boxes.generators.bayonetbox.BayonetBox">[docs]</a><span class="k">class</span> <span class="nc">BayonetBox</span><span class="p">(</span><span class="n">Boxes</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Round box made from layers with twist on top&quot;&quot;&quot;</span>
@@ -62,7 +62,7 @@
     <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Glue together. All outside rings to the bottom, all inside rings to the top.&quot;&quot;&quot;</span>
     <span class="n">ui_group</span> <span class="o">=</span> <span class="s2">&quot;Box&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Boxes</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>

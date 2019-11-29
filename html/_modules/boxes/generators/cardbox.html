@@ -55,7 +55,7 @@
 <span class="c1">#   You should have received a copy of the GNU General Public License</span>
 <span class="c1">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
-<span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="n">edges</span><span class="p">,</span> <span class="n">Boxes</span>
+<span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="n">edges</span><span class="p">,</span> <span class="n">Boxes</span>
 
 
 <span class="k">class</span> <span class="nc">InsetEdgeSettings</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">Settings</span><span class="p">):</span>
@@ -67,7 +67,7 @@
 
 <span class="k">class</span> <span class="nc">InsetEdge</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">BaseEdge</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An edge with space to slide in a lid&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -87,7 +87,7 @@
 
 <span class="k">class</span> <span class="nc">FingerHoleEdge</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">BaseEdge</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;An edge with room to get your fingers around cards&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="n">depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">wallheight</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="o">*</span><span class="mi">2</span><span class="o">-</span><span class="mi">10</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">length</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
@@ -102,7 +102,7 @@
     <span class="sd">&quot;&quot;&quot;Box for storage of playingcards&quot;&quot;&quot;</span>
     <span class="n">ui_group</span> <span class="o">=</span> <span class="s2">&quot;Box&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Boxes</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addSettingsArgs</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">FingerJointSettings</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">buildArgParser</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>

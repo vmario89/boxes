@@ -44,14 +44,14 @@
 
     <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;m&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">servo</span><span class="p">,</span> <span class="n">fingerHoles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">driven</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">servo</span><span class="p">,</span> <span class="n">fingerHoles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">driven</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">outset</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">servo</span> <span class="o">=</span> <span class="n">servo</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">outset</span> <span class="o">=</span> <span class="n">outset</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">driven</span> <span class="o">=</span> <span class="n">driven</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">EyeEdge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">fingerHoles</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">bedBolts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">bedBolts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bedBoltSettings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fingerHoles</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fingerHoles</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">edge_width</span>
 
@@ -86,12 +86,12 @@
 
 <div class="viewcode-block" id="ServoArg"><a class="viewcode-back" href="../../boxes.html#boxes.servos.ServoArg">[docs]</a><span class="k">class</span> <span class="nc">ServoArg</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">includenone</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">includenone</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">servos</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Servo9g&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">includenone</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">servos</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ServoArg.choices"><a class="viewcode-back" href="../../boxes.html#boxes.servos.ServoArg.choices">[docs]</a>    <span class="k">def</span> <span class="nf">choices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -106,7 +106,7 @@
 
 
 <div class="viewcode-block" id="Servo"><a class="viewcode-back" href="../../boxes.html#boxes.servos.Servo">[docs]</a><span class="k">class</span> <span class="nc">Servo</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">axle</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">axle</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axle</span> <span class="o">=</span> <span class="n">axle</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_edges</span> <span class="o">=</span> <span class="n">buildEdges</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>

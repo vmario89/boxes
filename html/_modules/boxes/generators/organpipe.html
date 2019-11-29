@@ -58,8 +58,8 @@
 <span class="c1">#   You should have received a copy of the GNU General Public License</span>
 <span class="c1">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
-<span class="kn">from</span> <span class="nn">boxes</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span>  <span class="nn">math</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span>  <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;c#&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;d#&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;f#&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;g#&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a#&#39;</span> <span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>
 
@@ -85,7 +85,7 @@
     <span class="k">def</span> <span class="nf">getAirSpeed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wind_pressure</span><span class="p">,</span> <span class="n">air_density</span><span class="o">=</span><span class="mf">1.2</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">wind_pressure</span> <span class="o">/</span> <span class="n">air_density</span><span class="p">))</span><span class="o">**.</span><span class="mi">5</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">Boxes</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">addSettingsArgs</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">FingerJointSettings</span><span class="p">,</span> <span class="n">finger</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span>
