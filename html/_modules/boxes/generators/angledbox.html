@@ -56,6 +56,7 @@
 
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">copy</span>
 
 <div class="viewcode-block" id="AngledBox"><a class="viewcode-back" href="../../../generators.html#boxes.generators.angledbox.AngledBox">[docs]</a><span class="k">class</span> <span class="nc">AngledBox</span><span class="p">(</span><span class="n">Boxes</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Box with both ends cornered&quot;&quot;&quot;</span>
@@ -140,8 +141,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">lx</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="n">side</span>
         
-        <span class="n">edges</span><span class="o">.</span><span class="n">FingerJointSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">360.</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;gGH&quot;</span><span class="p">)</span>
-
+        <span class="n">fingerJointSettings</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
+        <span class="n">fingerJointSettings</span><span class="o">.</span><span class="n">setValues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">360.</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="n">fingerJointSettings</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;gGH&quot;</span><span class="p">)</span>
 
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_context</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
@@ -218,7 +220,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
     </div>
   </body>
 </html>
