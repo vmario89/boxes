@@ -284,7 +284,14 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">factor</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown parameter for </span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span></div>
+                    <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checkValues</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Settings.checkValues"><a class="viewcode-back" href="../../boxes.html#boxes.edges.Settings.checkValues">[docs]</a>    <span class="k">def</span> <span class="nf">checkValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if all values are in the right range. Raise ValueError if needed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span></div>
 
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">if</span> <span class="s2">&quot;values&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
@@ -594,6 +601,10 @@
         <span class="s2">&quot;edge_width&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="s2">&quot;play&quot;</span> <span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
     <span class="p">}</span>
+
+<div class="viewcode-block" id="FingerJointSettings.checkValues"><a class="viewcode-back" href="../../boxes.html#boxes.edges.FingerJointSettings.checkValues">[docs]</a>    <span class="k">def</span> <span class="nf">checkValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">finger</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;FingerJointSettings: space + finger must not be close to zero&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FingerJointSettings.edgeObjects"><a class="viewcode-back" href="../../boxes.html#boxes.edges.FingerJointSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;fFh&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">FingerJointEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
@@ -1874,8 +1885,13 @@
 
     <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;stretch&quot;</span><span class="p">:</span> <span class="mf">1.05</span><span class="p">,</span>
-    <span class="p">}</span></div>
+    <span class="p">}</span>
 
+<div class="viewcode-block" id="FlexSettings.checkValues"><a class="viewcode-back" href="../../boxes.html#boxes.edges.FlexSettings.checkValues">[docs]</a>    <span class="k">def</span> <span class="nf">checkValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">distance</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Flex Settings: distance parameter must be &gt; 0.01mm&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Flex Settings: width parameter must be &gt; 0.1mm&quot;</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="FlexEdge"><a class="viewcode-back" href="../../boxes.html#boxes.edges.FlexEdge">[docs]</a><span class="k">class</span> <span class="nc">FlexEdge</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Edge with flex cuts - use straight edge for the opposing side&quot;&quot;&quot;</span>
