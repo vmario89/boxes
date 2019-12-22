@@ -68,11 +68,7 @@
 <span class="kn">from</span> <span class="nn">xml.sax.saxutils</span> <span class="kn">import</span> <span class="n">quoteattr</span>
 <span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
 <span class="kn">import</span> <span class="nn">copy</span>
-
-<span class="k">try</span><span class="p">:</span>  <span class="c1"># py3</span>
-    <span class="kn">from</span> <span class="nn">shlex</span> <span class="kn">import</span> <span class="n">quote</span>
-<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># py2</span>
-    <span class="kn">from</span> <span class="nn">pipes</span> <span class="kn">import</span> <span class="n">quote</span>
+<span class="kn">from</span> <span class="nn">shlex</span> <span class="kn">import</span> <span class="n">quote</span>
 
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="n">edges</span>
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="n">formats</span>
