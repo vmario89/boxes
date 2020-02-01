@@ -832,6 +832,12 @@
         <span class="s2">&quot;holedistance&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="p">}</span>
 
+<div class="viewcode-block" id="StackableSettings.checkValues"><a class="viewcode-back" href="../../boxes.html#boxes.edges.StackableSettings.checkValues">[docs]</a>    <span class="k">def</span> <span class="nf">checkValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;StackableSettings: &#39;angle&#39; is too small. Use value &gt;= 20&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">&gt;</span> <span class="mi">260</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;StackableSettings: &#39;angle&#39; is too big. Use value &lt; 260&quot;</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="StackableSettings.edgeObjects"><a class="viewcode-back" href="../../boxes.html#boxes.edges.StackableSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;sS&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fingersettings</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">fingersettings</span> <span class="o">=</span> <span class="n">fingersettings</span> <span class="ow">or</span> <span class="n">boxes</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">settings</span>
         <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">StackableEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">fingersettings</span><span class="p">),</span>
@@ -1165,6 +1171,10 @@
         <span class="s2">&quot;hinge_strength&quot;</span> <span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="s2">&quot;play&quot;</span> <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
         <span class="p">}</span>
+
+<div class="viewcode-block" id="ChestHingeSettings.checkValues"><a class="viewcode-back" href="../../boxes.html#boxes.edges.ChestHingeSettings.checkValues">[docs]</a>    <span class="k">def</span> <span class="nf">checkValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pin_height</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="o">&lt;</span> <span class="mf">1.2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ChestHingeSettings: &#39;pin_height&#39; must be &gt;= 1.2&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ChestHingeSettings.pinheight"><a class="viewcode-back" href="../../boxes.html#boxes.edges.ChestHingeSettings.pinheight">[docs]</a>    <span class="k">def</span> <span class="nf">pinheight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">((</span><span class="mf">0.9</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">pin_height</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span></div>

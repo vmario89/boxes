@@ -117,14 +117,14 @@
 <span class="sd">    The return value should be rounded upwards for perfect safety. E.g.</span>
 <span class="sd">    min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">pitch_angle</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">pitch_angle</span><span class="p">)),</span> <span class="mf">0.01</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span> <span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="undercut_max_k"><a class="viewcode-back" href="../../boxes.html#boxes.gears.undercut_max_k">[docs]</a><span class="k">def</span> <span class="nf">undercut_max_k</span><span class="p">(</span><span class="n">teeth</span><span class="p">,</span> <span class="n">pitch_angle</span><span class="o">=</span><span class="mf">20.0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; computes the maximum k value for a given teeth count and pitch_angle</span>
 <span class="sd">        so that no undercut occurs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">pitch_angle</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">(</span><span class="n">pitch_angle</span><span class="p">)),</span> <span class="mf">0.01</span><span class="p">)</span>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">teeth</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span></div>
 
 <div class="viewcode-block" id="undercut_min_angle"><a class="viewcode-back" href="../../boxes.html#boxes.gears.undercut_min_angle">[docs]</a><span class="k">def</span> <span class="nf">undercut_min_angle</span><span class="p">(</span><span class="n">teeth</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>

@@ -446,6 +446,10 @@
         <span class="n">lx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">ly</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">lx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Need more than one wall in x direction&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ly</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Need more than one wall in y direction&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hwalls</span><span class="p">)</span> <span class="o">!=</span> <span class="n">ly</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Wrong number of horizontal wall lines: </span><span class="si">%i</span><span class="s2"> (</span><span class="si">%i</span><span class="s2"> expected)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hwalls</span><span class="p">),</span> <span class="n">ly</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">nr</span><span class="p">,</span> <span class="n">walls</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">hwalls</span><span class="p">):</span>

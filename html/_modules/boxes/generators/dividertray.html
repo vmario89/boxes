@@ -128,9 +128,8 @@
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="n">side_walls_number</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">left_wall</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_wall</span><span class="p">])</span>
-        <span class="k">assert</span> <span class="p">(</span>
-            <span class="n">side_walls_number</span> <span class="o">&gt;</span> <span class="mi">0</span>
-        <span class="p">),</span> <span class="s2">&quot;You need at least one side wall to generate this tray&quot;</span>
+        <span class="k">if</span> <span class="n">side_walls_number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You need at least one side wall to generate this tray&quot;</span><span class="p">)</span>
 
         <span class="n">slot_descriptions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_slot_descriptions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">)</span>
 
