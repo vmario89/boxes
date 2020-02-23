@@ -7,11 +7,11 @@
     <title>Burn correction &#8212; boxes.py 0.1 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,7 +51,7 @@ care about it. Nevertheless they need to understand how it works to
 catch the places the do need to care.</p>
 <p>Burn correction is done by increasing the radius of all outer
 corners. This moves all the straight lines outward by the same
-amount. This has he addeed benefit of not needing to change the length
+amount. This has the added benefit of not needing to change the length
 of the straight lines – making them independent of the adjacent
 angles. An issue arises when it comes to inner corners. If they do
 have a radius reducing it by the burn value does the right thing. But
@@ -75,9 +75,9 @@ burn out-set into account and execute callbacks at the correct position.</p>
 callbacks while implementing a part they need to be aware of the burn
 correction. <a class="reference internal" href="boxes.html#boxes.Boxes.cc" title="boxes.Boxes.cc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">boxes.Boxes.cc()</span></code></a> does correct for the out-set if
 called without an <strong>y</strong> parameter. But if a value is given one has to
-add <strong>self.burn</strong> to compansate. Note that the <strong>x</strong> value typically
+add <strong>self.burn</strong> to compensate. Note that the <strong>x</strong> value typically
 does not have to be corrected as the callbacks are executed from right
-underneeth the part.</p>
+underneath the part.</p>
 <p>A similar approach is necessary when moving to a feature drawn inside
 the part without the use of callbacks. Here you typically have to
 correct for the out-set at the outside of the part and again for in-set
@@ -126,7 +126,7 @@ horizontally.</p>
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -152,7 +152,7 @@ horizontally.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>
