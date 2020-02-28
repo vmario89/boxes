@@ -135,7 +135,7 @@ replacing the F edge with fingerHoles. Use with E and F for edges only.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.roundedPlate">
-<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">roundedPlate</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">r</em>, <em class="sig-param">edge='f'</em>, <em class="sig-param">callback=None</em>, <em class="sig-param">holesMargin=None</em>, <em class="sig-param">holesSettings=None</em>, <em class="sig-param">bedBolts=None</em>, <em class="sig-param">bedBoltSettings=None</em>, <em class="sig-param">wallpieces=1</em>, <em class="sig-param">move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.roundedPlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.roundedPlate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">roundedPlate</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">r</em>, <em class="sig-param">edge='f'</em>, <em class="sig-param">callback=None</em>, <em class="sig-param">holesMargin=None</em>, <em class="sig-param">holesSettings=None</em>, <em class="sig-param">bedBolts=None</em>, <em class="sig-param">bedBoltSettings=None</em>, <em class="sig-param">wallpieces=1</em>, <em class="sig-param">extend_corners=True</em>, <em class="sig-param">move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.roundedPlate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.roundedPlate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plate with rounded corner fitting to .surroundingWall()</p>
 <p>For the callbacks the sides are counted depending on wallpieces</p>
 <dl class="field-list simple">
@@ -150,6 +150,7 @@ replacing the F edge with fingerHoles. Use with E and F for edges only.</p>
 <li><p><strong>bedBolts</strong> – (Default value = None)</p></li>
 <li><p><strong>bedBoltSettings</strong> – (Default value = None)</p></li>
 <li><p><strong>wallpieces</strong> – (Default value = 1) # of separate surrounding walls</p></li>
+<li><p><strong>extend_corners</strong> – (Default value = True) have corners outset with teh edges</p></li>
 <li><p><strong>move</strong> – (Default value = None)</p></li>
 </ul>
 </dd>
@@ -158,7 +159,7 @@ replacing the F edge with fingerHoles. Use with E and F for edges only.</p>
 
 <dl class="method">
 <dt id="boxes.Boxes.surroundingWall">
-<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">surroundingWall</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">r</em>, <em class="sig-param">h</em>, <em class="sig-param">bottom='e'</em>, <em class="sig-param">top='e'</em>, <em class="sig-param">left='D'</em>, <em class="sig-param">right='d'</em>, <em class="sig-param">pieces=1</em>, <em class="sig-param">callback=None</em>, <em class="sig-param">move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.surroundingWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.surroundingWall" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">surroundingWall</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">r</em>, <em class="sig-param">h</em>, <em class="sig-param">bottom='e'</em>, <em class="sig-param">top='e'</em>, <em class="sig-param">left='D'</em>, <em class="sig-param">right='d'</em>, <em class="sig-param">pieces=1</em>, <em class="sig-param">extend_corners=True</em>, <em class="sig-param">callback=None</em>, <em class="sig-param">move=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.surroundingWall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.surroundingWall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wall(s) with flex fiting around a roundedPlate()</p>
 <p>For the callbacks the sides are counted depending on pieces</p>
 <dl class="field-list simple">
