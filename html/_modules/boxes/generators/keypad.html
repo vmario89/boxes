@@ -42,7 +42,7 @@
 
 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
 
-<span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="n">Boxes</span>
+<span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="n">Boxes</span><span class="p">,</span> <span class="n">boolarg</span>
 <span class="kn">from</span> <span class="nn">boxes.edges</span> <span class="kn">import</span> <span class="n">FingerJointSettings</span>
 
 
@@ -67,8 +67,19 @@
             <span class="n">help</span><span class="o">=</span><span class="s1">&#39;number of buttons per column&#39;</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-            <span class="s1">&#39;--top_thickness&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;thickness of the top layer, cherry needs 1.5mm or smaller&#39;</span>
+            <span class="s1">&#39;--top1_thickness&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;thickness of the button hold layer, cherry like switches &#39;</span>
+                  <span class="s1">&#39;need 1.5mm or smaller to snap in&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;--top2_enable&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">boolarg</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;enables another top layer that can hold CPG151101S11 &#39;</span>
+                  <span class="s1">&#39;sockets&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+            <span class="s1">&#39;--top2_thickness&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;thickness of the hotplug layer, CPG151101S11 sockets &#39;</span>
+                  <span class="s1">&#39;need 1.2mm to 1.5mm&#39;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addSettingsArgs</span><span class="p">(</span><span class="n">FingerJointSettings</span><span class="p">,</span> <span class="n">surroundingspaces</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
@@ -82,7 +93,9 @@
         <span class="sd">&quot;&quot;&quot;Renders the keypad.&quot;&quot;&quot;</span>
         <span class="c1"># deeper edge for top to add multiple layers</span>
         <span class="n">deep_edge</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">edges</span><span class="p">[</span><span class="s1">&#39;f&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">settings</span><span class="p">)</span>
-        <span class="n">deep_edge</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_thickness</span>
+        <span class="n">deep_edge</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">top1_thickness</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top2_enable</span><span class="p">:</span>
+            <span class="n">deep_edge</span><span class="o">.</span><span class="n">thickness</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top2_thickness</span>
         <span class="n">deep_edge</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;gGH&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 
         <span class="n">d1</span><span class="p">,</span> <span class="n">d2</span> <span class="o">=</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span>
@@ -95,12 +108,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s2">&quot;GfEf&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">wally_cb</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="s2">&quot;GFEF&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">wallx_cb</span><span class="p">],</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;left up&quot;</span><span class="p">)</span>
 
-        <span class="c1"># electronics box lid</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;FFFF&quot;</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
-
         <span class="c1"># keypad lids</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ffff&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">support_hole</span><span class="p">],</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;up&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ffff&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_hole</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ffff&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">support_hole</span><span class="p">],</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ffff&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">key_hole</span><span class="p">],</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;up&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top2_enable</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;ffff&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">hotplug</span><span class="p">])</span>
 
         <span class="c1"># screwable</span>
         <span class="n">tr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">triangle</span>
@@ -115,6 +127,31 @@
             <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="n">trh</span><span class="p">,</span> <span class="n">trh</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d1</span><span class="p">)]</span>
         <span class="p">)</span>
 
+
+    <span class="k">def</span> <span class="nf">hotplug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Callback for the key stabelizers.&quot;&quot;&quot;</span>
+        <span class="c1"># draw clock wise to work with burn correction</span>
+        <span class="n">btn</span> <span class="o">=</span> <span class="p">[</span><span class="mf">11.6</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">*</span> <span class="mi">4</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">btn_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btn_y</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btn_x</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mf">7.8</span> <span class="p">,</span> <span class="mf">7.8</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mf">1.27</span> <span class="o">*</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mf">1.27</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">2.9</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mf">1.27</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.27</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">2.9</span><span class="p">)</span>
+
+                <span class="c1"># pcb mounts</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mf">1.27</span> <span class="o">*</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">1.7</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hole</span><span class="p">(</span><span class="mf">1.27</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="mf">1.7</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="o">-</span><span class="mf">7.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.8</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+
+                <span class="c1">#self.moveTo(1.27 * -2, 1.17 * 3)</span>
+                <span class="c1">#self.moveTo(1.27 * 2, 1.17 * -3)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btn_x</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">support_hole</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Callback for the key stabelizers.&quot;&quot;&quot;</span>
