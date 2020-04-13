@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Examples &#8212; boxes.py 0.1 documentation</title>
@@ -65,7 +65,7 @@ bottom to mount the PBC on.</p>
 <div class="section" id="nemamount">
 <h2>NemaMount<a class="headerlink" href="#nemamount" title="Permalink to this headline">¶</a></h2>
 <p>This is a good non box example to look at.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="boxes.generators.nemamount.NemaMount">
 <em class="property">class </em><code class="sig-prename descclassname">boxes.generators.nemamount.</code><code class="sig-name descname">NemaMount</code><a class="reference internal" href="_modules/boxes/generators/nemamount.html#NemaMount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.generators.nemamount.NemaMount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mounting braket for a Nema motor</p>
@@ -77,7 +77,7 @@ because it started as a copy of another generator like <code class="docutils lit
 </div>
 <div class="section" id="displayshelf">
 <h2>DisplayShelf<a class="headerlink" href="#displayshelf" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="boxes.generators.displayshelf.DisplayShelf">
 <em class="property">class </em><code class="sig-prename descclassname">boxes.generators.displayshelf.</code><code class="sig-name descname">DisplayShelf</code><a class="reference internal" href="_modules/boxes/generators/displayshelf.html#DisplayShelf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.generators.displayshelf.DisplayShelf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shelf with forward slanted floors</p>
@@ -94,14 +94,14 @@ with the default FingerJoints.</p>
 </div>
 <div class="section" id="bintray">
 <h2>BinTray<a class="headerlink" href="#bintray" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="boxes.generators.bintray.BinTray">
 <em class="property">class </em><code class="sig-prename descclassname">boxes.generators.bintray.</code><code class="sig-name descname">BinTray</code><a class="reference internal" href="_modules/boxes/generators/bintray.html#BinTray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.generators.bintray.BinTray" title="Permalink to this definition">¶</a></dt>
 <dd><p>A Type tray variant to be used up right with sloped walls in front</p>
 </dd></dl>
 
 <p>The BinTray is based on the TypeTray generator:</p>
-<dl class="class">
+<dl class="py class">
 <dt id="boxes.generators.typetray.TypeTray">
 <em class="property">class </em><code class="sig-prename descclassname">boxes.generators.typetray.</code><code class="sig-name descname">TypeTray</code><a class="reference internal" href="_modules/boxes/generators/typetray.html#TypeTray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.generators.typetray.TypeTray" title="Permalink to this definition">¶</a></dt>
 <dd><p>Type tray - allows only continuous walls</p>
@@ -110,9 +110,9 @@ with the default FingerJoints.</p>
 <p>TypeTray is an already pretty complicated generator.</p>
 <p>BinTray replaces the now vertical front (former top) edges with a
 special purpose one that does add the triangles:</p>
-<dl class="class">
+<dl class="py class">
 <dt id="boxes.generators.bintray.BinFrontEdge">
-<em class="property">class </em><code class="sig-prename descclassname">boxes.generators.bintray.</code><code class="sig-name descname">BinFrontEdge</code><span class="sig-paren">(</span><em class="sig-param">boxes</em>, <em class="sig-param">settings</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/generators/bintray.html#BinFrontEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.generators.bintray.BinFrontEdge" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">boxes.generators.bintray.</code><code class="sig-name descname">BinFrontEdge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">settings</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/generators/bintray.html#BinFrontEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.generators.bintray.BinFrontEdge" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p>The <code class="docutils literal notranslate"><span class="pre">hi</span></code> (height of inner walls) argument was removed although the
@@ -127,7 +127,7 @@ own Edge class. But it uses its own code to generate all the wall needed.</p>
 </div>
 <div class="section" id="stachel">
 <h2>Stachel<a class="headerlink" href="#stachel" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="boxes.generators.stachel.Stachel">
 <em class="property">class </em><code class="sig-prename descclassname">boxes.generators.stachel.</code><code class="sig-name descname">Stachel</code><a class="reference internal" href="_modules/boxes/generators/stachel.html#Stachel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.generators.stachel.Stachel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bass Recorder Endpin</p>
@@ -216,7 +216,7 @@ traditional CAD program.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
   </body>
 </html>

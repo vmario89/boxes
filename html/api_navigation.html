@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
     <title>Navigation &#8212; boxes.py 0.1 documentation</title>
@@ -55,9 +55,9 @@ and do all movement and drawing to be relative to the current
 position. The current positions does not only consist of a point on
 the drawing canvas but also a direction.</p>
 <p>To move the origin to a different location there are these to methods:</p>
-<dl class="method">
+<dl class="py method">
 <dt id="boxes.Boxes.moveTo">
-<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">moveTo</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y=0.0</em>, <em class="sig-param">degrees=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.moveTo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.moveTo" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">moveTo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">degrees</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.moveTo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.moveTo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move coordinate system to given point</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -70,9 +70,9 @@ the drawing canvas but also a direction.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="boxes.Boxes.moveArc">
-<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">moveArc</code><span class="sig-paren">(</span><em class="sig-param">angle</em>, <em class="sig-param">r=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.moveArc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.moveArc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">moveArc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">angle</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.moveArc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.moveArc" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -85,7 +85,7 @@ the drawing canvas but also a direction.</p>
 
 <p>Often it is necessary to return to a position e.g. after placing a
 row of parts. This can be done with the following context manager:</p>
-<dl class="method">
+<dl class="py method">
 <dt id="boxes.Boxes.saved_context">
 <code class="sig-prename descclassname">Boxes.</code><code class="sig-name descname">saved_context</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.saved_context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.saved_context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generator: for saving and restoring cairo contexts.
@@ -167,7 +167,7 @@ follow up <strong>.moveTo()</strong>. Use <strong>.moveTo(0, 0)</strong> if in d
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.1.
     </div>
   </body>
 </html>
