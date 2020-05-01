@@ -2141,7 +2141,11 @@
                 <span class="k">if</span> <span class="n">part_cnt</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lf</span><span class="p">,</span> <span class="n">rf</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lF</span><span class="p">,</span> <span class="n">rF</span>
+                    <span class="c1"># last part of an uneven lot</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">part_cnt</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">borders</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lF</span><span class="p">,</span> <span class="n">rf</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lF</span><span class="p">,</span> <span class="n">rF</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lf</span><span class="p">,</span> <span class="n">rF</span>
 
