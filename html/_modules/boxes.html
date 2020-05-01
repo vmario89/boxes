@@ -1070,9 +1070,10 @@
 <div class="viewcode-block" id="Boxes.move"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.move">[docs]</a>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> <span class="n">before</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Intended to be used by parts</span>
 <span class="sd">        where can be combinations of &quot;up&quot; or &quot;down&quot;, &quot;left&quot; or &quot;right&quot;, &quot;only&quot;,</span>
-<span class="sd">        &quot;mirror&quot;</span>
+<span class="sd">        &quot;mirror&quot; and &quot;rotated&quot;</span>
 <span class="sd">        when &quot;only&quot; is included the move is only done when before is True</span>
 <span class="sd">        &quot;mirror&quot; will flip the part along the y axis</span>
+<span class="sd">        &quot;rotated&quot; draws the parts rotated 90 counter clockwise</span>
 <span class="sd">        The function returns whether actual drawing of the part</span>
 <span class="sd">        should be omited.</span>
 
@@ -1090,6 +1091,10 @@
 
         <span class="n">x</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span>
         <span class="n">y</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span>
+
+        <span class="k">if</span> <span class="s2">&quot;rotated&quot;</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+
         <span class="n">moves</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
             <span class="s2">&quot;down&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">y</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
@@ -1097,6 +1102,7 @@
             <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
             <span class="s2">&quot;only&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
             <span class="s2">&quot;mirror&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="s2">&quot;rotated&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">before</span><span class="p">:</span>
@@ -1118,6 +1124,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;rotated&quot;</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="c1"># change back for &quot;mirror&quot;</span>
                 <span class="k">if</span> <span class="s2">&quot;mirror&quot;</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>

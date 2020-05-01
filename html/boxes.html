@@ -3124,9 +3124,10 @@ gets x, y, r, b, posx, posy</p></li>
 <code class="sig-name descname">move</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">where</span></em>, <em class="sig-param"><span class="n">before</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.move"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.move" title="Permalink to this definition">¶</a></dt>
 <dd><p>Intended to be used by parts
 where can be combinations of “up” or “down”, “left” or “right”, “only”,
-“mirror”
+“mirror” and “rotated”
 when “only” is included the move is only done when before is True
 “mirror” will flip the part along the y axis
+“rotated” draws the parts rotated 90 counter clockwise
 The function returns whether actual drawing of the part
 should be omited.</p>
 <dl class="field-list simple">
