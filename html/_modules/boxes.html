@@ -1532,6 +1532,28 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">polyline</span><span class="p">(</span><span class="o">*</span><span class="n">army</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="Boxes.fingerHoleRectangle"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.fingerHoleRectangle">[docs]</a>    <span class="nd">@restore</span>
+    <span class="k">def</span> <span class="nf">fingerHoleRectangle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">outside</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Place finger holes for four walls - attaching a box on this plane</span>
+
+<span class="sd">        :param dx: size in x direction</span>
+<span class="sd">        :param dy: size in y direction</span>
+<span class="sd">        :param x: x position of the center</span>
+<span class="sd">        :param y: y position of the center</span>
+<span class="sd">        :param angle: angle in which the rectangle is placed</span>
+<span class="sd">        :param outside: meassure size from the outside of the walls - not the inside</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="k">if</span> <span class="n">outside</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="o">-</span><span class="n">d</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="n">dy</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="o">-</span><span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">-</span><span class="n">dy</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="o">-</span><span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">dy</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="o">-</span><span class="n">dx</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">dy</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">d</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span></div>
+
     <span class="c1">##################################################</span>
     <span class="c1">### parts</span>
     <span class="c1">##################################################</span>
