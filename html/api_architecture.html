@@ -118,11 +118,12 @@ This is inversed for holes which need to be drawn clockwise.</p>
 at the current coordinate origin. Often these commands create holes or
 hole patterns.</p>
 </div>
-<div class="section" id="cairo">
-<h2>Cairo<a class="headerlink" href="#cairo" title="Permalink to this headline">¶</a></h2>
-<p>Boxes.py uses cairo as graphics library. It is not fully encapsulated
+<div class="section" id="back-end">
+<h2>Back end<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h2>
+<p>Boxes.py used to use cairo as graphics library. It now uses its own -
+pure Python - back end. It is not fully encapsulated
 within the drawing methods of the Boxes class. Although this is the
-long term goal. Boxes.ctx is the cairo context all drawing is made on.</p>
+long term goal. Boxes.ctx is the context all drawing is made on.</p>
 </div>
 </div>
 
@@ -148,7 +149,7 @@ long term goal. Boxes.ctx is the cairo context all drawing is made on.</p>
 <li><a class="reference internal" href="#edges">Edges</a></li>
 <li><a class="reference internal" href="#turtle-graphics">Turtle graphics</a></li>
 <li><a class="reference internal" href="#simple-drawing-commands">Simple drawing commands</a></li>
-<li><a class="reference internal" href="#cairo">Cairo</a></li>
+<li><a class="reference internal" href="#back-end">Back end</a></li>
 </ul>
 </li>
 </ul>

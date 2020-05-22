@@ -1984,17 +1984,6 @@ and has matching recesses on the top corners.</p>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="boxes.formats.PSFile">
-<em class="property">class </em><code class="sig-prename descclassname">boxes.formats.</code><code class="sig-name descname">PSFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/formats.html#PSFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.formats.PSFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt id="boxes.formats.PSFile.adjustDocumentMedia">
-<code class="sig-name descname">adjustDocumentMedia</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/formats.html#PSFile.adjustDocumentMedia"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.formats.PSFile.adjustDocumentMedia" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="module-boxes.gears">
 <span id="boxes-gears-module"></span><h2>boxes.gears module<a class="headerlink" href="#module-boxes.gears" title="Permalink to this headline">¶</a></h2>
@@ -2491,84 +2480,6 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 </div>
 <div class="section" id="module-boxes.svgutil">
 <span id="boxes-svgutil-module"></span><h2>boxes.svgutil module<a class="headerlink" href="#module-boxes.svgutil" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="boxes.svgutil.Extend">
-<em class="property">class </em><code class="sig-prename descclassname">boxes.svgutil.</code><code class="sig-name descname">Extend</code><a class="reference internal" href="_modules/boxes/svgutil.html#Extend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.Extend" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt id="boxes.svgutil.Extend.addExtend">
-<code class="sig-name descname">addExtend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">extend</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#Extend.addExtend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.Extend.addExtend" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="boxes.svgutil.Extend.addPoint">
-<code class="sig-name descname">addPoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#Extend.addPoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.Extend.addPoint" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="boxes.svgutil.SVGFile">
-<em class="property">class </em><code class="sig-prename descclassname">boxes.svgutil.</code><code class="sig-name descname">SVGFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt id="boxes.svgutil.SVGFile.addMetadata">
-<code class="sig-name descname">addMetadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">md</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.addMetadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.addMetadata" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="boxes.svgutil.SVGFile.d">
-<code class="sig-name descname">d</code><em class="property"> = '(\\-?\\d+(\\.\\d+)?)'</em><a class="headerlink" href="#boxes.svgutil.SVGFile.d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="boxes.svgutil.SVGFile.fix">
-<code class="sig-name descname">fix</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metadata</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.fix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.fix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="boxes.svgutil.SVGFile.getEnvelope">
-<code class="sig-name descname">getEnvelope</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.getEnvelope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.getEnvelope" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="boxes.svgutil.SVGFile.getExtend">
-<code class="sig-name descname">getExtend</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em>, <em class="sig-param"><span class="n">extend</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.getExtend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.getExtend" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="boxes.svgutil.SVGFile.moveOrigin">
-<code class="sig-name descname">moveOrigin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.moveOrigin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.moveOrigin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="boxes.svgutil.SVGFile.optimize">
-<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">element</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.optimize" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="boxes.svgutil.SVGFile.optimize_patterns">
-<code class="sig-name descname">optimize_patterns</code><em class="property"> = [(re.compile(' (\\-?\\d+(\\.\\d+)?) (\\-?\\d+(\\.\\d+)?) (M|L) \\1 \\3 '), ' \\1 \\3 '), (re.compile(' (\\-?\\d+(\\.\\d+)?) (\\-?\\d+(\\.\\d+)?) L (\\-?\\d+(\\.\\d+)?) \\3 '), ' \\1 \\3 H \\5 '), (re.compile(' (\\-?\\d+(\\.\\d+)?) (\\-?\\d+(\\.\\d+)?) L \\1 (\\-?\\d+(\\.\\d+)?) '), ' \\1 \\3 V \\5 '), (re.compile('H (\\-?\\d+(\\.\\d+)?) L \\1 (\\-?\\d+(\\.\\d+)?) '), 'H \\1 V \\3 '), (re.compile('V (\\-?\\d+(\\.\\d+)?) L (\\-?\\d+(\\.\\d+)?) \x01 '), 'V \\1 H \\3 ')]</em><a class="headerlink" href="#boxes.svgutil.SVGFile.optimize_patterns" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="boxes.svgutil.SVGFile.pathre">
-<code class="sig-name descname">pathre</code><em class="property"> = re.compile('[MCL]? *((-?\\d+(\\.\\d+)?) (-?\\d+(\\.\\d+)?) *)+')</em><a class="headerlink" href="#boxes.svgutil.SVGFile.pathre" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="boxes.svgutil.SVGFile.rewriteViewPort">
-<code class="sig-name descname">rewriteViewPort</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#SVGFile.rewriteViewPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.SVGFile.rewriteViewPort" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modify SVG file to have the correct width, height and viewPort attributes.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="boxes.svgutil.SVGFile.transformre">
-<code class="sig-name descname">transformre</code><em class="property"> = re.compile('matrix\\((-?\\d+(\\.\\d+)?),(-?\\d+(\\.\\d+)?),(-?\\d+(\\.\\d+)?),(-?\\d+(\\.\\d+)?),(-?\\d+(\\.\\d+)?),(-?\\d+(\\.\\d+)?)\\)')</em><a class="headerlink" href="#boxes.svgutil.SVGFile.transformre" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 <dl class="py function">
 <dt id="boxes.svgutil.getSizeInMM">
 <code class="sig-prename descclassname">boxes.svgutil.</code><code class="sig-name descname">getSizeInMM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tree</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/svgutil.html#getSizeInMM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.svgutil.getSizeInMM" title="Permalink to this definition">¶</a></dt>
@@ -3392,8 +3303,16 @@ angles may be tuple (angle, radius)</p>
 <dl class="py method">
 <dt id="boxes.Boxes.saved_context">
 <code class="sig-name descname">saved_context</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.saved_context"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.saved_context" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generator: for saving and restoring cairo contexts.
-:param cr: cairo context</p>
+<dd><p>Generator: for saving and restoring contexts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="boxes.Boxes.set_font">
+<code class="sig-name descname">set_font</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">style</span></em>, <em class="sig-param"><span class="n">bold</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">italic</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.set_font"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.set_font" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set font style used
+:param style: “serif”, “sans-serif” or “monospaced”
+:param bold: Use bold font
+:param italic: Use italic font</p>
 </dd></dl>
 
 <dl class="py method">
