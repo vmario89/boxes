@@ -4,6 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boxes package &#8212; boxes.py 0.1 documentation</title>
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,7 +26,8 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">boxes.py 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">boxes.py 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">boxes package</a></li> 
       </ul>
     </div>  
 
@@ -2318,6 +2320,13 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="boxes.robot.RobotArmMu">
+<em class="property">class </em><code class="sig-prename descclassname">boxes.robot.</code><code class="sig-name descname">RobotArmMu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">servo</span></em>, <em class="sig-param"><span class="n">servo2</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/robot.html#RobotArmMu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.robot.RobotArmMu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.robot._RobotArm</span></code></p>
+<p>Robot arm segment with a servo and an orthogonal sets of hinge knuckles</p>
+</dd></dl>
+
+<dl class="py class">
 <dt id="boxes.robot.RobotArmUU">
 <em class="property">class </em><code class="sig-prename descclassname">boxes.robot.</code><code class="sig-name descname">RobotArmUU</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">servo</span></em>, <em class="sig-param"><span class="n">servo2</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/robot.html#RobotArmUU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.robot.RobotArmUU" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.robot._RobotArm</span></code></p>
@@ -2329,13 +2338,6 @@ min_teeth = int(math.ceil(undercut_min_teeth(20.0)))    # 18, not 17</p>
 <em class="property">class </em><code class="sig-prename descclassname">boxes.robot.</code><code class="sig-name descname">RobotArmUu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">servo</span></em>, <em class="sig-param"><span class="n">servo2</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/robot.html#RobotArmUu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.robot.RobotArmUu" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.robot._RobotArm</span></code></p>
 <p>Robot arm segment with two orthogonal sets of hinge knuckles</p>
-</dd></dl>
-
-<dl class="py class">
-<dt id="boxes.robot.RobotArmMu">
-<em class="property">class </em><code class="sig-prename descclassname">boxes.robot.</code><code class="sig-name descname">RobotArmMu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">servo</span></em>, <em class="sig-param"><span class="n">servo2</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/robot.html#RobotArmMu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.robot.RobotArmMu" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.robot._RobotArm</span></code></p>
-<p>Robot arm segment with a servo and an orthogonal sets of hinge knuckles</p>
 </dd></dl>
 
 </div>
@@ -2631,7 +2633,7 @@ Assumes a closed loop of points</p>
 <p>Main class – Generator should sub class this</p>
 <dl class="py method">
 <dt id="boxes.Boxes.NEMA">
-<code class="sig-name descname">NEMA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.NEMA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.NEMA" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">NEMA</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.NEMA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.NEMA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw holes for mounting a NEMA stepper motor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2647,7 +2649,7 @@ Assumes a closed loop of points</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.TX">
-<code class="sig-name descname">TX</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.TX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.TX" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">TX</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.TX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.TX" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a star pattern</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2744,7 +2746,7 @@ Assumes a closed loop of points</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.circle">
-<code class="sig-name descname">circle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">r</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.circle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">circle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.circle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.circle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a round disc</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2800,7 +2802,7 @@ Call after .render()</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.dHole">
-<code class="sig-name descname">dHole</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">d</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">w</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rel_w</span><span class="o">=</span><span class="default_value">0.75</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.dHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.dHole" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dHole</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.dHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.dHole" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2823,7 +2825,7 @@ Call after .render()</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.fingerHoleRectangle">
-<code class="sig-name descname">fingerHoleRectangle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dx</span></em>, <em class="sig-param"><span class="n">dy</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">outside</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.fingerHoleRectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.fingerHoleRectangle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fingerHoleRectangle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.fingerHoleRectangle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.fingerHoleRectangle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Place finger holes for four walls - attaching a box on this plane</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2862,7 +2864,7 @@ replacing the F edge with fingerHoles. Use with E and F for edges only.</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.flatHole">
-<code class="sig-name descname">flatHole</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">d</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">w</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rel_w</span><span class="o">=</span><span class="default_value">0.75</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.flatHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.flatHole" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">flatHole</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.flatHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.flatHole" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2992,7 +2994,7 @@ gets x, y, r, b, posx, posy</p></li>
 
 <dl class="py method">
 <dt id="boxes.Boxes.hole">
-<code class="sig-name descname">hole</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">d</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">tabs</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.hole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hole" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hole</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.hole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.hole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw a round hole</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3148,7 +3150,7 @@ Call this before .render()</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.polygonWalls">
-<code class="sig-name descname">polygonWalls</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">borders</span></em>, <em class="sig-param"><span class="n">h</span></em>, <em class="sig-param"><span class="n">bottom</span><span class="o">=</span><span class="default_value">'F'</span></em>, <em class="sig-param"><span class="n">top</span><span class="o">=</span><span class="default_value">'F'</span></em>, <em class="sig-param"><span class="n">symetrical</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.polygonWalls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.polygonWalls" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">polygonWalls</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.polygonWalls"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.polygonWalls" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -3166,7 +3168,7 @@ angles may be tuple (angle, radius)</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.rectangularHole">
-<code class="sig-name descname">rectangularHole</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">dx</span></em>, <em class="sig-param"><span class="n">dy</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularHole" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rectangularHole</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.rectangularHole"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.rectangularHole" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw an rectangulat hole</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3245,7 +3247,7 @@ angles may be tuple (angle, radius)</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.regularPolygonAt">
-<code class="sig-name descname">regularPolygonAt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">y</span></em>, <em class="sig-param"><span class="n">corners</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">h</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">side</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.regularPolygonAt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.regularPolygonAt" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">regularPolygonAt</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.regularPolygonAt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.regularPolygonAt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw regular polygone</p>
 </dd></dl>
 
@@ -3354,7 +3356,7 @@ Positive values move to the outside of the part</p>
 
 <dl class="py method">
 <dt id="boxes.Boxes.text">
-<code class="sig-name descname">text</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">align</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">fontsize</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">color</span><span class="o">=</span><span class="default_value">[0.0, 0.0, 0.0]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">text</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw text</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3486,6 +3488,7 @@ Positive values move to the outside of the part</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -3546,12 +3549,13 @@ Positive values move to the outside of the part</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">boxes.py 0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">boxes.py 0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">boxes package</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.4.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
     </div>
   </body>
 </html>
