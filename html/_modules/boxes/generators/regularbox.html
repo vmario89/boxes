@@ -57,9 +57,10 @@
 <span class="c1">#   along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 
 <span class="kn">from</span> <span class="nn">boxes</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">boxes.generators.bayonetbox</span> <span class="kn">import</span> <span class="n">BayonetBox</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 
-<div class="viewcode-block" id="RegularBox"><a class="viewcode-back" href="../../../generators.html#boxes.generators.regularbox.RegularBox">[docs]</a><span class="k">class</span> <span class="nc">RegularBox</span><span class="p">(</span><span class="n">Boxes</span><span class="p">):</span>
+<div class="viewcode-block" id="RegularBox"><a class="viewcode-back" href="../../../generators.html#boxes.generators.regularbox.RegularBox">[docs]</a><span class="k">class</span> <span class="nc">RegularBox</span><span class="p">(</span><span class="n">BayonetBox</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Box with regular polygon as base&quot;&quot;&quot;</span>
 
     <span class="n">ui_group</span> <span class="o">=</span> <span class="s2">&quot;Box&quot;</span>
@@ -76,8 +77,10 @@
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;number of sides&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
             <span class="s2">&quot;--top&quot;</span><span class="p">,</span>  <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
-            <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;hole&quot;</span><span class="p">,</span> <span class="s2">&quot;angled hole&quot;</span><span class="p">,</span> <span class="s2">&quot;angled lid&quot;</span><span class="p">,</span> <span class="s2">&quot;angled lid2&quot;</span><span class="p">,</span> <span class="s2">&quot;round lid&quot;</span><span class="p">],</span>
+            <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="s2">&quot;hole&quot;</span><span class="p">,</span> <span class="s2">&quot;angled hole&quot;</span><span class="p">,</span> <span class="s2">&quot;angled lid&quot;</span><span class="p">,</span> <span class="s2">&quot;angled lid2&quot;</span><span class="p">,</span> <span class="s2">&quot;round lid&quot;</span><span class="p">,</span> <span class="s2">&quot;bayonet mount&quot;</span><span class="p">],</span>
             <span class="n">help</span><span class="o">=</span><span class="s2">&quot;style of the top and lid&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lugs</span><span class="o">=</span><span class="mi">6</span>
 
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -116,12 +119,18 @@
                                         <span class="n">hole</span><span class="o">=</span><span class="p">(</span><span class="n">sh</span><span class="o">-</span><span class="n">t</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">==</span> <span class="s2">&quot;round lid&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">disc</span><span class="p">(</span><span class="n">sh</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="o">==</span> <span class="s2">&quot;bayonet mount&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">diameter</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">sh</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lowerLayer</span><span class="p">(</span><span class="n">asPart</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">regularPolygonWall</span><span class="p">(</span><span class="n">corners</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+                                        <span class="n">callback</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">upperCB</span><span class="p">],</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">disc</span><span class="p">(</span><span class="n">sh</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">regularPolygonWall</span><span class="p">(</span><span class="n">corners</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;up only&quot;</span><span class="p">)</span>
 
         <span class="n">side</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mf">180.0</span><span class="o">/</span><span class="n">n</span><span class="p">))</span> <span class="o">*</span> <span class="n">r</span>
         <span class="n">fingers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">top</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;hole&quot;</span><span class="p">,</span> <span class="s2">&quot;angled hole&quot;</span><span class="p">,</span> <span class="s2">&quot;round lid&quot;</span><span class="p">,</span>
-                               <span class="s2">&quot;angled lid2&quot;</span><span class="p">)</span>
+                               <span class="s2">&quot;angled lid2&quot;</span><span class="p">,</span> <span class="s2">&quot;bayonet mount&quot;</span><span class="p">)</span>
         
         <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
