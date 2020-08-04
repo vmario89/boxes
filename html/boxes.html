@@ -2633,7 +2633,7 @@ Assumes a closed loop of points</p>
 <p>Main class – Generator should sub class this</p>
 <dl class="py method">
 <dt id="boxes.Boxes.NEMA">
-<code class="sig-name descname">NEMA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.NEMA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.NEMA" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">NEMA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">x</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">y</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">angle</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">screwholes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#Boxes.NEMA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.Boxes.NEMA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw holes for mounting a NEMA stepper motor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3421,6 +3421,30 @@ Positive values move to the outside of the part</p>
 <dl class="py attribute">
 <dt id="boxes.Boxes.webinterface">
 <code class="sig-name descname">webinterface</code><em class="property"> = True</em><a class="headerlink" href="#boxes.Boxes.webinterface" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="boxes.HexHolesSettings">
+<em class="property">class </em><code class="sig-prename descclassname">boxes.</code><code class="sig-name descname">HexHolesSettings</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">thickness</span></em>, <em class="sig-param"><span class="n">relative</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes.html#HexHolesSettings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.HexHolesSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boxes.edges.Settings" title="boxes.edges.Settings"><code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.edges.Settings</span></code></a></p>
+<p>Settings for hexagonal hole patterns</p>
+<p>Values:</p>
+<ul class="simple">
+<li><p>absolute
+* diameter : 5.0 : diameter of the holes
+* distance : 3.0 : distance between the holes
+* style : “circles” : currently only supported style</p></li>
+</ul>
+<dl class="py attribute">
+<dt id="boxes.HexHolesSettings.absolute_params">
+<code class="sig-name descname">absolute_params</code><em class="property"> = {'diameter': 10.0, 'distance': 3.0, 'style': ('circle',)}</em><a class="headerlink" href="#boxes.HexHolesSettings.absolute_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="boxes.HexHolesSettings.relative_params">
+<code class="sig-name descname">relative_params</code><em class="property"> = {}</em><a class="headerlink" href="#boxes.HexHolesSettings.relative_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

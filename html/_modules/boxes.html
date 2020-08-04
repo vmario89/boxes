@@ -255,6 +255,28 @@
 
 <span class="n">boolarg</span> <span class="o">=</span> <span class="n">BoolArg</span><span class="p">()</span>
 
+
+<div class="viewcode-block" id="HexHolesSettings"><a class="viewcode-back" href="../boxes.html#boxes.HexHolesSettings">[docs]</a><span class="k">class</span> <span class="nc">HexHolesSettings</span><span class="p">(</span><span class="n">edges</span><span class="o">.</span><span class="n">Settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Settings for hexagonal hole patterns</span>
+
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute</span>
+<span class="sd">  * diameter : 5.0 : diameter of the holes</span>
+<span class="sd">  * distance : 3.0 : distance between the holes</span>
+<span class="sd">  * style : &quot;circles&quot; : currently only supported style</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;diameter&#39;</span> <span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>
+        <span class="s1">&#39;distance&#39;</span> <span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+        <span class="s1">&#39;style&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="s1">&#39;circle&#39;</span><span class="p">,</span> <span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="n">relative_params</span> <span class="o">=</span> <span class="p">{}</span></div>
+
+
 <span class="c1">##############################################################################</span>
 <span class="c1">### Main class</span>
 <span class="c1">##############################################################################</span>
@@ -350,7 +372,6 @@
             <span class="k">return</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">bedBoltSettings</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>  <span class="c1"># d, d_nut, h_nut, l, l1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;circle&#39;</span><span class="p">)</span>  <span class="c1"># r, dist, style</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">surface</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">getSurface</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;svg_Ponoko&#39;</span><span class="p">:</span>
@@ -395,14 +416,20 @@
         <span class="k">for</span> <span class="n">arg</span><span class="p">,</span> <span class="n">default</span> <span class="ow">in</span> <span class="n">kw</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="mf">100.0</span>
+                <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;inner width in mm&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;outside&quot;</span> <span class="ow">in</span> <span class="n">kw</span><span class="p">:</span>
+                    <span class="n">help</span> <span class="o">+=</span> <span class="s2">&quot; (unless outside selected)&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
                     <span class="s2">&quot;--x&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
-                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;inner width in mm (unless outside selected)&quot;</span><span class="p">)</span>
+                    <span class="n">help</span><span class="o">=</span><span class="n">help</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="mf">100.0</span>
+                <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;inner depth in mm&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;outside&quot;</span> <span class="ow">in</span> <span class="n">kw</span><span class="p">:</span>
+                    <span class="n">help</span> <span class="o">+=</span> <span class="s2">&quot; (unless outside selected)&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
                     <span class="s2">&quot;--y&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
-                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;inner depth in mm (unless outside selected)&quot;</span><span class="p">)</span>
+                    <span class="n">help</span><span class="o">=</span><span class="n">help</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;sx&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="s2">&quot;50*3&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -423,9 +450,12 @@
                     <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;sections bottom to top in mm. See --sy for format&quot;&quot;&quot;</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;h&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="mf">100.0</span>
+                <span class="n">help</span> <span class="o">=</span> <span class="s2">&quot;inner height in mm&quot;</span>
+                <span class="k">if</span> <span class="s2">&quot;outside&quot;</span> <span class="ow">in</span> <span class="n">kw</span><span class="p">:</span>
+                    <span class="n">help</span> <span class="o">+=</span> <span class="s2">&quot; (unless outside selected)&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
                     <span class="s2">&quot;--h&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">default</span><span class="p">,</span>
-                    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;inner height in mm (unless outside selected)&quot;</span><span class="p">)</span>
+                    <span class="n">help</span><span class="o">=</span><span class="n">help</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="s2">&quot;hi&quot;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">default</span> <span class="o">=</span> <span class="mf">0.0</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -551,6 +581,10 @@
         <span class="c1"># Rounded Triangle Edge</span>
         <span class="n">edges</span><span class="o">.</span><span class="n">RoundedTriangleEdgeSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">edgesettings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;RoundedTriangleEdge&quot;</span><span class="p">,</span> <span class="p">{}))</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># HexHoles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span> <span class="o">=</span> <span class="n">HexHolesSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">edgesettings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;HexHoles&quot;</span><span class="p">,</span> <span class="p">{}))</span>
 
         <span class="c1"># Nuts</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addPart</span><span class="p">(</span><span class="n">NutHole</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
@@ -1349,7 +1383,7 @@
     <span class="p">}</span>
 
 <div class="viewcode-block" id="Boxes.NEMA"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.NEMA">[docs]</a>    <span class="nd">@restore</span>
-    <span class="k">def</span> <span class="nf">NEMA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">NEMA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">screwholes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Draw holes for mounting a NEMA stepper motor</span>
 
 <span class="sd">        :param size: Nominal size in tenths of inches</span>
@@ -1359,6 +1393,8 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">width</span><span class="p">,</span> <span class="n">flange</span><span class="p">,</span> <span class="n">holedistance</span><span class="p">,</span> <span class="n">diameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nema_sizes</span><span class="p">[</span><span class="n">size</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">screwholes</span><span class="p">:</span>
+            <span class="n">diameter</span> <span class="o">=</span> <span class="n">screwholes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">angle</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rectangularHole</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
@@ -1389,7 +1425,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">settings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span>
-        <span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">settings</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">diameter</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">distance</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">style</span>
 
         <span class="n">w</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">b</span> <span class="o">/</span> <span class="mf">2.0</span>
         <span class="n">dist</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">6.0</span><span class="p">)</span>
@@ -1472,7 +1508,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">settings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span>
-        <span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">settings</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">diameter</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">distance</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">style</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
         <span class="n">w</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">b</span> <span class="o">/</span> <span class="mf">2.0</span>
