@@ -492,7 +492,7 @@
         <span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span> <span class="ow">or</span> <span class="n">settings</span><span class="o">.</span><span class="vm">__name__</span><span class="p">[:</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="s2">&quot;Settings&quot;</span><span class="p">)]</span>
         <span class="n">settings</span><span class="o">.</span><span class="n">parserArguments</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">edgesettings</span><span class="p">[</span><span class="n">prefix</span><span class="p">]</span> <span class="o">=</span>  <span class="p">{}</span></div>
-        
+
 
 <div class="viewcode-block" id="Boxes.parseArgs"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.parseArgs">[docs]</a>    <span class="k">def</span> <span class="nf">parseArgs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -509,7 +509,7 @@
         <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;--tab=&#39;</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;cli&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;boxes &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">quote</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argparser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">))</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="c1"># treat edge settings separately </span>
+            <span class="c1"># treat edge settings separately</span>
             <span class="k">for</span> <span class="n">setting</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgesettings</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">setting</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">edgesettings</span><span class="p">[</span><span class="n">setting</span><span class="p">][</span><span class="n">key</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">setting</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">value</span>
@@ -814,12 +814,12 @@
 <div class="viewcode-block" id="Boxes.curveTo"><a class="viewcode-back" href="../boxes.html#boxes.Boxes.curveTo">[docs]</a>    <span class="k">def</span> <span class="nf">curveTo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;control point 1, control point 2, end point</span>
 
-<span class="sd">        :param x1: </span>
-<span class="sd">        :param y1: </span>
-<span class="sd">        :param x2: </span>
-<span class="sd">        :param y2: </span>
-<span class="sd">        :param x3: </span>
-<span class="sd">        :param y3: </span>
+<span class="sd">        :param x1:</span>
+<span class="sd">        :param y1:</span>
+<span class="sd">        :param x2:</span>
+<span class="sd">        :param y2:</span>
+<span class="sd">        :param x3:</span>
+<span class="sd">        :param y3:</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">curve_to</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
@@ -1423,6 +1423,7 @@
 
 
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="n">settings</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span>
         <span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">diameter</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">distance</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">style</span>
@@ -1477,12 +1478,12 @@
         <span class="k">def</span> <span class="nf">skip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">posx</span><span class="p">,</span> <span class="n">posy</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">            :param x: </span>
-<span class="sd">            :param y: </span>
-<span class="sd">            :param r: </span>
-<span class="sd">            :param b: </span>
-<span class="sd">            :param posx: </span>
-<span class="sd">            :param posy: </span>
+<span class="sd">            :param x:</span>
+<span class="sd">            :param y:</span>
+<span class="sd">            :param r:</span>
+<span class="sd">            :param b:</span>
+<span class="sd">            :param posx:</span>
+<span class="sd">            :param posy:</span>
 
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">posx</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">posx</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">))</span>
@@ -1710,7 +1711,7 @@
 <span class="sd">        :param x: width of matching roundedPlate</span>
 <span class="sd">        :param y: height of matching roundedPlate</span>
 <span class="sd">        :param r: corner radius of matching roundedPlate</span>
-<span class="sd">        :param h: inner height of the wall (without edges) </span>
+<span class="sd">        :param h: inner height of the wall (without edges)</span>
 <span class="sd">        :param bottom:  (Default value = &#39;e&#39;) Edge type</span>
 <span class="sd">        :param top:  (Default value = &#39;e&#39;) Edge type</span>
 <span class="sd">        :param left: (Default value = &#39;D&#39;) left edge(s)</span>
@@ -2156,7 +2157,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">turtle</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">tw</span><span class="p">,</span> <span class="n">th</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
                 <span class="k">return</span>
-        
+
             <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="o">-</span><span class="n">minx</span><span class="p">,</span> <span class="o">-</span><span class="n">miny</span><span class="p">)</span>
 
         <span class="n">length_correction</span> <span class="o">=</span> <span class="mf">0.</span>
