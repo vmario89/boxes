@@ -91,9 +91,9 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hexpattern</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minspace</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minspace</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
             <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span>
-            <span class="n">settings</span><span class="o">.</span><span class="n">setValues</span><span class="p">(</span><span class="s1">&#39;diameter&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">candiameter</span><span class="p">)</span>
-            <span class="n">settings</span><span class="o">.</span><span class="n">setValues</span><span class="p">(</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minspace</span><span class="p">)</span>
-            <span class="n">settings</span><span class="o">.</span><span class="n">setValues</span><span class="p">(</span><span class="s1">&#39;style&#39;</span><span class="p">,</span> <span class="s1">&#39;cricle&#39;</span><span class="p">)</span>
+            <span class="n">settings</span><span class="o">.</span><span class="n">diameter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">candiameter</span>
+            <span class="n">settings</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minspace</span>
+            <span class="n">settings</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;circle&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesRectangle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">minspace</span><span class="p">,</span>
                                    <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">minspace</span><span class="p">,</span>
                                    <span class="n">settings</span><span class="p">)</span>
@@ -187,7 +187,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
   </body>
 </html>
