@@ -581,6 +581,9 @@
         <span class="c1"># Rounded Triangle Edge</span>
         <span class="n">edges</span><span class="o">.</span><span class="n">RoundedTriangleEdgeSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">edgesettings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;RoundedTriangleEdge&quot;</span><span class="p">,</span> <span class="p">{}))</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># Grooved Edge</span>
+        <span class="n">edges</span><span class="o">.</span><span class="n">GroovedSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>
+                              <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">edgesettings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Grooved&quot;</span><span class="p">,</span> <span class="p">{}))</span><span class="o">.</span><span class="n">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="c1"># HexHoles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hexHolesSettings</span> <span class="o">=</span> <span class="n">HexHolesSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>

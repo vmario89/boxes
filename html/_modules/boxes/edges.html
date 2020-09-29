@@ -384,6 +384,137 @@
 
 
 <span class="c1">#############################################################################</span>
+<span class="c1">####     GroovedEdge</span>
+<span class="c1">#############################################################################</span>
+
+<div class="viewcode-block" id="GroovedSettings"><a class="viewcode-back" href="../../boxes.html#boxes.edges.GroovedSettings">[docs]</a><span class="k">class</span> <span class="nc">GroovedSettings</span><span class="p">(</span><span class="n">Settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Settings for Grooved Edge</span>
+<span class="sd">Values:</span>
+
+<span class="sd">* absolute_params</span>
+
+<span class="sd"> * style : &quot;arc&quot; : the style of grooves</span>
+<span class="sd"> * tri_angle : 30 : the angle of triangular cuts</span>
+<span class="sd"> * arc_angle : 120 : the angle of arc cuts</span>
+<span class="sd"> * width : 0.2 : the width of each groove (fraction of the edge length)</span>
+<span class="sd"> * gap : 0.1 : the gap between grooves (fraction of the edge length)</span>
+<span class="sd"> * margin : 0.3 : minimum space left and right without grooves (fraction of the edge length)</span>
+<span class="sd"> * inverse : False : invert the groove directions</span>
+<span class="sd"> * interleave : False : alternate the direction of grooves</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">PARAM_ARC</span> <span class="o">=</span> <span class="s2">&quot;arc&quot;</span>
+    <span class="n">PARAM_FLAT</span> <span class="o">=</span> <span class="s2">&quot;flat&quot;</span>
+    <span class="n">PARAM_SOFTARC</span> <span class="o">=</span> <span class="s2">&quot;softarc&quot;</span>
+    <span class="n">PARAM_TRIANGLE</span> <span class="o">=</span> <span class="s2">&quot;triangle&quot;</span>
+
+    <span class="n">absolute_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;style&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">PARAM_ARC</span><span class="p">,</span> <span class="n">PARAM_FLAT</span><span class="p">,</span> <span class="n">PARAM_TRIANGLE</span><span class="p">,</span> <span class="n">PARAM_SOFTARC</span><span class="p">),</span>
+        <span class="s2">&quot;tri_angle&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s2">&quot;arc_angle&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span>
+        <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="s2">&quot;gap&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span>
+        <span class="s2">&quot;inverse&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;interleave&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="GroovedSettings.edgeObjects"><a class="viewcode-back" href="../../boxes.html#boxes.edges.GroovedSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;zZ&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">GroovedEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+                 <span class="n">GroovedEdgeCounterPart</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="GroovedEdgeBase"><a class="viewcode-back" href="../../boxes.html#boxes.edges.GroovedEdgeBase">[docs]</a><span class="k">class</span> <span class="nc">GroovedEdgeBase</span><span class="p">(</span><span class="n">BaseEdge</span><span class="p">):</span>
+<div class="viewcode-block" id="GroovedEdgeBase.is_inverse"><a class="viewcode-back" href="../../boxes.html#boxes.edges.GroovedEdgeBase.is_inverse">[docs]</a>    <span class="k">def</span> <span class="nf">is_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">inverse</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span></div>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">def</span> <span class="nf">check_bounds</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">mn</span><span class="p">,</span> <span class="n">mx</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">mn</span> <span class="o">&lt;=</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="n">mx</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> needs to be in [</span><span class="si">{</span><span class="n">mn</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">mx</span><span class="si">}</span><span class="s2">] but is </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">style</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">margin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">margin</span>
+        <span class="n">gap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">gap</span>
+        <span class="n">interleave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">interleave</span>
+
+        <span class="n">check_bounds</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">)</span>
+        <span class="n">check_bounds</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;margin&quot;</span><span class="p">)</span>
+        <span class="n">check_bounds</span><span class="p">(</span><span class="n">gap</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;gap&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Check how many grooves fit</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span> <span class="o">+</span> <span class="n">gap</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="n">gap</span><span class="p">)))</span>
+        <span class="n">inside_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span> <span class="o">*</span> <span class="p">(</span><span class="n">width</span> <span class="o">+</span> <span class="n">gap</span><span class="p">)</span> <span class="o">-</span> <span class="n">gap</span><span class="p">)</span>
+        <span class="n">margin</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">inside_width</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="c1"># Convert to actual length</span>
+        <span class="n">margin</span> <span class="o">=</span> <span class="n">length</span> <span class="o">*</span> <span class="n">margin</span>
+        <span class="n">gap</span> <span class="o">=</span> <span class="n">length</span> <span class="o">*</span> <span class="n">gap</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span>
+
+        <span class="c1"># Determine the initial inversion</span>
+        <span class="n">inv</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_inverse</span><span class="p">()</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">interleave</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span> <span class="ow">and</span> <span class="n">count</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">inv</span> <span class="o">=</span> <span class="o">-</span><span class="n">inv</span>
+
+        <span class="c1"># The edge until the first groove</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Grooves</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">gap</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">interleave</span><span class="p">:</span>
+                    <span class="n">inv</span> <span class="o">=</span> <span class="o">-</span><span class="n">inv</span>
+            <span class="k">if</span> <span class="n">style</span> <span class="o">==</span> <span class="n">GroovedSettings</span><span class="o">.</span><span class="n">PARAM_FLAT</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="n">GroovedSettings</span><span class="o">.</span><span class="n">PARAM_ARC</span><span class="p">:</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arc_angle</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">side_length</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="n">angle</span><span class="p">,</span> <span class="n">side_length</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="n">angle</span><span class="p">,</span> <span class="n">side_length</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="n">GroovedSettings</span><span class="o">.</span><span class="n">PARAM_SOFTARC</span><span class="p">:</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">arc_angle</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">side_length</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">/</span> <span class="mi">4</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="o">-</span><span class="n">angle</span><span class="p">,</span> <span class="n">side_length</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="n">angle</span><span class="p">,</span> <span class="n">side_length</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="n">angle</span><span class="p">,</span> <span class="n">side_length</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="o">-</span><span class="n">angle</span><span class="p">,</span> <span class="n">side_length</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">style</span> <span class="o">==</span> <span class="n">GroovedSettings</span><span class="o">.</span><span class="n">PARAM_TRIANGLE</span><span class="p">:</span>
+                <span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">tri_angle</span>
+                <span class="n">side_length</span> <span class="o">=</span> <span class="n">width</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">side_length</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">angle</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">side_length</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">inv</span> <span class="o">*</span> <span class="o">-</span><span class="n">angle</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown GroovedEdge style: </span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">style</span><span class="p">)</span>
+
+        <span class="c1"># The final edge</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">tabs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GroovedEdge"><a class="viewcode-back" href="../../boxes.html#boxes.edges.GroovedEdge">[docs]</a><span class="k">class</span> <span class="nc">GroovedEdge</span><span class="p">(</span><span class="n">GroovedEdgeBase</span><span class="p">):</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Edge with grooves&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;z&#39;</span>
+    <span class="n">inverse</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="GroovedEdgeCounterPart"><a class="viewcode-back" href="../../boxes.html#boxes.edges.GroovedEdgeCounterPart">[docs]</a><span class="k">class</span> <span class="nc">GroovedEdgeCounterPart</span><span class="p">(</span><span class="n">GroovedEdgeBase</span><span class="p">):</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Edge with grooves (opposing side)&quot;&quot;&quot;</span>
+    <span class="n">char</span> <span class="o">=</span> <span class="s1">&#39;Z&#39;</span>
+    <span class="n">inverse</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<span class="c1">#############################################################################</span>
 <span class="c1">####     Gripping Edge</span>
 <span class="c1">#############################################################################</span>
 

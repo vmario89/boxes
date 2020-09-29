@@ -98,6 +98,8 @@
 </li>
         <li><a href="boxes.html#boxes.edges.GripSettings.absolute_params">(boxes.edges.GripSettings attribute)</a>
 </li>
+        <li><a href="boxes.html#boxes.edges.GroovedSettings.absolute_params">(boxes.edges.GroovedSettings attribute)</a>
+</li>
         <li><a href="boxes.html#boxes.edges.HingeSettings.absolute_params">(boxes.edges.HingeSettings attribute)</a>
 </li>
         <li><a href="boxes.html#boxes.edges.LidSettings.absolute_params">(boxes.edges.LidSettings attribute)</a>
@@ -349,6 +351,10 @@
 </li>
         <li><a href="boxes.html#boxes.edges.GrippingEdge.char">(boxes.edges.GrippingEdge attribute)</a>
 </li>
+        <li><a href="boxes.html#boxes.edges.GroovedEdge.char">(boxes.edges.GroovedEdge attribute)</a>
+</li>
+        <li><a href="boxes.html#boxes.edges.GroovedEdgeCounterPart.char">(boxes.edges.GroovedEdgeCounterPart attribute)</a>
+</li>
         <li><a href="boxes.html#boxes.edges.Hinge.char">(boxes.edges.Hinge attribute)</a>
 </li>
         <li><a href="boxes.html#boxes.edges.HingePin.char">(boxes.edges.HingePin attribute)</a>
@@ -501,6 +507,10 @@
 </li>
         <li><a href="boxes.html#boxes.edges.GrippingEdge.description">(boxes.edges.GrippingEdge attribute)</a>
 </li>
+        <li><a href="boxes.html#boxes.edges.GroovedEdge.description">(boxes.edges.GroovedEdge attribute)</a>
+</li>
+        <li><a href="boxes.html#boxes.edges.GroovedEdgeCounterPart.description">(boxes.edges.GroovedEdgeCounterPart attribute)</a>
+</li>
         <li><a href="boxes.html#boxes.edges.Hinge.description">(boxes.edges.Hinge attribute)</a>
 </li>
         <li><a href="boxes.html#boxes.edges.HingePin.description">(boxes.edges.HingePin attribute)</a>
@@ -600,6 +610,8 @@
         <li><a href="api_edges.html#boxes.edges.FingerJointSettings.edgeObjects">(boxes.edges.FingerJointSettings method)</a>, <a href="boxes.html#boxes.edges.FingerJointSettings.edgeObjects">[1]</a>
 </li>
         <li><a href="boxes.html#boxes.edges.GripSettings.edgeObjects">(boxes.edges.GripSettings method)</a>
+</li>
+        <li><a href="boxes.html#boxes.edges.GroovedSettings.edgeObjects">(boxes.edges.GroovedSettings method)</a>
 </li>
         <li><a href="boxes.html#boxes.edges.HingeSettings.edgeObjects">(boxes.edges.HingeSettings method)</a>
 </li>
@@ -752,12 +764,12 @@
 </li>
       <li><a href="api_generator.html#boxes.generators.getAllGeneratorModules">getAllGeneratorModules() (in module boxes.generators)</a>, <a href="boxes.html#boxes.generators.getAllGeneratorModules">[1]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="boxes.html#boxes.edges.getDescriptions">getDescriptions() (in module boxes.edges)</a>
 </li>
       <li><a href="api_parts.html#boxes.Boxes.getEntry">getEntry() (boxes.Boxes method)</a>, <a href="boxes.html#boxes.Boxes.getEntry">[1]</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="boxes.html#boxes.formats.Formats.getFormats">getFormats() (boxes.formats.Formats method)</a>
 </li>
       <li><a href="boxes.html#boxes.pulley.Pulley.getProfiles">getProfiles() (boxes.pulley.Pulley class method)</a>
@@ -775,6 +787,14 @@
       <li><a href="api_edges.html#boxes.edges.GrippingEdge">GrippingEdge (class in boxes.edges)</a>, <a href="boxes.html#boxes.edges.GrippingEdge">[1]</a>
 </li>
       <li><a href="api_edges.html#boxes.edges.GripSettings">GripSettings (class in boxes.edges)</a>, <a href="boxes.html#boxes.edges.GripSettings">[1]</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedEdge">GroovedEdge (class in boxes.edges)</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedEdgeBase">GroovedEdgeBase (class in boxes.edges)</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedEdgeCounterPart">GroovedEdgeCounterPart (class in boxes.edges)</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedSettings">GroovedSettings (class in boxes.edges)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -854,11 +874,19 @@
 </li>
       <li><a href="generators.html#boxes.generators.integratedhingebox.IntegratedHingeBox">IntegratedHingeBox (class in boxes.generators.integratedhingebox)</a>
 </li>
+      <li><a href="boxes.html#boxes.edges.GroovedEdge.inverse">inverse (boxes.edges.GroovedEdge attribute)</a>
+
+      <ul>
+        <li><a href="boxes.html#boxes.edges.GroovedEdgeCounterPart.inverse">(boxes.edges.GroovedEdgeCounterPart attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="boxes.html#boxes.gears.involute_intersect_angle">involute_intersect_angle() (in module boxes.gears)</a>
 </li>
       <li><a href="boxes.html#boxes.ArgparseEdgeType.inx">inx() (boxes.ArgparseEdgeType method)</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedEdgeBase.is_inverse">is_inverse() (boxes.edges.GroovedEdgeBase method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1087,6 +1115,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generators.html#boxes.generators.paintbox.PaintStorage">PaintStorage (class in boxes.generators.paintbox)</a>
 </li>
+      <li><a href="boxes.html#boxes.edges.GroovedSettings.PARAM_ARC">PARAM_ARC (boxes.edges.GroovedSettings attribute)</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedSettings.PARAM_FLAT">PARAM_FLAT (boxes.edges.GroovedSettings attribute)</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedSettings.PARAM_SOFTARC">PARAM_SOFTARC (boxes.edges.GroovedSettings attribute)</a>
+</li>
+      <li><a href="boxes.html#boxes.edges.GroovedSettings.PARAM_TRIANGLE">PARAM_TRIANGLE (boxes.edges.GroovedSettings attribute)</a>
+</li>
       <li><a href="api_generator.html#boxes.Boxes.parseArgs">parseArgs() (boxes.Boxes method)</a>, <a href="boxes.html#boxes.Boxes.parseArgs">[1]</a>
 </li>
       <li><a href="api_arguments.html#boxes.edges.Settings.parserArguments">parserArguments() (boxes.edges.Settings class method)</a>, <a href="boxes.html#boxes.edges.Settings.parserArguments">[1]</a>
@@ -1105,12 +1141,12 @@
 </li>
       <li><a href="boxes.html#boxes.gears.point_on_circle">point_on_circle() (in module boxes.gears)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generators.html#boxes.generators.polehook.PoleHook">PoleHook (class in boxes.generators.polehook)</a>
 </li>
       <li><a href="boxes.html#boxes.Boxes.polygonWall">polygonWall() (boxes.Boxes method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="boxes.html#boxes.Boxes.polygonWalls">polygonWalls() (boxes.Boxes method)</a>
 </li>
       <li><a href="api_drawing.html#boxes.Boxes.polyline">polyline() (boxes.Boxes method)</a>, <a href="boxes.html#boxes.Boxes.polyline">[1]</a>
