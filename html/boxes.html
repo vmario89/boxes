@@ -6,8 +6,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>boxes package &#8212; boxes.py 0.1 documentation</title>
-    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -1651,6 +1651,22 @@ Values:</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="boxes.edges.RoundedTriangleFingerHolesEdge">
+<em class="property">class </em><code class="sig-prename descclassname">boxes.edges.</code><code class="sig-name descname">RoundedTriangleFingerHolesEdge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boxes</span></em>, <em class="sig-param"><span class="n">settings</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#RoundedTriangleFingerHolesEdge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.RoundedTriangleFingerHolesEdge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#boxes.edges.RoundedTriangleEdge" title="boxes.edges.RoundedTriangleEdge"><code class="xref py py-class docutils literal notranslate"><span class="pre">boxes.edges.RoundedTriangleEdge</span></code></a></p>
+<dl class="py attribute">
+<dt id="boxes.edges.RoundedTriangleFingerHolesEdge.char">
+<code class="sig-name descname">char</code><em class="property"> = 'T'</em><a class="headerlink" href="#boxes.edges.RoundedTriangleFingerHolesEdge.char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="boxes.edges.RoundedTriangleFingerHolesEdge.start_width">
+<code class="sig-name descname">start_width</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#RoundedTriangleFingerHolesEdge.start_width"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.RoundedTriangleFingerHolesEdge.start_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="boxes.edges.Settings">
 <em class="property">class </em><code class="sig-prename descclassname">boxes.edges.</code><code class="sig-name descname">Settings</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">thickness</span></em>, <em class="sig-param"><span class="n">relative</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/boxes/edges.html#Settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#boxes.edges.Settings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -2740,7 +2756,7 @@ Assumes a closed loop of points</p>
 
 <dl class="py attribute">
 <dt id="boxes.ArgparseEdgeType.names">
-<code class="sig-name descname">names</code><em class="property"> = {'A': 'Abstract Edge Class', 'B': 'Abstract Edge Class', 'C': 'Abstract Edge Class', 'D': 'Edge (parallel slot wall Holes)', 'E': 'Straight Edge (outset by thickness)', 'F': 'Finger Joint (opposing side)', 'I': 'Edge with hinge pin', 'J': 'Edge with hinge pin (other end)', 'K': 'Edge with hinge pin (both ends)', 'L': 'Edge for slide on lid (box back)', 'M': 'Edge for slide on lid (box left)', 'N': 'Edge for slide on lid (box right)', 'O': 'Edge with chest hinge (other end)', 'P': 'Edge with chest hinge (other end)', 'Q': 'Edge opposing a chest hinge', 'R': 'Rack (and pinion) Edge', 'S': 'Stackable (top)', 'U': 'Edge with cabinet hinges top side', 'V': 'Edge with cabinet hinges 90° lid', 'X': 'Flex cut', 'Z': 'Edge with grooves (opposing side)', 'a': 'Abstract Edge Class', 'b': 'Abstract Edge Class', 'c': 'Abstract Edge Class', 'd': 'Edge (parallel slot wall Holes)', 'e': 'Straight Edge', 'f': 'Finger Joint', 'g': 'Corrugated edge useful as an gipping area', 'h': 'Edge (parallel Finger Joint Holes)', 'i': 'Straight edge with hinge eye', 'j': 'Straight edge with hinge eye (other end)', 'k': 'Straight edge with hinge eye (both ends)', 'l': 'Edge for slide on lid (back)', 'm': 'Edge for slide on lid (left)', 'n': 'Edge for slide on lid (right)', 'o': 'Edge with chest hinge', 'p': 'Edge with chest hinge', 'q': 'Edge with pins for an chest hinge', 's': 'Stackable (bottom, finger joint holes)', 't': 'Triangle for handle', 'u': 'Edge with cabinet hinges', 'v': 'Edge with cabinet hinges for 90° lid', 'z': 'Edge with grooves', '|': 'Edge (orthogonal Finger Joint Holes)'}</em><a class="headerlink" href="#boxes.ArgparseEdgeType.names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">names</code><em class="property"> = {'A': 'Abstract Edge Class', 'B': 'Abstract Edge Class', 'C': 'Abstract Edge Class', 'D': 'Edge (parallel slot wall Holes)', 'E': 'Straight Edge (outset by thickness)', 'F': 'Finger Joint (opposing side)', 'I': 'Edge with hinge pin', 'J': 'Edge with hinge pin (other end)', 'K': 'Edge with hinge pin (both ends)', 'L': 'Edge for slide on lid (box back)', 'M': 'Edge for slide on lid (box left)', 'N': 'Edge for slide on lid (box right)', 'O': 'Edge with chest hinge (other end)', 'P': 'Edge with chest hinge (other end)', 'Q': 'Edge opposing a chest hinge', 'R': 'Rack (and pinion) Edge', 'S': 'Stackable (top)', 'T': 'Triangle for handle', 'U': 'Edge with cabinet hinges top side', 'V': 'Edge with cabinet hinges 90° lid', 'X': 'Flex cut', 'Z': 'Edge with grooves (opposing side)', 'a': 'Abstract Edge Class', 'b': 'Abstract Edge Class', 'c': 'Abstract Edge Class', 'd': 'Edge (parallel slot wall Holes)', 'e': 'Straight Edge', 'f': 'Finger Joint', 'g': 'Corrugated edge useful as an gipping area', 'h': 'Edge (parallel Finger Joint Holes)', 'i': 'Straight edge with hinge eye', 'j': 'Straight edge with hinge eye (other end)', 'k': 'Straight edge with hinge eye (both ends)', 'l': 'Edge for slide on lid (back)', 'm': 'Edge for slide on lid (left)', 'n': 'Edge for slide on lid (right)', 'o': 'Edge with chest hinge', 'p': 'Edge with chest hinge', 'q': 'Edge with pins for an chest hinge', 's': 'Stackable (bottom, finger joint holes)', 't': 'Triangle for handle', 'u': 'Edge with cabinet hinges', 'v': 'Edge with cabinet hinges for 90° lid', 'z': 'Edge with grooves', '|': 'Edge (orthogonal Finger Joint Holes)'}</em><a class="headerlink" href="#boxes.ArgparseEdgeType.names" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -3567,7 +3583,7 @@ Positive values move to the outside of the part</p>
 <li><p>absolute
 * diameter : 5.0 : diameter of the holes
 * distance : 3.0 : distance between the holes
-* style : “circles” : currently only supported style</p></li>
+* style : “circle” : currently only supported style</p></li>
 </ul>
 <dl class="py attribute">
 <dt id="boxes.HexHolesSettings.absolute_params">
@@ -3711,7 +3727,7 @@ Positive values move to the outside of the part</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
     </div>
   </body>
 </html>

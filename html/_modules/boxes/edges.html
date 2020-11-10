@@ -6,8 +6,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>boxes.edges &#8212; boxes.py 0.1 documentation</title>
-    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/nature.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
@@ -2164,7 +2164,8 @@
     <span class="p">}</span>
 
 <div class="viewcode-block" id="RoundedTriangleEdgeSettings.edgeObjects"><a class="viewcode-back" href="../../boxes.html#boxes.edges.RoundedTriangleEdgeSettings.edgeObjects">[docs]</a>    <span class="k">def</span> <span class="nf">edgeObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">RoundedTriangleEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
+        <span class="n">edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">RoundedTriangleEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span>
+                 <span class="n">RoundedTriangleFingerHolesEdge</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="bp">self</span><span class="p">)]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edgeObjects</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">chars</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="RoundedTriangleEdge"><a class="viewcode-back" href="../../boxes.html#boxes.edges.RoundedTriangleEdge">[docs]</a><span class="k">class</span> <span class="nc">RoundedTriangleEdge</span><span class="p">(</span><span class="n">Edge</span><span class="p">):</span>
@@ -2203,6 +2204,17 @@
 
 <div class="viewcode-block" id="RoundedTriangleEdge.margin"><a class="viewcode-back" href="../../boxes.html#boxes.edges.RoundedTriangleEdge.margin">[docs]</a>    <span class="k">def</span> <span class="nf">margin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">radius</span></div></div>
+
+<div class="viewcode-block" id="RoundedTriangleFingerHolesEdge"><a class="viewcode-back" href="../../boxes.html#boxes.edges.RoundedTriangleFingerHolesEdge">[docs]</a><span class="k">class</span> <span class="nc">RoundedTriangleFingerHolesEdge</span><span class="p">(</span><span class="n">RoundedTriangleEdge</span><span class="p">):</span>
+
+    <span class="n">char</span> <span class="o">=</span> <span class="s2">&quot;T&quot;</span>
+
+<div class="viewcode-block" id="RoundedTriangleFingerHolesEdge.start_width"><a class="viewcode-back" href="../../boxes.html#boxes.edges.RoundedTriangleFingerHolesEdge.start_width">[docs]</a>    <span class="k">def</span> <span class="nf">start_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span></div>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>  <span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></div>
 
 <span class="c1">#############################################################################</span>
 <span class="c1">####     Slat wall</span>
@@ -2488,7 +2500,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
     </div>
   </body>
 </html>
