@@ -74,6 +74,9 @@
     <span class="n">ui_group</span> <span class="o">=</span> <span class="s2">&quot;Misc&quot;</span>
 
     <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">This insert was designed with 3 mm plywood in mind, and should work fine with</span>
+<span class="s2">materials around this thickness.</span>
+
 <span class="s2">This is an insert for the [Agricola Revised Edition](https://boardgamegeek.com/boardgame/200680/agricola-revised-edition)</span>
 <span class="s2">board game. It is specifically designed around the [Farmers Of The Moor expansion](https://boardgamegeek.com/boardgameexpansion/257344/agricola-farmers-moor),</span>
 <span class="s2">and should also store the [5-6 players expansion](https://boardgamegeek.com/boardgameexpansion/210625/agricola-expansion-5-and-6-players)</span>
@@ -172,22 +175,43 @@
 
     <span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">player_box_height</span> <span class="o">=</span> <span class="mf">34.5</span>
+        <span class="n">player_box_inner_width</span> <span class="o">=</span> <span class="mf">50.5</span>
         <span class="n">bigger_box_inner_height</span> <span class="o">=</span> <span class="mf">36.7</span>
         <span class="n">row_width</span> <span class="o">=</span> <span class="mf">37.2</span>
         <span class="n">tray_inner_height</span> <span class="o">=</span> <span class="mi">17</span>
         <span class="n">box_width</span> <span class="o">=</span> <span class="mi">218</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_card_divider_tray</span><span class="p">(</span>
-            <span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">tray_inner_height</span><span class="p">,</span> <span class="n">box_width</span>
+        <span class="n">card_tray_height</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">tray_inner_height</span> <span class="o">+</span> <span class="n">bigger_box_inner_height</span>
         <span class="p">)</span>
+        <span class="n">card_tray_width</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="mf">305.35</span> <span class="o">-</span> <span class="n">player_box_inner_width</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">row_width</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">9</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">render_card_divider_tray</span><span class="p">(</span><span class="n">card_tray_height</span><span class="p">,</span> <span class="n">box_width</span><span class="p">,</span> <span class="n">card_tray_width</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">render_upper_token_trays</span><span class="p">(</span><span class="n">tray_inner_height</span><span class="p">,</span> <span class="n">box_width</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_horse_box</span><span class="p">(</span><span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_room_boxes</span><span class="p">(</span><span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_moor_box</span><span class="p">(</span><span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">)</span>
+        <span class="n">wood_room_box_width</span> <span class="o">=</span> <span class="mf">39.8</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render_room_box</span><span class="p">(</span><span class="n">wood_room_box_width</span><span class="p">,</span> <span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">)</span>
+        <span class="n">stone_room_box_width</span> <span class="o">=</span> <span class="mf">26.7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render_room_box</span><span class="p">(</span><span class="n">stone_room_box_width</span><span class="p">,</span> <span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">)</span>
+        <span class="n">moor_box_length</span> <span class="o">=</span> <span class="mf">84.6</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render_moor_box</span><span class="p">(</span>
+            <span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">,</span> <span class="n">moor_box_length</span>
+        <span class="p">)</span>
+        <span class="n">horse_box_margin</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="n">horse_box_length</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">box_width</span>
+            <span class="o">-</span> <span class="n">wood_room_box_width</span>
+            <span class="o">-</span> <span class="n">stone_room_box_width</span>
+            <span class="o">-</span> <span class="n">moor_box_length</span>
+            <span class="o">-</span> <span class="mi">6</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+            <span class="o">-</span> <span class="n">horse_box_margin</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">render_horse_box</span><span class="p">(</span><span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">,</span> <span class="n">horse_box_length</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">render_player_box</span><span class="p">(</span><span class="n">player_box_height</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">render_player_box</span><span class="p">(</span><span class="n">player_box_height</span><span class="p">,</span> <span class="n">player_box_inner_width</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">render_card_divider_tray</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">tray_inner_height</span><span class="p">,</span> <span class="n">tray_length</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">card_tray_height</span><span class="p">,</span> <span class="n">card_tray_length</span><span class="p">,</span> <span class="n">card_tray_width</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The whole tray which contains the cards, including its dividers.</span>
@@ -195,11 +219,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
-        <span class="n">tray_inner_length</span> <span class="o">=</span> <span class="n">tray_length</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
-        <span class="n">card_tray_height</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">tray_inner_height</span> <span class="o">+</span> <span class="n">bigger_box_inner_height</span>
-        <span class="p">)</span>
-        <span class="n">card_tray_width</span> <span class="o">=</span> <span class="mi">110</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
+        <span class="n">tray_inner_length</span> <span class="o">=</span> <span class="n">card_tray_length</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">margin_for_score_sheet</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 3 if you want more space for score sheet</span>
         <span class="n">sleeved_cards_width</span> <span class="o">=</span> <span class="mi">62</span> <span class="o">+</span> <span class="n">margin_for_score_sheet</span>
 
@@ -249,7 +269,7 @@
 
         <span class="c1"># generate spacer</span>
         <span class="n">spacer_height</span> <span class="o">=</span> <span class="n">card_tray_height</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="n">spacer_spacing</span> <span class="o">=</span> <span class="mf">4.5</span>
+        <span class="n">spacer_spacing</span> <span class="o">=</span> <span class="n">card_tray_width</span><span class="o">-</span><span class="mf">99.8</span>
         <span class="n">spacer_upper_width</span> <span class="o">=</span> <span class="n">sloped_wall_posx_at_y0</span> <span class="o">+</span> <span class="n">spacer_height</span> <span class="o">*</span> <span class="n">tan</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">trapezoidWall</span><span class="p">(</span>
             <span class="n">spacer_height</span><span class="p">,</span>
@@ -290,7 +310,7 @@
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">tray_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;FFFF&quot;</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right only&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">card_tray_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;FFFF&quot;</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right only&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
         <span class="n">divider_height</span> <span class="o">=</span> <span class="n">sleeved_cards_width</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span> <span class="o">*</span> <span class="n">tan</span>
@@ -447,16 +467,16 @@
         <span class="c1"># Move for next piece</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">total_width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">move</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">render_horse_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">render_horse_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Box for the horses on lower level. Same height as player boxes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">length</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">row_width</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
-        <span class="c1"># Could be more finely computed based on tile boxes dynamic sizes</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="mi">49</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">render_simple_tray</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">render_moor_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">render_moor_box</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">bigger_box_inner_height</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">,</span> <span class="n">length</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Box for the moor/forest tiles, and the cardboard tokens with multiple</span>
 <span class="sd">        units of resources.</span>
@@ -467,7 +487,6 @@
         <span class="n">height</span> <span class="o">=</span> <span class="n">bigger_box_inner_height</span>
         <span class="n">lowered_height</span> <span class="o">=</span> <span class="n">player_box_height</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">lowered_corner_height</span> <span class="o">=</span> <span class="n">height</span> <span class="o">-</span> <span class="n">lowered_height</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="mf">84.6</span>
         <span class="n">corner_length</span> <span class="o">=</span> <span class="mf">53.5</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span>
@@ -522,15 +541,6 @@
     <span class="k">def</span> <span class="nf">generate_side_finger_holes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row_width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fingerHolesAt</span><span class="p">(</span><span class="n">row_width</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">render_room_boxes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The two boxes for field/wood room tiles and clay/stone room tiles.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">wood_room_box_width</span> <span class="o">=</span> <span class="mf">39.8</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_room_box</span><span class="p">(</span><span class="n">wood_room_box_width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">)</span>
-        <span class="n">stone_room_box_width</span> <span class="o">=</span> <span class="mf">26.7</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">render_room_box</span><span class="p">(</span><span class="n">stone_room_box_width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">)</span>
-
     <span class="k">def</span> <span class="nf">render_room_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">row_width</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A box in which storing room/field tiles.</span>
@@ -573,7 +583,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">rectangularWall</span><span class="p">(</span><span class="n">room_box_length</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;FFFF&quot;</span><span class="p">,</span> <span class="n">move</span><span class="o">=</span><span class="s2">&quot;right only&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">render_player_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">render_player_box</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player_box_height</span><span class="p">,</span> <span class="n">player_box_inner_width</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A box in which storing all the bits of a single player,</span>
 <span class="sd">        including (and designed for) the cardboard bed from Farmers Of The Moor.</span>
@@ -581,7 +591,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
         <span class="n">bed_inner_height</span> <span class="o">=</span> <span class="n">player_box_height</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
         <span class="n">bed_inner_length</span> <span class="o">=</span> <span class="mf">66.75</span>
-        <span class="n">bed_inner_width</span> <span class="o">=</span> <span class="mf">50.5</span>
+        <span class="n">bed_inner_width</span> <span class="o">=</span> <span class="n">player_box_inner_width</span>
         <span class="n">cardboard_bed_foot_height</span> <span class="o">=</span> <span class="mf">6.5</span>
         <span class="n">cardboard_bed_hole_margin</span> <span class="o">=</span> <span class="mi">5</span>
         <span class="n">cardboard_bed_hole_length</span> <span class="o">=</span> <span class="mi">12</span>
