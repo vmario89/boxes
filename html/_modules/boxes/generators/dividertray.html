@@ -137,6 +137,12 @@
         <span class="k">if</span> <span class="n">side_walls_number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You need at least one side wall to generate this tray&quot;</span><span class="p">)</span>
 
+        <span class="c1"># If measures are inside, we need to adjust height before slot generation</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">outside</span><span class="p">:</span>
+            <span class="c1"># If the parameter &#39;h&#39; is the inner height of the content itself,</span>
+            <span class="c1"># then the actual tray height needs to be adjusted with the angle</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slot_angle</span><span class="p">))</span>
+
         <span class="n">slot_descriptions</span> <span class="o">=</span> <span class="n">SlotDescriptionsGenerator</span><span class="p">()</span><span class="o">.</span><span class="n">generate_all_same_angles</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span><span class="p">,</span>
@@ -147,14 +153,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">slot_radius</span><span class="p">,</span>
         <span class="p">)</span>
 
+        <span class="c1"># If measures are outside, we need to readjust slots afterwards</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">outside</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_wall</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_wall</span><span class="p">)</span>
             <span class="n">side_wall_target_length</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">thickness</span>
             <span class="n">slot_descriptions</span><span class="o">.</span><span class="n">adjust_to_target_length</span><span class="p">(</span><span class="n">side_wall_target_length</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># If the parameter &#39;h&#39; is the inner height of the content itself,</span>
-            <span class="c1"># then the actual tray height needs to be adjusted with the angle</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">slot_angle</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ctx</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
@@ -625,7 +628,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2016, Florian Festi.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.0.
     </div>
   </body>
 </html>
