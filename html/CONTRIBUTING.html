@@ -123,6 +123,29 @@ this to work.</p>
 <p>The online documentation gets build and updated automatically by the Travis CI
 as soon as the changes makes it into the GitHub master branch.</p>
 </div>
+<div class="section" id="provide-photos-for-generators">
+<h2>Provide photos for generators<a class="headerlink" href="#provide-photos-for-generators" title="Permalink to this headline">¶</a></h2>
+<p>Many generators still come without an example photo. If you are
+creating such an item consider donating a good picture. You can
+simply attach it to <a class="reference external" href="https://github.com/florianfesti/boxes/issues/140">ticket #140</a>. If you want you can
+also create a proper pull request instead:</p>
+<ul class="simple">
+<li><p>Make sure you have sh, convert (ImageMagick), sed and sha256sum installed</p></li>
+<li><p>The picture needs to be an jpg file with the name of the generator
+(This is case sensitive. Use CamelCase.)</p></li>
+<li><p>The picture should be 1200 pixels wide and square or not too far
+from square (3:4 is fine).</p></li>
+<li><p>Place the file in <em>static/samples/</em></p></li>
+<li><p>Check if the picture shows up at the bottom of the settings page of
+the generator when running <em>scripts/boxesserver</em></p></li>
+<li><p>Change dir to <em>./scripts</em> and there execute <em>./gen_thumbnails.sh</em></p></li>
+<li><p>Check if the thumbnail is seen in the main page when hovering over
+the generator entry</p></li>
+<li><p>Create a commit including <em>static/samples/$GeneratorName*.jpg</em> and
+<em>static/samples/samples.sha256</em></p></li>
+<li><p>Create a pull request from that</p></li>
+</ul>
+</div>
 <div class="section" id="improving-the-user-interface">
 <h2>Improving the User Interface<a class="headerlink" href="#improving-the-user-interface" title="Permalink to this headline">¶</a></h2>
 <p>Coming up with good names and good descriptions is hard. Often writing
@@ -179,6 +202,7 @@ easier it is to implement. You can add an “enhancement” tag.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#improving-the-documentation">Improving the Documentation</a></li>
+<li><a class="reference internal" href="#provide-photos-for-generators">Provide photos for generators</a></li>
 <li><a class="reference internal" href="#improving-the-user-interface">Improving the User Interface</a></li>
 <li><a class="reference internal" href="#running-the-code">Running the Code</a></li>
 <li><a class="reference internal" href="#reporting-bugs">Reporting bugs</a></li>
