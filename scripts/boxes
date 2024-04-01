@@ -56,7 +56,7 @@ def run_generator(name, args):
         box.open()
         box.render()
         data = box.close()
-        with os.fdopen(sys.stdout.fileno(), "wb", closefd=False) if box.output == "-" else open(box.output, 'wb') as f:
+        with os.fdopen(sys.stdout.fileno(), "wb", closefd=False, encoding="utf-8") if box.output == "-" else open(box.output, 'wb', encoding="utf-8") as f:
             f.write(data.getvalue())
     else:
         msg = f'Unknown generator \'{name}\'. Use boxes --list to get a list of available commands.\n'
