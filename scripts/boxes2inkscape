@@ -64,6 +64,9 @@ class Boxes2INX:
                 t = '"bool"'
                 default = str(a.default).lower()
 
+            elif isinstance(a.type, argparse.FileType):
+                t = '"path" mode="file"'
+
             elif a.type is boxes.argparseSections:
                 t = '"string"'
 
